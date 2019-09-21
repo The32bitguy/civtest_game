@@ -8,12 +8,47 @@ default = {}
 
 default.LIGHT_MAX = 14
 
+-- TODO: move these to configuration
+default.HEALTH_MULTIPLIER = 10
+default.PLAYER_MAX_HEALTH = 20 * default.HEALTH_MULTIPLIER
+default.PUNCH_INTERVAL = 0.2
+
 -- GUI related stuff
 minetest.register_on_joinplayer(function(player)
 	player:set_formspec_prepend([[
 			bgcolor[#080808BB;true]
 			background[5,5;1,1;gui_formbg.png;true]
 			listcolors[#00000069;#5A5A5A;#141318;#30434C;#FFF] ]])
+end)
+
+-- Player health support code
+
+minetest.register_on_respawnplayer(function(player)
+      -- Respawn with appropriate health
+      local props = player:get_properties()
+      if props.hp_max ~= default.PLAYER_MAX_HEALTH then
+         player:set_properties({ hp_max = default.PLAYER_MAX_HEALTH })
+         player:set_hp(default.PLAYER_MAX_HEALTH)
+      end
+end)
+
+local storage = minetest.get_mod_storage()
+
+minetest.register_on_joinplayer(function(player)
+      -- New players have appropriate amount of health
+      local props = player:get_properties()
+      if props.hp_max ~= default.PLAYER_MAX_HEALTH then
+         player:set_properties({ hp_max = default.PLAYER_MAX_HEALTH })
+      end
+
+      local pname = player:get_player_name()
+      local pname_oldfriend_key = pname .. "_oldfriend"
+
+      local player_is_newfriend = storage:get_string(pname_oldfriend_key) == ""
+      if player_is_newfriend then
+         player:set_hp(default.PLAYER_MAX_HEALTH)
+         storage:set_string(pname_oldfriend_key, "true")
+      end
 end)
 
 function default.get_hotbar_bg(x,y)
