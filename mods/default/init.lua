@@ -48,7 +48,18 @@ minetest.register_on_joinplayer(function(player)
       if player_is_newfriend then
          player:set_hp(default.PLAYER_MAX_HEALTH)
          storage:set_string(pname_oldfriend_key, "true")
+      else
+         local pname_health_key = pname .. "_health"
+         local phealth = storage:get_int(pname_health_key, phealth)
+         player:set_hp(phealth)
       end
+end)
+
+minetest.register_on_leaveplayer(function(player)
+      local pname = player:get_player_name()
+      local pname_health_key = pname .. "_health"
+      local phealth = player:get_hp()
+      storage:set_int(pname_health_key, phealth)
 end)
 
 function default.get_hotbar_bg(x,y)
