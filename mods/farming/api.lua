@@ -70,6 +70,13 @@ farming.hoe_on_use = function(itemstack, user, pointed_thing, uses)
 	return itemstack
 end
 
+farming.hoe_on_secondary_use = function(itemstack,user,pointed_thing)
+	local name = user:get_player_name()
+	if name then
+		minetest.chat_send_player(name, "The heat of this area is " .. minetest.get_heat(user:get_pos()))
+	end
+end
+
 -- Register new hoes
 farming.register_hoe = function(name, def)
 	-- Check for : prefix (register new hoes in your mod's namespace)
@@ -93,6 +100,9 @@ farming.register_hoe = function(name, def)
 		on_use = function(itemstack, user, pointed_thing)
 			return farming.hoe_on_use(itemstack, user, pointed_thing, def.max_uses)
 		end,
+		on_secondary_use = function(itemstack, user, pointed_thing)
+			return farming.hoe_on_secondary_use(itemstack,user,pointed_thing)
+		end,
 		groups = def.groups,
 		sound = {breaks = "default_tool_breaks"},
 	})
@@ -114,13 +124,54 @@ farming.register_hoe = function(name, def)
 	end
 end
 
+local function set_timer(pos,again)
+	local node = minetest.get_node(pos)
+	local name = node.name
+	local growth = minetest.registered_nodes[name].custom_growth
+
+	--default values
+	local lower_bound = 166
+	local higher_bound = 286
+	if again == true then
+		lower_bound = 40
+		higher_bound = 80
+	end
+
+	if growth then
+		local biome = minetest.get_biome_data(pos)
+
+		local heat_difference = math.abs(biome.heat-growth.optimum_heat)
+		--local humidity_difference = math.abs(biome.humidity-growth.optimum_humidity)
+
+		local grow_time = 200
+
+		if growth.heat_scaling == "linear" then
+			grow_time = growth.heat_factor*heat_difference + growth.base_speed
+		elseif growth.heat_scaling == "exponential" then
+			-- todo
+			minetest.log("Exponential scaling isn't implemented yet, defaulting to base speed of " .. growth.base_speed)
+			grow_time = growth.base_speed
+		end
+
+		lower_bound = grow_time - growth.variance
+		higher_bound = grow_time + growth.variance
+
+		if again == true then 
+			lower_bound = lower_bound / 4
+			higher_bound = higher_bound / 4
+		end
+	end
+	--minetest.log("Lower bound:" .. lower_bound .. " upper:" .. higher_bound)
+	minetest.get_node_timer(pos):start(math.random(lower_bound, higher_bound))
+end
+
 -- how often node timers for plants will tick, +/- some random value
 local function tick(pos)
-	minetest.get_node_timer(pos):start(math.random(166, 286))
+	set_timer(pos,false)
 end
 -- how often a growth failure tick is retried (e.g. too dark)
 local function tick_again(pos)
-	minetest.get_node_timer(pos):start(math.random(40, 80))
+	set_timer(pos,true)
 end
 
 -- Seed placement
@@ -317,6 +368,7 @@ farming.register_plant = function(name, def)
 		on_timer = farming.grow_plant,
 		minlight = def.minlight,
 		maxlight = def.maxlight,
+		custom_growth = def.custom_growth,
 	})
 
 	-- Register harvest
@@ -370,6 +422,7 @@ farming.register_plant = function(name, def)
 			on_timer = farming.grow_plant,
 			minlight = def.minlight,
 			maxlight = def.maxlight,
+			custom_growth = def.custom_growth,
 		})
 	end
 
