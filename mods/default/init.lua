@@ -23,44 +23,72 @@ end)
 
 -- Player health support code
 
-minetest.register_on_respawnplayer(function(player)
-      -- Respawn with appropriate health
-      local props = player:get_properties()
-      if props.hp_max ~= default.PLAYER_MAX_HEALTH then
-         player:set_properties({ hp_max = default.PLAYER_MAX_HEALTH })
-         player:set_hp(default.PLAYER_MAX_HEALTH)
+-- minetest.register_on_respawnplayer(function(player)
+--       -- Respawn with appropriate health
+--       local props = player:get_properties()
+--       if props.hp_max ~= default.PLAYER_MAX_HEALTH then
+--          player:set_properties({ hp_max = default.PLAYER_MAX_HEALTH })
+--          player:set_hp(default.PLAYER_MAX_HEALTH)
+--       end
+-- end)
+
+-- local storage = minetest.get_mod_storage()
+
+-- minetest.register_on_joinplayer(function(player)
+--       -- New players have appropriate amount of health
+--       local props = player:get_properties()
+--       if props.hp_max ~= default.PLAYER_MAX_HEALTH then
+--          player:set_properties({ hp_max = default.PLAYER_MAX_HEALTH })
+--       end
+
+--       local pname = player:get_player_name()
+--       local pname_oldfriend_key = pname .. "_oldfriend"
+
+--       local player_is_newfriend = storage:get_string(pname_oldfriend_key) == ""
+--       if player_is_newfriend then
+--          player:set_hp(default.PLAYER_MAX_HEALTH)
+--          storage:set_string(pname_oldfriend_key, "true")
+--       else
+--          local pname_health_key = pname .. "_health"
+--          local phealth = storage:get_int(pname_health_key, phealth)
+--          player:set_hp(phealth)
+--       end
+-- end)
+
+-- minetest.register_on_leaveplayer(function(player)
+--       local pname = player:get_player_name()
+--       local pname_health_key = pname .. "_health"
+--       local phealth = player:get_hp()
+--       storage:set_int(pname_health_key, phealth)
+-- end)
+
+local fall_dmg_blacklist = {
+   ["air"] = true,
+   ["default:water_source"] = true
+}
+
+minetest.register_on_mods_loaded(function()
+      for node_name, node_def in pairs(minetest.registered_nodes) do
+	 -- Avoid modifying blacklisted nodes, or nodes without groups
+	 if fall_dmg_blacklist[node_name]
+	    or (not node_def.groups)
+	 then
+	    goto continue
+	 end
+
+	 local fall_dmg_pct = node_def.groups.fall_damage_add_percent or 100
+
+	 local new_fall_dmg = (100 * default.HEALTH_MULTIPLIER)
+
+	 local node_redef = node_def
+	 node_redef.groups.fall_damage_add_percent_post = new_fall_dmg
+
+	 minetest.register_node(":" .. node_name, node_redef)
+
+	 ::continue::
       end
 end)
 
-local storage = minetest.get_mod_storage()
-
-minetest.register_on_joinplayer(function(player)
-      -- New players have appropriate amount of health
-      local props = player:get_properties()
-      if props.hp_max ~= default.PLAYER_MAX_HEALTH then
-         player:set_properties({ hp_max = default.PLAYER_MAX_HEALTH })
-      end
-
-      local pname = player:get_player_name()
-      local pname_oldfriend_key = pname .. "_oldfriend"
-
-      local player_is_newfriend = storage:get_string(pname_oldfriend_key) == ""
-      if player_is_newfriend then
-         player:set_hp(default.PLAYER_MAX_HEALTH)
-         storage:set_string(pname_oldfriend_key, "true")
-      else
-         local pname_health_key = pname .. "_health"
-         local phealth = storage:get_int(pname_health_key, phealth)
-         player:set_hp(phealth)
-      end
-end)
-
-minetest.register_on_leaveplayer(function(player)
-      local pname = player:get_player_name()
-      local pname_health_key = pname .. "_health"
-      local phealth = player:get_hp()
-      storage:set_int(pname_health_key, phealth)
-end)
 
 function default.get_hotbar_bg(x,y)
 	local out = ""
