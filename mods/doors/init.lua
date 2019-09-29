@@ -128,6 +128,44 @@ local transform = {
 	},
 }
 
+ct = minetest.get_modpath("citadella")
+pm = minetest.get_modpath("playermanager")
+
+if ct and pm then
+   minetest.log("Door integration with Citadella/PlayerManager enabled.")
+end
+
+local function has_locked_door_privilege(pos, player)
+   local pname = player:get_player_name()
+   local reinf = ct.get_reinforcement(pos)
+   if not reinf then
+      return true
+   end
+
+   -- TODO: this code keeps getting duplicated...
+   local player_id = pm.get_player_by_name(pname).id
+   local player_groups = pm.get_groups_for_player(player_id)
+   local reinf_ctgroup_id = reinf.ctgroup_id
+   local reinf_id_in_group_ids = false
+   local group_name = ""
+
+   for _, group in ipairs(player_groups) do
+      if reinf_ctgroup_id == group.id then
+         group_name = group.name
+         reinf_id_in_group_ids = true
+         break
+      end
+   end
+
+   if reinf_id_in_group_ids then
+      return true, reinf, group_name
+   else
+      minetest.chat_send_player(pname, "Door is locked!")
+      return false
+   end
+end
+
+
 function doors.door_toggle(pos, node, clicker)
 	local meta = minetest.get_meta(pos)
 	node = node or minetest.get_node(pos)
@@ -151,6 +189,13 @@ function doors.door_toggle(pos, node, clicker)
 	if clicker and not default.can_interact_with_node(clicker, pos) then
 		return false
 	end
+
+        if ct and pm then
+           local can_open = has_locked_door_privilege(door, clicker)
+           if not can_open then
+              return false
+           end
+        end
 
 	-- until Lua-5.2 we have no bitwise operators :(
 	if state % 2 == 1 then
