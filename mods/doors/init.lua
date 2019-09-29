@@ -128,10 +128,10 @@ local transform = {
 	},
 }
 
-ct = minetest.get_modpath("citadella")
-pm = minetest.get_modpath("playermanager")
+local has_citadella = minetest.get_modpath("citadella")
+local has_playermanager = minetest.get_modpath("playermanager")
 
-if ct and pm then
+if has_citadella and has_playermanager then
    minetest.log("Door integration with Citadella/PlayerManager enabled.")
 end
 
@@ -190,8 +190,8 @@ function doors.door_toggle(pos, node, clicker)
 		return false
 	end
 
-        if ct and pm then
-           local can_open = has_locked_door_privilege(door, clicker)
+        if has_citadella and has_playermanager then
+           local can_open = has_locked_door_privilege(pos, clicker)
            if not can_open then
               return false
            end
