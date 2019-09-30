@@ -23,7 +23,7 @@ farming.register_plant("farming:wheat", {
 	fertility = {"grassland"},
 	groups = {food_wheat = 1, flammable = 4},
 	place_param2 = 3,
-	custom_growth = {optimum_heat = 50,	heat_scaling = "linear", heat_factor = 5, base_speed = 200, variance = 10},
+	custom_growth = {optimum_heat = 50,	heat_scaling = "linear", heat_a = 5, heat_base_speed = 200, variance = 10},
 })
 
 minetest.register_craftitem("farming:flour", {

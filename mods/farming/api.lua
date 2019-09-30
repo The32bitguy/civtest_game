@@ -73,7 +73,7 @@ end
 farming.hoe_on_secondary_use = function(itemstack,user,pointed_thing)
 	local name = user:get_player_name()
 	if name then
-		minetest.chat_send_player(name, "The heat of this area is " .. minetest.get_heat(user:get_pos()))
+		minetest.chat_send_player(name, "The heat of this area is " .. minetest.get_heat(user:get_pos()) .. " and the humidity is " .. minetest.get_humidity(user:get_pos()))
 	end
 end
 
@@ -141,17 +141,27 @@ local function set_timer(pos,again)
 		local biome = minetest.get_biome_data(pos)
 
 		local heat_difference = math.abs(biome.heat-growth.optimum_heat)
-		--local humidity_difference = math.abs(biome.humidity-growth.optimum_humidity)
+		local humidity_difference = math.abs(biome.humidity-growth.optimum_humidity)
 
-		local grow_time = 200
+		local grow_time = -1 --Initial value
 
-		if growth.heat_scaling == "linear" then
-			grow_time = growth.heat_factor*heat_difference + growth.base_speed
-		elseif growth.heat_scaling == "exponential" then
-			-- todo
-			minetest.log("Exponential scaling isn't implemented yet, defaulting to base speed of " .. growth.base_speed)
-			grow_time = growth.base_speed
+		if growth.heat_scaling then
+			if growth.heat_scaling == "linear" then
+				grow_time = growth.heat_a*heat_difference + growth.heat_base_speed
+			elseif growth.heat_scaling == "exponential" then
+				grow_time = growth.heat_a*growth.heat_b^heat_difference+growth.heat_base_speed
+			end
 		end
+
+		if growth.humidity_scaling then 
+			if growth.humidity_scaling == "linear" then
+				grow_time = grow_time + growth.humidity_a*humidity_difference + growth.humidity_base_speed
+			elseif growth.humidity_scaling == "exponential" then
+				grow_time = grow_time + growth.humidity_a*growth.humidity_b^humidity_difference+growth.humidity_base_speed
+			end
+		end
+		
+		if grow_time == -1  then grow_time = 200 end --If the grow time wasen't changed we change it to a default value
 
 		lower_bound = grow_time - growth.variance
 		higher_bound = grow_time + growth.variance
