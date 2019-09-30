@@ -139,13 +139,10 @@ local function set_timer(pos,again)
 
 	if growth then
 		local biome = minetest.get_biome_data(pos)
-
-		local heat_difference = math.abs(biome.heat-growth.optimum_heat)
-		local humidity_difference = math.abs(biome.humidity-growth.optimum_humidity)
-
 		local grow_time = -1 --Initial value
 
 		if growth.heat_scaling then
+			local heat_difference = math.abs(biome.heat-growth.optimum_heat)
 			if growth.heat_scaling == "linear" then
 				grow_time = growth.heat_a*heat_difference + growth.heat_base_speed
 			elseif growth.heat_scaling == "exponential" then
@@ -154,6 +151,7 @@ local function set_timer(pos,again)
 		end
 
 		if growth.humidity_scaling then 
+			local humidity_difference = math.abs(biome.humidity-growth.optimum_humidity)
 			if growth.humidity_scaling == "linear" then
 				grow_time = grow_time + growth.humidity_a*humidity_difference + growth.humidity_base_speed
 			elseif growth.humidity_scaling == "exponential" then
