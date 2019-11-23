@@ -96,7 +96,7 @@ end
 
 
 function boat.on_activate(self, staticdata, dtime_s)
-	self.object:set_armor_groups({immortal = 1})
+	-- self.object:set_armor_groups({immortal = 1})
 	if staticdata then
 		self.v = tonumber(staticdata)
 	end
@@ -114,17 +114,22 @@ function boat.on_punch(self, puncher)
 		return
 	end
 
-	local name = puncher:get_player_name()
-	if self.driver and name == self.driver then
+	if self.driver then
+		local driver_objref = minetest.get_player_by_name(self.driver)
+                local driver_name = driver_objref:get_player_name()
+		driver_objref:set_detach()
+		player_api.player_attached[driver_name] = false
 		self.driver = nil
-		puncher:set_detach()
-		player_api.player_attached[name] = false
+		minetest.after(0.2, function()
+                        player_api.set_animation(driver_objref, "stand", 30)
+		end)
 	end
 	if not self.driver then
 		self.removed = true
+                local puncher_name = puncher:get_player_name()
 		local inv = puncher:get_inventory()
 		if not (creative and creative.is_enabled_for
-				and creative.is_enabled_for(name))
+				and creative.is_enabled_for(puncher_name))
 				or not inv:contains_item("main", "boats:boat") then
 			local leftover = inv:add_item("main", "boats:boat")
 			-- if no room in inventory add a replacement boat to the world
