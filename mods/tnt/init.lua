@@ -87,7 +87,7 @@ local basic_flame_on_construct -- cached value
 local function destroy(drops, npos, cid, c_air, c_fire,
 		on_blast_queue, on_construct_queue,
 		ignore_protection, ignore_on_blast, owner)
-	if not ignore_protection and minetest.is_protected(npos, owner) then
+	if minetest.is_protected(npos, "", minetest.DIG_ACTION) then
 		return cid
 	end
 
