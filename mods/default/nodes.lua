@@ -41,6 +41,10 @@ default:obsidian
 default:obsidianbrick
 default:obsidian_block
 
+(civtest_game specific)
+default:limestone
+default:marble_block
+
 Soft / Non-Stone
 ----------------
 (1. Material 2. Modified forms)
@@ -406,6 +410,22 @@ minetest.register_node("default:obsidian_block", {
 	is_ground_content = false,
 	sounds = default.node_sound_stone_defaults(),
 	groups = {cracky = 1, level = 2},
+})
+
+minetest.register_node("default:limestone", {
+	description = "Limestone",
+	tiles = {"default_limestone.png"},
+	groups = {cracky = 2},
+	drop = 'default:cobble',
+	sounds = default.node_sound_stone_defaults(),
+})
+
+minetest.register_node("default:marble_block", {
+	description = "Marble Block",
+	tiles = {"default_marble_block.png"},
+	groups = {cracky = 2},
+	drop = 'default:cobble',
+	sounds = default.node_sound_stone_defaults(),
 })
 
 --

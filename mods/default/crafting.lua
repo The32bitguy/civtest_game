@@ -877,6 +877,14 @@ minetest.register_craft({
 	cooktime = 5,
 })
 
+-- civtest_game specific
+
+minetest.register_craft({
+	type = "cooking",
+	output = "default:limestone",
+	recipe = "default:marble_block",
+})
+
 
 --
 -- Fuels
