@@ -881,8 +881,8 @@ minetest.register_craft({
 
 minetest.register_craft({
 	type = "cooking",
-	output = "default:limestone",
-	recipe = "default:marble_block",
+	output = "default:marble_block",
+	recipe = "default:limestone",
         cooktime = 5
 })
 
