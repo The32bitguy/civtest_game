@@ -360,3 +360,20 @@ minetest.register_craftitem("default:limestone_dust", {
 	description = "Limestone Dust",
 	inventory_image = "default_limestone.png"
 })
+
+minetest.register_craftitem("default:quicklime", {
+	description = "Quicklime",
+	inventory_image = "default_quicklime.png"
+})
+
+minetest.register_craftitem("default:coke", {
+	description = "Coke",
+	inventory_image = "default_coke.png",
+        groups = {coke = 1, coal = 1, flammable = 1}
+})
+
+minetest.register_craftitem("default:charcoal", {
+	description = "Charcoal",
+	inventory_image = "default_charcoal.png",
+        groups = {coke = 1, coal = 1, flammable = 1}
+})
