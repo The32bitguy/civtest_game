@@ -414,9 +414,17 @@ minetest.register_node("default:obsidian_block", {
 
 minetest.register_node("default:limestone", {
 	description = "Limestone",
-	tiles = {"default_limestone.png"},
+	tiles = {"default_limestone_stone.png"},
 	groups = {cracky = 2},
-	drop = 'default:cobble',
+        drop = {
+           max_items = 4,
+           items = {
+              {items = {'default:limestone_dust'}, rarity = 32},
+              {items = {'default:limestone_dust'}, rarity = 16},
+              {items = {'default:limestone_dust'}}
+              {items = {'default:limestone_dust'}}
+           }
+	},
 	sounds = default.node_sound_stone_defaults(),
 })
 

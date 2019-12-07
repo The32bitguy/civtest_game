@@ -261,7 +261,7 @@ minetest.register_craftitem("default:coal_lump", {
 })
 
 minetest.register_craftitem("default:iron_lump", {
-	description = "Iron Lump",
+	description = "Pig Iron",
 	inventory_image = "default_iron_lump.png",
 })
 
@@ -293,6 +293,16 @@ minetest.register_craftitem("default:diamond", {
 minetest.register_craftitem("default:clay_lump", {
 	description = "Clay Lump",
 	inventory_image = "default_clay_lump.png",
+})
+
+minetest.register_craftitem("default:mithril_ingot", {
+	description = "Mithril Ingot",
+	inventory_image = "default_mithril_ingot.png",
+})
+
+minetest.register_craftitem("default:iron_ingot", {
+	description = "Iron Ingot",
+	inventory_image = "default_iron_ingot.png",
 })
 
 minetest.register_craftitem("default:steel_ingot", {
@@ -344,4 +354,9 @@ minetest.register_craftitem("default:blueberries", {
 	description = "Blueberries",
 	inventory_image = "default_blueberries.png",
 	on_use = minetest.item_eat(2),
+})
+
+minetest.register_craftitem("default:limestone_dust", {
+	description = "Limestone Dust",
+	inventory_image = "default_limestone.png"
 })

@@ -788,6 +788,14 @@ minetest.register_craft({
 	}
 })
 
+minetest.register_craft({
+	output = 'default:limestone',
+	recipe = {
+		{'default:limestone_dust', 'default:limestone_dust'},
+		{'default:limestone_dust', 'default:limestone_dust'}
+	}
+})
+
 
 --
 -- Crafting (tool repair)
