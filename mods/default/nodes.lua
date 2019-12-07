@@ -421,7 +421,7 @@ minetest.register_node("default:limestone", {
            items = {
               {items = {'default:limestone_dust'}, rarity = 32},
               {items = {'default:limestone_dust'}, rarity = 16},
-              {items = {'default:limestone_dust'}}
+              {items = {'default:limestone_dust'}},
               {items = {'default:limestone_dust'}}
            }
 	},
