@@ -309,37 +309,6 @@ minetest.register_craft({
 })
 
 minetest.register_craft({
-	output = 'default:skeleton_key',
-	recipe = {
-		{'default:gold_ingot'},
-	}
-})
-
-minetest.register_craft({
-	output = 'default:chest',
-	recipe = {
-		{'group:wood', 'group:wood', 'group:wood'},
-		{'group:wood', '', 'group:wood'},
-		{'group:wood', 'group:wood', 'group:wood'},
-	}
-})
-
-minetest.register_craft({
-	output = 'default:chest_locked',
-	recipe = {
-		{'group:wood', 'group:wood', 'group:wood'},
-		{'group:wood', 'default:steel_ingot', 'group:wood'},
-		{'group:wood', 'group:wood', 'group:wood'},
-	}
-})
-
-minetest.register_craft( {
-	type = "shapeless",
-	output = "default:chest_locked",
-	recipe = {"default:chest", "default:steel_ingot"},
-})
-
-minetest.register_craft({
 	output = 'default:furnace',
 	recipe = {
 		{'group:stone', 'group:stone', 'group:stone'},
@@ -1161,18 +1130,6 @@ minetest.register_craft({
 	type = "fuel",
 	recipe = "default:sign_wall_wood",
 	burntime = 10,
-})
-
-minetest.register_craft({
-	type = "fuel",
-	recipe = "default:chest",
-	burntime = 30,
-})
-
-minetest.register_craft({
-	type = "fuel",
-	recipe = "default:chest_locked",
-	burntime = 30,
 })
 
 minetest.register_craft({
