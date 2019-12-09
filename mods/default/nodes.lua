@@ -1184,7 +1184,6 @@ minetest.register_node("default:stone_with_iron", {
 	description = "Iron Ore",
 	tiles = {"default_stone.png^default_mineral_iron.png"},
 	groups = {cracky = 2},
-	drop = 'default:iron_lump',
 	sounds = default.node_sound_stone_defaults(),
 })
 
@@ -1201,7 +1200,6 @@ minetest.register_node("default:stone_with_copper", {
 	description = "Copper Ore",
 	tiles = {"default_stone.png^default_mineral_copper.png"},
 	groups = {cracky = 2},
-	drop = 'default:copper_lump',
 	sounds = default.node_sound_stone_defaults(),
 })
 
@@ -1218,7 +1216,6 @@ minetest.register_node("default:stone_with_tin", {
 	description = "Tin Ore",
 	tiles = {"default_stone.png^default_mineral_tin.png"},
 	groups = {cracky = 2},
-	drop = "default:tin_lump",
 	sounds = default.node_sound_stone_defaults(),
 })
 
@@ -1262,7 +1259,6 @@ minetest.register_node("default:stone_with_gold", {
 	description = "Gold Ore",
 	tiles = {"default_stone.png^default_mineral_gold.png"},
 	groups = {cracky = 2},
-	drop = "default:gold_lump",
 	sounds = default.node_sound_stone_defaults(),
 })
 
