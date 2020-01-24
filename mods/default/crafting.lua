@@ -803,46 +803,8 @@ minetest.register_craft({
 
 minetest.register_craft({
 	type = "cooking",
-	output = "default:steel_ingot",
-	recipe = "default:iron_lump",
-})
-
-minetest.register_craft({
-	type = "cooking",
-	output = "default:copper_ingot",
-	recipe = "default:copper_lump",
-})
-
-minetest.register_craft({
-	type = "cooking",
-	output = "default:tin_ingot",
-	recipe = "default:tin_lump",
-})
-
-minetest.register_craft({
-	type = "cooking",
-	output = "default:gold_ingot",
-	recipe = "default:gold_lump",
-})
-
-minetest.register_craft({
-	type = "cooking",
 	output = "default:clay_brick",
 	recipe = "default:clay_lump",
-})
-
-minetest.register_craft({
-	type = 'cooking',
-	output = 'default:gold_ingot',
-	recipe = 'default:skeleton_key',
-	cooktime = 5,
-})
-
-minetest.register_craft({
-	type = 'cooking',
-	output = 'default:gold_ingot',
-	recipe = 'default:key',
-	cooktime = 5,
 })
 
 -- civtest_game specific
