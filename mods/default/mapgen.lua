@@ -2194,6 +2194,38 @@ function default.register_decorations()
 		},
 	})
 
+        -- Underwater Limestone
+
+	minetest.register_decoration({
+		name = "default:limestones",
+		deco_type = "simple",
+		place_on = {"default:sand"},
+		place_offset_y = -1,
+		sidelen = 16,
+		noise_params = {
+			offset = 0.2,
+			scale = 2,
+			spread = {x = 200, y = 200, z = 200},
+			seed = 78324,
+			octaves = 3,
+			persist = 0.7
+		},
+		biomes = {
+			"taiga_ocean",
+			"snowy_grassland_ocean",
+			"grassland_ocean",
+			"coniferous_forest_ocean",
+			"deciduous_forest_ocean",
+			"sandstone_desert_ocean",
+			"cold_desert_ocean"},
+		y_max = -1,
+		y_min = -30,
+		flags = "force_placement",
+		decoration = "default:limestone"
+		-- param2 = 48,
+		-- param2_max = 96
+	})
+
 	-- Kelp
 
 	minetest.register_decoration({
