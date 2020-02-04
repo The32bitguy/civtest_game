@@ -90,6 +90,14 @@ minetest.register_craft({
 })
 
 minetest.register_craft({
+	output = 'default:torch 4',
+	recipe = {
+		{'default:charcoal'},
+		{'group:stick'},
+	}
+})
+
+minetest.register_craft({
 	output = 'default:pick_wood',
 	recipe = {
 		{'group:wood', 'group:wood', 'group:wood'},
@@ -807,6 +815,11 @@ minetest.register_craft({
         cooktime = 5
 })
 
+minetest.register_craft({
+	type = "cooking",
+	output = "default:charcoal",
+	recipe = "group:tree",
+})
 
 --
 -- Fuels
