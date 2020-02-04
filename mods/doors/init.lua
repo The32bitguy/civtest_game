@@ -590,6 +590,13 @@ function doors.trapdoor_toggle(pos, node, clicker)
 		return false
 	end
 
+        if has_citadella and has_playermanager then
+           local can_open = has_locked_door_privilege(pos, clicker)
+           if not can_open then
+              return false
+           end
+        end
+
 	local def = minetest.registered_nodes[node.name]
 
 	if string.sub(node.name, -5) == "_open" then
@@ -777,6 +784,12 @@ function doors.register_fencegate(name, def)
 		groups = def.groups,
 		sounds = def.sounds,
 		on_rightclick = function(pos, node, clicker, itemstack, pointed_thing)
+			if has_citadella and has_playermanager then
+			   local can_open = has_locked_door_privilege(pos, clicker)
+			   if not can_open then
+			      return itemstack
+			   end
+			end
 			local node_def = minetest.registered_nodes[node.name]
 			minetest.swap_node(pos, {name = node_def.gate, param2 = node.param2})
 			minetest.sound_play(node_def.sound, {pos = pos, gain = 0.3,
