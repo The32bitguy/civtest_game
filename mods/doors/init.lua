@@ -262,6 +262,11 @@ function doors.register(name, def)
 		name = "doors:" .. name
 	end
 
+        -- civtest_game always defers protection to Citadella
+        if def then
+           def.protected = nil
+        end
+
 	-- replace old doors of this type automatically
 	minetest.register_lbm({
 		name = ":doors:replace_" .. name:gsub(":", "_"),
