@@ -332,6 +332,23 @@ minetest.register_craft({
 	}
 })
 
+
+minetest.register_craft({
+	output = 'default:ironblock',
+	recipe = {
+		{'default:iron_ingot', 'default:iron_ingot', 'default:iron_ingot'},
+		{'default:iron_ingot', 'default:iron_ingot', 'default:iron_ingot'},
+		{'default:iron_ingot', 'default:iron_ingot', 'default:iron_ingot'},
+	}
+})
+
+minetest.register_craft({
+	output = 'default:iron_ingot 9',
+	recipe = {
+		{'default:ironblock'},
+	}
+})
+
 minetest.register_craft({
 	output = 'default:steelblock',
 	recipe = {
