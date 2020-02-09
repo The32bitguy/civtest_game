@@ -236,7 +236,7 @@ default:cloud
 minetest.register_node("default:stone", {
 	description = "Stone",
 	tiles = {"default_stone.png"},
-	groups = {cracky = 3, stone = 1},
+	groups = {cracky = 2, stone = 1, level = 1},
 	drop = 'default:cobble',
 	legacy_mineral = true,
 	sounds = default.node_sound_stone_defaults(),
@@ -246,7 +246,7 @@ minetest.register_node("default:cobble", {
 	description = "Cobblestone",
 	tiles = {"default_cobble.png"},
 	is_ground_content = false,
-	groups = {cracky = 3, stone = 2},
+	groups = {cracky = 2, stone = 2, level = 1},
 	sounds = default.node_sound_stone_defaults(),
 })
 
@@ -256,7 +256,7 @@ minetest.register_node("default:stonebrick", {
 	place_param2 = 0,
 	tiles = {"default_stone_brick.png"},
 	is_ground_content = false,
-	groups = {cracky = 2, stone = 1},
+	groups = {cracky = 2, stone = 1, level = 1},
 	sounds = default.node_sound_stone_defaults(),
 })
 
@@ -264,7 +264,7 @@ minetest.register_node("default:stone_block", {
 	description = "Stone Block",
 	tiles = {"default_stone_block.png"},
 	is_ground_content = false,
-	groups = {cracky = 2, stone = 1},
+	groups = {cracky = 2, stone = 1, level = 1},
 	sounds = default.node_sound_stone_defaults(),
 })
 
@@ -272,7 +272,7 @@ minetest.register_node("default:mossycobble", {
 	description = "Mossy Cobblestone",
 	tiles = {"default_mossycobble.png"},
 	is_ground_content = false,
-	groups = {cracky = 3, stone = 1},
+	groups = {cracky = 2, stone = 1, level = 1},
 	sounds = default.node_sound_stone_defaults(),
 })
 
@@ -280,7 +280,7 @@ minetest.register_node("default:mossycobble", {
 minetest.register_node("default:desert_stone", {
 	description = "Desert Stone",
 	tiles = {"default_desert_stone.png"},
-	groups = {cracky = 3, stone = 1},
+	groups = {cracky = 2, stone = 1, level = 1},
 	drop = 'default:desert_cobble',
 	legacy_mineral = true,
 	sounds = default.node_sound_stone_defaults(),
@@ -290,7 +290,7 @@ minetest.register_node("default:desert_cobble", {
 	description = "Desert Cobblestone",
 	tiles = {"default_desert_cobble.png"},
 	is_ground_content = false,
-	groups = {cracky = 3, stone = 2},
+	groups = {cracky = 2, stone = 2, level = 1},
 	sounds = default.node_sound_stone_defaults(),
 })
 
@@ -300,7 +300,7 @@ minetest.register_node("default:desert_stonebrick", {
 	place_param2 = 0,
 	tiles = {"default_desert_stone_brick.png"},
 	is_ground_content = false,
-	groups = {cracky = 2, stone = 1},
+	groups = {cracky = 2, stone = 1, level = 1},
 	sounds = default.node_sound_stone_defaults(),
 })
 
@@ -308,14 +308,14 @@ minetest.register_node("default:desert_stone_block", {
 	description = "Desert Stone Block",
 	tiles = {"default_desert_stone_block.png"},
 	is_ground_content = false,
-	groups = {cracky = 2, stone = 1},
+	groups = {cracky = 2, stone = 1, level = 1},
 	sounds = default.node_sound_stone_defaults(),
 })
 
 minetest.register_node("default:sandstone", {
 	description = "Sandstone",
 	tiles = {"default_sandstone.png"},
-	groups = {crumbly = 1, cracky = 3},
+	groups = {crumbly = 1, cracky = 2, level = 1},
 	sounds = default.node_sound_stone_defaults(),
 })
 
@@ -325,7 +325,7 @@ minetest.register_node("default:sandstonebrick", {
 	place_param2 = 0,
 	tiles = {"default_sandstone_brick.png"},
 	is_ground_content = false,
-	groups = {cracky = 2},
+	groups = {cracky = 2, level = 1},
 	sounds = default.node_sound_stone_defaults(),
 })
 
@@ -333,14 +333,14 @@ minetest.register_node("default:sandstone_block", {
 	description = "Sandstone Block",
 	tiles = {"default_sandstone_block.png"},
 	is_ground_content = false,
-	groups = {cracky = 2},
+	groups = {cracky = 2, level = 1},
 	sounds = default.node_sound_stone_defaults(),
 })
 
 minetest.register_node("default:desert_sandstone", {
 	description = "Desert Sandstone",
 	tiles = {"default_desert_sandstone.png"},
-	groups = {crumbly = 1, cracky = 3},
+	groups = {crumbly = 1, cracky = 2, level = 1},
 	sounds = default.node_sound_stone_defaults(),
 })
 
@@ -350,7 +350,7 @@ minetest.register_node("default:desert_sandstone_brick", {
 	place_param2 = 0,
 	tiles = {"default_desert_sandstone_brick.png"},
 	is_ground_content = false,
-	groups = {cracky = 2},
+	groups = {cracky = 2, level = 1},
 	sounds = default.node_sound_stone_defaults(),
 })
 
@@ -358,14 +358,14 @@ minetest.register_node("default:desert_sandstone_block", {
 	description = "Desert Sandstone Block",
 	tiles = {"default_desert_sandstone_block.png"},
 	is_ground_content = false,
-	groups = {cracky = 2},
+	groups = {cracky = 2, level = 1},
 	sounds = default.node_sound_stone_defaults(),
 })
 
 minetest.register_node("default:silver_sandstone", {
 	description = "Silver Sandstone",
 	tiles = {"default_silver_sandstone.png"},
-	groups = {crumbly = 1, cracky = 3},
+	groups = {crumbly = 1, cracky = 2, level = 1},
 	sounds = default.node_sound_stone_defaults(),
 })
 
@@ -375,7 +375,7 @@ minetest.register_node("default:silver_sandstone_brick", {
 	place_param2 = 0,
 	tiles = {"default_silver_sandstone_brick.png"},
 	is_ground_content = false,
-	groups = {cracky = 2},
+	groups = {cracky = 2, level = 1},
 	sounds = default.node_sound_stone_defaults(),
 })
 
@@ -383,7 +383,7 @@ minetest.register_node("default:silver_sandstone_block", {
 	description = "Silver Sandstone Block",
 	tiles = {"default_silver_sandstone_block.png"},
 	is_ground_content = false,
-	groups = {cracky = 2},
+	groups = {cracky = 2, level = 1},
 	sounds = default.node_sound_stone_defaults(),
 })
 
@@ -415,7 +415,7 @@ minetest.register_node("default:obsidian_block", {
 minetest.register_node("default:limestone", {
 	description = "Limestone",
 	tiles = {"default_limestone_stone.png"},
-	groups = {cracky = 2},
+	groups = {cracky = 2, level = 1},
         drop = {
            max_items = 4,
            items = {
@@ -431,7 +431,7 @@ minetest.register_node("default:limestone", {
 minetest.register_node("default:marble_block", {
 	description = "Marble Block",
 	tiles = {"default_marble_block.png"},
-	groups = {cracky = 2},
+	groups = {cracky = 2, level = 1},
 	drop = 'default:cobble',
 	sounds = default.node_sound_stone_defaults(),
 })
@@ -1166,7 +1166,7 @@ minetest.register_node("default:aspen_sapling", {
 minetest.register_node("default:stone_with_coal", {
 	description = "Coal Ore",
 	tiles = {"default_stone.png^default_mineral_coal.png"},
-	groups = {cracky = 3},
+	groups = {cracky = 2, level = 1},
 	drop = 'default:coal_lump',
 	sounds = default.node_sound_stone_defaults(),
 })
@@ -1175,7 +1175,7 @@ minetest.register_node("default:coalblock", {
 	description = "Coal Block",
 	tiles = {"default_coal_block.png"},
 	is_ground_content = false,
-	groups = {cracky = 3},
+	groups = {cracky = 2, level = 1},
 	sounds = default.node_sound_stone_defaults(),
 })
 
@@ -1183,15 +1183,23 @@ minetest.register_node("default:coalblock", {
 minetest.register_node("default:stone_with_iron", {
 	description = "Iron Ore",
 	tiles = {"default_stone.png^default_mineral_iron.png"},
-	groups = {cracky = 2},
+	groups = {cracky = 2, level = 2},
 	sounds = default.node_sound_stone_defaults(),
+})
+
+minetest.register_node("default:ironblock", {
+	description = "Iron Block",
+	tiles = {"default_iron_block.png"},
+	is_ground_content = false,
+	groups = {cracky = 1, level = 1},
+	sounds = default.node_sound_metal_defaults(),
 })
 
 minetest.register_node("default:steelblock", {
 	description = "Steel Block",
 	tiles = {"default_steel_block.png"},
 	is_ground_content = false,
-	groups = {cracky = 1, level = 2},
+	groups = {cracky = 1, level = 1},
 	sounds = default.node_sound_metal_defaults(),
 })
 
@@ -1199,7 +1207,7 @@ minetest.register_node("default:steelblock", {
 minetest.register_node("default:stone_with_copper", {
 	description = "Copper Ore",
 	tiles = {"default_stone.png^default_mineral_copper.png"},
-	groups = {cracky = 2},
+	groups = {cracky = 2, level = 1},
 	sounds = default.node_sound_stone_defaults(),
 })
 
@@ -1207,7 +1215,7 @@ minetest.register_node("default:copperblock", {
 	description = "Copper Block",
 	tiles = {"default_copper_block.png"},
 	is_ground_content = false,
-	groups = {cracky = 1, level = 2},
+	groups = {cracky = 1},
 	sounds = default.node_sound_metal_defaults(),
 })
 
@@ -1215,7 +1223,7 @@ minetest.register_node("default:copperblock", {
 minetest.register_node("default:stone_with_tin", {
 	description = "Tin Ore",
 	tiles = {"default_stone.png^default_mineral_tin.png"},
-	groups = {cracky = 2},
+	groups = {cracky = 2, level = 1},
 	sounds = default.node_sound_stone_defaults(),
 })
 
@@ -1223,7 +1231,7 @@ minetest.register_node("default:tinblock", {
 	description = "Tin Block",
 	tiles = {"default_tin_block.png"},
 	is_ground_content = false,
-	groups = {cracky = 1, level = 2},
+	groups = {cracky = 1, level = 1},
 	sounds = default.node_sound_metal_defaults(),
 })
 
@@ -1232,7 +1240,7 @@ minetest.register_node("default:bronzeblock", {
 	description = "Bronze Block",
 	tiles = {"default_bronze_block.png"},
 	is_ground_content = false,
-	groups = {cracky = 1, level = 2},
+	groups = {cracky = 1, level = 1},
 	sounds = default.node_sound_metal_defaults(),
 })
 
@@ -1249,7 +1257,7 @@ minetest.register_node("default:mese", {
 	description = "Mese Block",
 	tiles = {"default_mese_block.png"},
 	paramtype = "light",
-	groups = {cracky = 1, level = 2},
+	groups = {cracky = 1},
 	sounds = default.node_sound_stone_defaults(),
 	light_source = 3,
 })
@@ -1258,7 +1266,7 @@ minetest.register_node("default:mese", {
 minetest.register_node("default:stone_with_gold", {
 	description = "Gold Ore",
 	tiles = {"default_stone.png^default_mineral_gold.png"},
-	groups = {cracky = 2},
+	groups = {cracky = 2, level = 3},
 	sounds = default.node_sound_stone_defaults(),
 })
 
@@ -1266,7 +1274,7 @@ minetest.register_node("default:goldblock", {
 	description = "Gold Block",
 	tiles = {"default_gold_block.png"},
 	is_ground_content = false,
-	groups = {cracky = 1},
+	groups = {cracky = 1, level = 1},
 	sounds = default.node_sound_metal_defaults(),
 })
 
@@ -1274,7 +1282,7 @@ minetest.register_node("default:goldblock", {
 minetest.register_node("default:stone_with_diamond", {
 	description = "Diamond Ore",
 	tiles = {"default_stone.png^default_mineral_diamond.png"},
-	groups = {cracky = 1},
+	groups = {cracky = 1, level = 4},
 	drop = "default:diamond",
 	sounds = default.node_sound_stone_defaults(),
 })
@@ -1283,7 +1291,7 @@ minetest.register_node("default:diamondblock", {
 	description = "Diamond Block",
 	tiles = {"default_diamond_block.png"},
 	is_ground_content = false,
-	groups = {cracky = 1, level = 3},
+	groups = {cracky = 1, level = 1},
 	sounds = default.node_sound_stone_defaults(),
 })
 
