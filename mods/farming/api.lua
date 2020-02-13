@@ -83,6 +83,30 @@ function farming.plant_from_node_name(name)
    return farming.registered_plants[plantname]
 end
 
+local function growth_timescale(time)
+   local divisor = 1
+   local unit = "seconds"
+   local over_three_months = false
+   if time > (60 * 60 * 24 * 7 * 4 * 3) then
+      over_three_months = true
+      divisor = (60 * 60 * 24 * 7 * 4)
+      unit =  "months"
+   elseif time > (60 * 60 * 24 * 7) then
+      divisor = (60 * 60 * 24 * 7)
+      unit = "weeks"
+   elseif time > (60 * 60 * 24) then
+      divisor = (60 * 60 * 24)
+      unit = "days"
+   elseif time > (60 * 60) then
+      divisor = (60 * 60)
+      unit = "hours"
+   elseif time > 60 then
+      divisor = 60
+      unit = "minutes"
+   end
+   return divisor, unit, over_three_months
+end
+
 farming.hoe_on_place = function(itemstack, user, pointed_thing)
    if pointed_thing
       and pointed_thing.type == "node"
@@ -104,19 +128,44 @@ farming.hoe_on_place = function(itemstack, user, pointed_thing)
       local heat_difference = math.abs(biome.heat-growth.optimum_heat)
 
       if growth.heat_scaling == "linear" then
-         grow_time = growth.heat_a*heat_difference + growth.heat_base_speed
+         grow_time = (growth.heat_a*heat_difference) + growth.heat_base_speed
       elseif growth.heat_scaling == "exponential" then
-         grow_time = growth.heat_a*growth.heat_b^heat_difference+growth.heat_base_speed
+         grow_time = (growth.heat_a*growth.heat_b^heat_difference)+growth.heat_base_speed
       end
 
       local lower_bound = grow_time - growth.variance
       local higher_bound = grow_time + growth.variance
 
-      minetest.chat_send_player(
-         user:get_player_name(),
-         plant.description .. " will take between " .. tostring(lower_bound)
-            .. " and " .. tostring(higher_bound) .. " seconds to grow."
-      )
+      -- The above are per-stage, so multiple
+      local full_lower_bound = lower_bound * (plant.steps - 1)
+      local full_higher_bound = higher_bound * (plant.steps - 1)
+
+      local flb_divisor, flb_unit, flb_over_three_months = growth_timescale(full_lower_bound)
+      local fhb_divisor, fhb_unit, fhb_over_three_months = growth_timescale(full_higher_bound)
+
+      if flb_over_three_months and fhb_over_three_months then
+         minetest.chat_send_player(
+            user:get_player_name(),
+            "A " .. plant.description .. " will take over three months to fully grow here."
+         )
+      else
+         local pretty_full_lower_bound = string.format("%.2f", full_lower_bound / flb_divisor)
+         if flb_over_three_months then
+            pretty_full_lower_bound = "3+"
+         end
+
+         local pretty_full_higher_bound = string.format("%.2f", full_higher_bound / fhb_divisor)
+         if fhb_over_three_months then
+            pretty_full_higher_bound = "3+"
+         end
+
+         minetest.chat_send_player(
+            user:get_player_name(),
+            "A " .. plant.description .. " will take from " .. pretty_full_lower_bound
+               .. " " .. flb_unit .. " to " .. pretty_full_higher_bound .. " "
+               .. fhb_unit .. " to fully grow here."
+         )
+      end
    end
    return itemstack
 end
@@ -208,7 +257,7 @@ local function set_timer(pos,again)
 			if growth.heat_scaling == "linear" then
 				grow_time = growth.heat_a*heat_difference + growth.heat_base_speed
 			elseif growth.heat_scaling == "exponential" then
-				grow_time = growth.heat_a*growth.heat_b^heat_difference+growth.heat_base_speed
+				grow_time = (growth.heat_a*growth.heat_b^heat_difference)+growth.heat_base_speed
 			end
 		end
 
