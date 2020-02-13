@@ -70,11 +70,70 @@ farming.hoe_on_use = function(itemstack, user, pointed_thing, uses)
 	return itemstack
 end
 
+function farming.plant_from_node_name(name)
+   local plantname
+   if string.find(name, "seed") then
+      -- farming:seed_<name>
+      plantname = name:split("_")[2]
+   else
+      -- farming:<name>_<stage>
+      local modname_plantname = name:split("_")[1]
+      plantname = modname_plantname:split(":")[2]
+   end
+   return farming.registered_plants[plantname]
+end
+
+farming.hoe_on_place = function(itemstack, user, pointed_thing)
+   if pointed_thing
+      and pointed_thing.type == "node"
+   then
+      local pos = pointed_thing.under
+      local node = minetest.get_node(pos)
+
+      local plant = farming.plant_from_node_name(node.name)
+
+      if (not plant) or (not plant.custom_growth) then
+         return
+      end
+
+      -- TODO: this is duplicated code from set_timer
+      local growth = plant.custom_growth
+      local grow_time = -1
+
+      local biome = minetest.get_biome_data(pos)
+      local heat_difference = math.abs(biome.heat-growth.optimum_heat)
+
+      if growth.heat_scaling == "linear" then
+         grow_time = growth.heat_a*heat_difference + growth.heat_base_speed
+      elseif growth.heat_scaling == "exponential" then
+         grow_time = growth.heat_a*growth.heat_b^heat_difference+growth.heat_base_speed
+      end
+
+      local lower_bound = grow_time - growth.variance
+      local higher_bound = grow_time + growth.variance
+
+      minetest.chat_send_player(
+         user:get_player_name(),
+         plant.description .. " will take between " .. tostring(lower_bound)
+            .. " and " .. tostring(higher_bound) .. " seconds to grow."
+      )
+   end
+   return itemstack
+end
+
 farming.hoe_on_secondary_use = function(itemstack,user,pointed_thing)
-	local name = user:get_player_name()
-	if name then
-		minetest.chat_send_player(name, "The heat of this area is " .. minetest.get_heat(user:get_pos()) .. " and the humidity is " .. minetest.get_humidity(user:get_pos()))
-	end
+   local name = user:get_player_name()
+   if not name then
+      return
+   end
+   local pos = user:get_pos()
+   local biome = minetest.get_biome_data(pos)
+
+   minetest.chat_send_player(
+      name,
+      "The heat of this area is " .. minetest.get_heat(pos)
+         .. " and the humidity is " .. minetest.get_humidity(pos)
+   )
 end
 
 -- Register new hoes
@@ -100,6 +159,9 @@ farming.register_hoe = function(name, def)
 		on_use = function(itemstack, user, pointed_thing)
 			return farming.hoe_on_use(itemstack, user, pointed_thing, def.max_uses)
 		end,
+                on_place = function(itemstack, user, pointed_thing)
+                      return farming.hoe_on_place(itemstack, user, pointed_thing)
+                end,
 		on_secondary_use = function(itemstack, user, pointed_thing)
 			return farming.hoe_on_secondary_use(itemstack,user,pointed_thing)
 		end,
@@ -150,7 +212,7 @@ local function set_timer(pos,again)
 			end
 		end
 
-		if growth.humidity_scaling then 
+		if growth.humidity_scaling then
 			local humidity_difference = math.abs(biome.humidity-growth.optimum_humidity)
 			if growth.humidity_scaling == "linear" then
 				grow_time = grow_time + growth.humidity_a*humidity_difference + growth.humidity_base_speed
@@ -158,13 +220,13 @@ local function set_timer(pos,again)
 				grow_time = grow_time + growth.humidity_a*growth.humidity_b^humidity_difference+growth.humidity_base_speed
 			end
 		end
-		
+
 		if grow_time == -1  then grow_time = 200 end --If the grow time wasen't changed we change it to a default value
 
 		lower_bound = grow_time - growth.variance
 		higher_bound = grow_time + growth.variance
 
-		if again == true then 
+		if again == true then
 			lower_bound = lower_bound / 4
 			higher_bound = higher_bound / 4
 		end
