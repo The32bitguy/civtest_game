@@ -638,7 +638,7 @@ function default.register_ores()
                    octaves=3,
                    persist=0.70
                 },
-                noise_threshhold = 0.85
+                noise_threshold = 0.85
 	})
 
 	-- Tin
@@ -660,7 +660,7 @@ function default.register_ores()
                    octaves=3,
                    persist=0.70
                 },
-                noise_threshhold = 0.96
+                noise_threshold = 0.96
 	})
 
 	-- Copper
@@ -682,7 +682,7 @@ function default.register_ores()
                    octaves=3,
                    persist=0.70
                 },
-                noise_threshhold = 0.99
+                noise_threshold = 0.99
 	})
 
 	-- Iron
@@ -704,7 +704,7 @@ function default.register_ores()
                    octaves=3,
                    persist=0.70
                 },
-                noise_threshhold = 0.98
+                noise_threshold = 0.98
 	})
 
 	-- Gold
@@ -726,7 +726,7 @@ function default.register_ores()
                    octaves=3,
                    persist=0.70
                 },
-                noise_threshhold = 0.87
+                noise_threshold = 0.87
 	})
 
 	minetest.register_ore({
