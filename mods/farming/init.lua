@@ -3,6 +3,7 @@
 farming = {}
 farming.path = minetest.get_modpath("farming")
 
+farming.mod = "civfarm"
 
 -- Load files
 
@@ -20,7 +21,7 @@ farming.register_plant("farming:wheat", {
 	steps = 8,
 	minlight = 13,
 	maxlight = default.LIGHT_MAX,
-	fertility = {"grassland"},
+	fertility = {"grassland", "desert"},
 	groups = {food_wheat = 1, flammable = 4},
 	place_param2 = 3,
 	custom_growth = {optimum_heat = 50, heat_scaling = "exponential", heat_a = 2.5, heat_b = 1.7, heat_base_speed = 5000, variance = 1250},
@@ -63,6 +64,7 @@ farming.register_plant("farming:cotton", {
 	maxlight = default.LIGHT_MAX,
 	fertility = {"grassland", "desert"},
 	groups = {flammable = 4},
+	custom_growth = {optimum_heat = 75, heat_scaling = "exponential", heat_a = 10, heat_b = 1.2, heat_base_speed = 2500, variance = 500},
 })
 
 minetest.register_craftitem("farming:string", {
@@ -137,4 +139,42 @@ minetest.register_craft({
 	type = "fuel",
 	recipe = "farming:hoe_wood",
 	burntime = 5,
+})
+
+-- Potato
+
+farming.register_plant("farming:potato", {
+	description = "Potato Seed",
+	paramtype2 = "meshoptions",
+	inventory_image = "farming_potato_seed.png",
+	steps = 4,
+	minlight = 13,
+	maxlight = default.LIGHT_MAX,
+	fertility = {"grassland","desert"},
+	groups = {food_potato = 1, flammable = 4},
+	place_param2 = 3,
+	custom_growth = {optimum_heat = 40, heat_scaling = "exponential", heat_a = 2.5, heat_b = 1.7, heat_base_speed = 10000, variance = 2500},
+})
+
+minetest.register_craftitem("farming:potato", {
+	description = "Potato",
+	inventory_image = "farming_potato.png",
+	on_use = minetest.item_eat(5),
+	groups = {food_potato = 1, flammable = 2},
+})
+
+
+minetest.register_craftitem("farming:baked_potato", {
+	description = "Baked Potato",
+	inventory_image = "farming_baked_potato.png",
+	on_use = minetest.item_eat(5),
+	groups = {food_potato = 1, flammable = 2},
+})
+
+
+minetest.register_craft({
+	type = "cooking",
+	cooktime = 15,
+	output = "farming:baked_potato",
+	recipe = "farming:potato"
 })

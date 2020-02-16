@@ -137,8 +137,8 @@ farming.hoe_on_place = function(itemstack, user, pointed_thing)
       local higher_bound = grow_time + growth.variance
 
       -- The above are per-stage, so multiple
-      local full_lower_bound = lower_bound * (plant.steps - 1)
-      local full_higher_bound = higher_bound * (plant.steps - 1)
+      local full_lower_bound = lower_bound * plant.steps
+      local full_higher_bound = higher_bound * plant.steps
 
       local flb_divisor, flb_unit, flb_over_three_months = growth_timescale(full_lower_bound)
       local fhb_divisor, fhb_unit, fhb_over_three_months = growth_timescale(full_higher_bound)
