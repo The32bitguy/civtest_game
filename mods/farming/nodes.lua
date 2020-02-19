@@ -189,3 +189,61 @@ minetest.override_item("default:junglegrass", {drop = {
 		{items = {'default:junglegrass'}},
 	}
 }})
+
+--------------------------------------------------------------------------------
+--
+-- Blueberry bushes & apples
+--
+--------------------------------------------------------------------------------
+
+-- TODO: we should eventually do this using the heat scaling for normal crops,
+--       but we still need refactor that stuff.
+
+local function blueberry_adjust()
+   minetest.registered_nodes["default:blueberry_bush_leaves_with_berries"]
+      .after_dig_node = function(pos, oldnode, oldmetadata, digger)
+         minetest.set_node(pos, {name = "default:blueberry_bush_leaves"})
+         minetest.get_node_timer(pos):start(math.random(60*60*3, 60*60*12))
+      end
+
+   minetest.registered_nodes["default:blueberry_bush_leaves"]
+      .on_timer = function(pos, elapsed)
+         local biome = minetest.get_biome_data(pos)
+         if biome.heat < 40 or biome.heat > 60 then
+            return
+         end
+         if minetest.get_node_light(pos) < 11
+         then
+            minetest.get_node_timer(pos):start(300)
+         else
+            minetest.set_node(pos, {name = "default:blueberry_bush_leaves_with_berries"})
+         end
+      end
+end
+
+local function apple_adjust()
+   minetest.registered_nodes["default:apple"]
+      .after_dig_node = function(pos, oldnode, oldmetadata, digger)
+         if oldnode.param2 == 0 then
+            minetest.set_node(pos, {name = "default:apple_mark"})
+            minetest.get_node_timer(pos):start(math.random(60*60*3, 60*60*12))
+         end
+      end
+
+   minetest.registered_nodes["default:apple_mark"]
+      .on_timer = function(pos, elapsed)
+         if (not minetest.find_node_near(pos, 1, "default:leaves"))
+            or biome.heat < 40
+            or biome.heat > 60
+         then
+            minetest.remove_node(pos)
+         elseif minetest.get_node_light(pos) < 11 then
+            minetest.get_node_timer(pos):start(300)
+         else
+            minetest.set_node(pos, {name = "default:apple"})
+         end
+      end
+end
+
+blueberry_adjust()
+apple_adjust()
