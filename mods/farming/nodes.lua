@@ -176,6 +176,7 @@ for i = 1, 5 do
 		max_items = 1,
 		items = {
 			{items = {'farming:seed_wheat'},rarity = 5},
+                        {items = {'farming:seed_potato'}, rarity = 5},
 			{items = {'default:grass_1'}},
 		}
 	}})
