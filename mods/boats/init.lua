@@ -131,7 +131,7 @@ function boat.on_punch(self, puncher)
 		if not (creative and creative.is_enabled_for
 				and creative.is_enabled_for(puncher_name))
 				or not inv:contains_item("main", "boats:boat") then
-			local leftover = inv:add_item("main", "boats:boat")
+			local leftover = player_api.give_player(puncher, "boats:boat")
 			-- if no room in inventory add a replacement boat to the world
 			if not leftover:is_empty() then
 				minetest.add_item(self.object:get_pos(), leftover)

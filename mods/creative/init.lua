@@ -77,8 +77,10 @@ function minetest.handle_node_drops(pos, drops, digger)
 	local inv = digger:get_inventory()
 	if inv then
 		for _, item in ipairs(drops) do
-			if not inv:contains_item("main", item, true) then
-				inv:add_item("main", item)
+			if (not inv:contains_item("main", item, true))
+				or (not inv:contains_item("main2", item, true))
+			then
+				player_api.give_item(digger, item)
 			end
 		end
 	end

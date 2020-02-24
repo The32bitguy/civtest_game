@@ -37,8 +37,8 @@ function sfinv.get_nav_fs(player, context, nav, current_idx)
 end
 
 local theme_inv = [[
-		list[current_player;main;0,4.7;8,1;]
-		list[current_player;main;0,5.85;8,3;8]
+		list[current_player;main2;0,4.7;8,3;]
+		list[current_player;main;0,7.85;8,1;]
 	]]
 
 function sfinv.make_formspec(player, context, content, show_inv, size)
@@ -141,6 +141,8 @@ function sfinv.get_page(player)
 end
 
 minetest.register_on_joinplayer(function(player)
+	player:get_inventory():set_size("main", 8)
+        player:get_inventory():set_size("main2", 24)
 	if sfinv.enabled then
 		sfinv.set_player_inventory_formspec(player)
 	end

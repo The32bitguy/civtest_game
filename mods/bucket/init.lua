@@ -145,8 +145,10 @@ minetest.register_craftitem("bucket:bucket_empty", {
 
 				-- if space in inventory add filled bucked, otherwise drop as item
 				local inv = user:get_inventory()
-				if inv:room_for_item("main", {name=liquiddef.itemname}) then
-					inv:add_item("main", liquiddef.itemname)
+				if inv:room_for_item("main", {name=liquiddef.itemname})
+					or inv:room_for_item("main2", {name=liquiddef.itemname})
+				then
+					player_api.give_item(user, liquiddef.itemname)
 				else
 					local pos = user:get_pos()
 					pos.y = math.floor(pos.y + 0.5)

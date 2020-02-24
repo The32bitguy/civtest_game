@@ -116,9 +116,8 @@ minetest.register_on_player_receive_fields(function(player, formname, fields)
 
 		if new_stack then
 			new_stack:get_meta():from_table({ fields = data })
-			if inv:room_for_item("main", new_stack) then
-				inv:add_item("main", new_stack)
-			else
+			local left = player_api.give_item(player, new_stack)
+			if left and not left:is_empty() then
 				minetest.add_item(player:get_pos(), new_stack)
 			end
 		else

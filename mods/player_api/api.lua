@@ -137,3 +137,14 @@ minetest.register_globalstep(function(dtime)
 		end
 	end
 end)
+
+function player_api.give_item(player, itemstack)
+   local left = inv:add_item("main", itemstack)
+   if left and not left:is_empty() then
+      local left2 = inv:add_item("main2", left)
+      if left2 and not left2:is_empty() then
+         return left2
+      end
+   end
+   return ItemStack()
+end
