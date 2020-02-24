@@ -16,7 +16,7 @@ function binoculars.update_player_property(player)
 	local creative_enabled =
 		(creative_mod and creative.is_enabled_for(player:get_player_name())) or
 		creative_mode_cache
-	local new_zoom_fov = 0
+	local new_zoom_fov = 15
 
 	if player:get_inventory():contains_item(
 			"main", "binoculars:binoculars") then
