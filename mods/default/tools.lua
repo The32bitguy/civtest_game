@@ -9,10 +9,10 @@ minetest.register_item(":", {
 		full_punch_interval = default.PUNCH_INTERVAL,
 		max_drop_level = 0,
 		groupcaps = {
-			crumbly = {times={[1]=20.0, [2]=8.00, [3]=2.00}, uses=0, maxlevel=4},
-			snappy = {times={[1]=20.0, [2]=8.00, [3]=2.00}, uses=0, maxlevel=4},
-                        cracky = {times={[1]=20.0, [2]=8.00, [3]=2.00}, uses=0, maxlevel=4},
-                        choppy = {times={[1]=20.0, [2]=8.00, [3]=2.00}, uses=0, maxlevel=4},
+			crumbly = {times={[1]=20.0, [2]=10.00, [3]=2.00}, uses=0, maxlevel=4},
+			snappy = {times={[1]=20.0, [2]=10.00, [3]=2.00}, uses=0, maxlevel=4},
+                        cracky = {times={[1]=20.0, [2]=10.00, [3]=2.00}, uses=0, maxlevel=4},
+                        choppy = {times={[1]=20.0, [2]=10.00, [3]=2.00}, uses=0, maxlevel=4},
 			oddly_breakable_by_hand = {times={[1]=3.50,[2]=2.00,[3]=0.70}, uses=0}
 		},
 		damage_groups = {fleshy=1},
@@ -44,7 +44,7 @@ minetest.register_tool("default:pick_stone", {
 		full_punch_interval = default.PUNCH_INTERVAL,
 		max_drop_level=1,
 		groupcaps={
-			cracky = {times={[2]=6.0, [3]=1.5}, uses=25, maxlevel=4},
+			cracky = {times={[2]=4.0, [3]=1.5}, uses=40, maxlevel=4},
 		},
 		damage_groups = {fleshy=3 * default.HEALTH_MULTIPLIER},
 	},
@@ -58,7 +58,7 @@ minetest.register_tool("default:pick_copper", {
 		full_punch_interval = default.PUNCH_INTERVAL,
 		max_drop_level=2,
 		groupcaps={
-			cracky = {times={[2]=3.0, [3]=1.0}, uses=250, maxlevel=4},
+			cracky = {times={[2]=3.0, [3]=1.0}, uses=400, maxlevel=4},
 		},
 		damage_groups = {fleshy=4 * default.HEALTH_MULTIPLIER},
 	},
@@ -135,7 +135,7 @@ minetest.register_tool("default:shovel_stone", {
 		full_punch_interval = default.PUNCH_INTERVAL,
 		max_drop_level=1,
 		groupcaps={
-			crumbly = {times={[1]=4.50, [2]=2.30, [3]=0.50}, uses=25, maxlevel=4},
+			crumbly = {times={[1]=4.50, [2]=2.30, [3]=0.50}, uses=40, maxlevel=4},
 		},
 		damage_groups = {fleshy=2 * default.HEALTH_MULTIPLIER},
 	},
@@ -150,7 +150,7 @@ minetest.register_tool("default:shovel_copper", {
 		full_punch_interval = default.PUNCH_INTERVAL,
 		max_drop_level=2,
 		groupcaps={
-			crumbly = {times={[1]=3.00, [2]=1.70, [3]=0.45}, uses=250, maxlevel=4},
+			crumbly = {times={[1]=3.00, [2]=1.70, [3]=0.45}, uses=400, maxlevel=4},
 		},
 		damage_groups = {fleshy=3 * default.HEALTH_MULTIPLIER},
 	},
@@ -228,7 +228,7 @@ minetest.register_tool("default:axe_stone", {
 		full_punch_interval = default.PUNCH_INTERVAL,
 		max_drop_level=1,
 		groupcaps={
-			choppy={times={[1]=4.00, [2]=2.00, [3]=1.30}, uses=25, maxlevel=4},
+			choppy={times={[1]=4.00, [2]=2.00, [3]=1.30}, uses=40, maxlevel=4},
 		},
 		damage_groups = {fleshy=3 * default.HEALTH_MULTIPLIER},
 	},
@@ -242,7 +242,7 @@ minetest.register_tool("default:axe_copper", {
 		full_punch_interval = default.PUNCH_INTERVAL,
 		max_drop_level=2,
 		groupcaps={
-			choppy={times={[1]=3.00, [2]=1.70, [3]=1.15}, uses=250, maxlevel=4},
+			choppy={times={[1]=3.00, [2]=1.70, [3]=1.15}, uses=400, maxlevel=4},
 		},
 		damage_groups = {fleshy=4 * default.HEALTH_MULTIPLIER},
 	},
