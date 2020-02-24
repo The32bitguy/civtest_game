@@ -36,10 +36,11 @@ function sfinv.get_nav_fs(player, context, nav, current_idx)
 	end
 end
 
-local theme_inv = [[
-		list[current_player;main2;0,4.7;8,3;]
-		list[current_player;main;0,7.85;8,1;]
-	]]
+function sfinv.get_inventory_area_formspec(offset)
+   local theme_inv = "list[current_player;main2;0,"..tostring(offset)..";8,3;]"
+      .."list[current_player;main;0,"..tostring(offset+3.15)..";8,1;]"
+   return theme_inv
+end
 
 function sfinv.make_formspec(player, context, content, show_inv, size)
 	local tmp = {
@@ -48,7 +49,7 @@ function sfinv.make_formspec(player, context, content, show_inv, size)
 		content
 	}
 	if show_inv then
-		tmp[#tmp + 1] = theme_inv
+		tmp[#tmp + 1] = sfinv.get_inventory_area_formspec(4.7)
 	end
 	return table.concat(tmp, "")
 end
