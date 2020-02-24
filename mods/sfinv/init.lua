@@ -20,3 +20,18 @@ sfinv.register_page("sfinv:crafting", {
 			]], true)
 	end
 })
+
+minetest.register_on_player_receive_fields(function(player, formname, fields)
+      if not fields.quit then
+         return
+      end
+      local inv = player:get_inventory()
+      local craft = inv:get_list("craft")
+      for n, item in ipairs(craft) do
+         local leftover = player_api.give_item(player, item)
+         if leftover and not leftover:is_empty() then
+            minetest.add_item(player:get_pos(), item)
+         end
+      end
+      inv:set_list("craft", {})
+end)
