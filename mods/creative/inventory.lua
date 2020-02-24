@@ -107,11 +107,14 @@ function creative.register_tab(name, title, items)
 				"label[6.2,3.35;" .. minetest.colorize("#FFFF00", tostring(pagenum)) .. " / " .. tostring(pagemax) .. "]" ..
 				[[
 					image[4.06,3.4;0.8,0.8;creative_trash_icon.png]
-					listcolors[#00000069;#5A5A5A;#141318;#30434C;#FFF]
-					list[current_player;main;0,4.7;8,1;]
-					list[current_player;main;0,5.85;8,3;8]
+					listcolors[#00000069;#5A5A5A;#141318;#30434C;#FFF] ]]
+				.. sfinv.get_inventory_area_formspec(4.7) ..
+				[[
 					list[detached:creative_trash;main;4,3.3;1,1;]
-					listring[]
+					listring[current_player;main2]
+					listring[detached:creative_trash;main]
+					listring[current_player;main]
+					listring[detached:creative_trash;main]
 					image_button[5.4,3.25;0.8,0.8;creative_prev_icon.png;creative_prev;]
 					image_button[7.2,3.25;0.8,0.8;creative_next_icon.png;creative_next;]
 					image_button[2.1,3.25;0.8,0.8;creative_search_icon.png;creative_search;]
@@ -120,13 +123,12 @@ function creative.register_tab(name, title, items)
 					tooltip[creative_clear;Reset]
 					tooltip[creative_prev;Previous page]
 					tooltip[creative_next;Next page]
-					listring[current_player;main]
 					field_close_on_enter[creative_filter;false]
 				]] ..
 				"field[0.3,3.5;2.2,1;creative_filter;;" .. minetest.formspec_escape(inv.filter) .. "]" ..
 				"listring[detached:creative_" .. player_name .. ";main]" ..
 				"list[detached:creative_" .. player_name .. ";main;0,0;8,3;" .. tostring(start_i) .. "]" ..
-				default.get_hotbar_bg(0,4.7) .. creative.formspec_add, false)
+				default.get_hotbar_bg(0,4.7) .. creative.formspec_add, true)
 		end,
 		on_enter = function(self, player, context)
 			local player_name = player:get_player_name()
