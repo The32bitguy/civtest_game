@@ -224,7 +224,11 @@ end
 local function apple_adjust()
    minetest.registered_nodes["default:apple"]
       .after_dig_node = function(pos, oldnode, oldmetadata, digger)
-         if oldnode.param2 == 0 then
+         local biome = minetest.get_biome_data(pos)
+         if oldnode.param2 == 0
+            and biome.heat > 40
+            and biome.heat < 60
+         then
             minetest.set_node(pos, {name = "default:apple_mark"})
             minetest.get_node_timer(pos):start(math.random(60*60*3, 60*60*12))
          end
@@ -232,10 +236,7 @@ local function apple_adjust()
 
    minetest.registered_nodes["default:apple_mark"]
       .on_timer = function(pos, elapsed)
-         if (not minetest.find_node_near(pos, 1, "default:leaves"))
-            or biome.heat < 40
-            or biome.heat > 60
-         then
+         if not minetest.find_node_near(pos, 1, "default:leaves") then
             minetest.remove_node(pos)
          elseif minetest.get_node_light(pos) < 11 then
             minetest.get_node_timer(pos):start(300)
