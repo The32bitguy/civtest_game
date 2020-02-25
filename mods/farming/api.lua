@@ -70,6 +70,53 @@ farming.hoe_on_use = function(itemstack, user, pointed_thing, uses)
 	return itemstack
 end
 
+function farming.compute_growth_interval(pos, growth, again)
+   --default values
+   local lower_bound = 166
+   local higher_bound = 286
+   if again == true then
+      lower_bound = 40
+      higher_bound = 80
+   end
+
+   if growth then
+      local biome = minetest.get_biome_data(pos)
+      local grow_time = -1
+
+      if growth.heat_scaling then
+         local heat_diff = math.abs(biome.heat-growth.optimum_heat)
+         if growth.heat_scaling == "linear" then
+            grow_time = growth.heat_a * heat_diff + growth.heat_base_speed
+         elseif growth.heat_scaling == "exponential" then
+            grow_time = (growth.heat_a * growth.heat_b^heat_diff) + growth.heat_base_speed
+         end
+      end
+
+      if growth.humidity_scaling then
+         local humidity_diff = math.abs(biome.humidity-growth.optimum_humidity)
+         if growth.humidity_scaling == "linear" then
+            grow_time = grow_time + growth.humidity_a * humidity_diff + growth.humidity_base_speed
+         elseif growth.humidity_scaling == "exponential" then
+            grow_time = grow_time + (growth.humidity_a * growth.humidity_b^humidity_diff) + growth.humidity_base_speed
+         end
+      end
+
+      -- If the grow time wasn't changed we change it to a default value
+      if grow_time == -1 then grow_time = 200 end
+
+      lower_bound = grow_time - growth.variance
+      higher_bound = grow_time + growth.variance
+
+      if again == true then
+         lower_bound = lower_bound / 4
+         higher_bound = higher_bound / 4
+      end
+   end
+
+   --minetest.log("Lower bound:" .. lower_bound .. " upper:" .. higher_bound)
+   return lower_bound, higher_bound
+end
+
 function farming.plant_from_node_name(name)
    local plantname
    if string.find(name, "seed") then
@@ -120,23 +167,13 @@ farming.hoe_on_place = function(itemstack, user, pointed_thing)
          return
       end
 
-      -- TODO: this is duplicated code from set_timer
       local growth = plant.custom_growth
-      local grow_time = -1
 
-      local biome = minetest.get_biome_data(pos)
-      local heat_difference = math.abs(biome.heat-growth.optimum_heat)
+      local lower_bound, higher_bound = farming.compute_growth_interval(
+         pos, growth, false
+      )
 
-      if growth.heat_scaling == "linear" then
-         grow_time = (growth.heat_a*heat_difference) + growth.heat_base_speed
-      elseif growth.heat_scaling == "exponential" then
-         grow_time = (growth.heat_a*growth.heat_b^heat_difference)+growth.heat_base_speed
-      end
-
-      local lower_bound = grow_time - growth.variance
-      local higher_bound = grow_time + growth.variance
-
-      -- The above are per-stage, so multiple
+      -- The above are per-stage, so multiply
       local full_lower_bound = lower_bound * plant.steps
       local full_higher_bound = higher_bound * plant.steps
 
@@ -235,62 +272,26 @@ farming.register_hoe = function(name, def)
 	end
 end
 
-local function set_timer(pos,again)
+function farming.set_timer(pos,again)
 	local node = minetest.get_node(pos)
 	local name = node.name
 	local growth = minetest.registered_nodes[name].custom_growth
 
-	--default values
-	local lower_bound = 166
-	local higher_bound = 286
-	if again == true then
-		lower_bound = 40
-		higher_bound = 80
-	end
+        local lower_bound, higher_bound = farming.compute_growth_interval(
+           pos, growth, again
+        )
 
-	if growth then
-		local biome = minetest.get_biome_data(pos)
-		local grow_time = -1 --Initial value
-
-		if growth.heat_scaling then
-			local heat_difference = math.abs(biome.heat-growth.optimum_heat)
-			if growth.heat_scaling == "linear" then
-				grow_time = growth.heat_a*heat_difference + growth.heat_base_speed
-			elseif growth.heat_scaling == "exponential" then
-				grow_time = (growth.heat_a*growth.heat_b^heat_difference)+growth.heat_base_speed
-			end
-		end
-
-		if growth.humidity_scaling then
-			local humidity_difference = math.abs(biome.humidity-growth.optimum_humidity)
-			if growth.humidity_scaling == "linear" then
-				grow_time = grow_time + growth.humidity_a*humidity_difference + growth.humidity_base_speed
-			elseif growth.humidity_scaling == "exponential" then
-				grow_time = grow_time + growth.humidity_a*growth.humidity_b^humidity_difference+growth.humidity_base_speed
-			end
-		end
-
-		if grow_time == -1  then grow_time = 200 end --If the grow time wasen't changed we change it to a default value
-
-		lower_bound = grow_time - growth.variance
-		higher_bound = grow_time + growth.variance
-
-		if again == true then
-			lower_bound = lower_bound / 4
-			higher_bound = higher_bound / 4
-		end
-	end
 	--minetest.log("Lower bound:" .. lower_bound .. " upper:" .. higher_bound)
 	minetest.get_node_timer(pos):start(math.random(lower_bound, higher_bound))
 end
 
 -- how often node timers for plants will tick, +/- some random value
 local function tick(pos)
-	set_timer(pos,false)
+	farming.set_timer(pos,false)
 end
 -- how often a growth failure tick is retried (e.g. too dark)
 local function tick_again(pos)
-	set_timer(pos,true)
+	farming.set_timer(pos,true)
 end
 
 -- Seed placement
