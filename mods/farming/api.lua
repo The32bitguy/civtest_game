@@ -125,7 +125,11 @@ function farming.plant_from_node_name(name)
    else
       -- farming:<name>_<stage>
       local modname_plantname = name:split("_")[1]
-      plantname = modname_plantname:split(":")[2]
+      if modname_plantname then
+         plantname = modname_plantname:split(":")[2]
+      else
+         return nil
+      end
    end
    return farming.registered_plants[plantname]
 end
@@ -272,28 +276,6 @@ farming.register_hoe = function(name, def)
 	end
 end
 
-function farming.set_timer(pos,again)
-	local node = minetest.get_node(pos)
-	local name = node.name
-	local growth = minetest.registered_nodes[name].custom_growth
-
-        local lower_bound, higher_bound = farming.compute_growth_interval(
-           pos, growth, again
-        )
-
-	--minetest.log("Lower bound:" .. lower_bound .. " upper:" .. higher_bound)
-	minetest.get_node_timer(pos):start(math.random(lower_bound, higher_bound))
-end
-
--- how often node timers for plants will tick, +/- some random value
-local function tick(pos)
-	farming.set_timer(pos,false)
-end
--- how often a growth failure tick is retried (e.g. too dark)
-local function tick_again(pos)
-	farming.set_timer(pos,true)
-end
-
 -- Seed placement
 farming.place_seed = function(itemstack, placer, pointed_thing, plantname)
 	local pt = pointed_thing
@@ -344,7 +326,13 @@ farming.place_seed = function(itemstack, placer, pointed_thing, plantname)
 
 	-- add the node and remove 1 item from the itemstack
 	minetest.add_node(pt.above, {name = plantname, param2 = 1})
-	tick(pt.above)
+
+        local meta = minetest.get_meta(pt.above)
+        local time = os.time(os.date("!*t"))
+
+        meta:set_string("last_crop_name", plantname)
+        meta:set_string("last_grow", time)
+
 	if not (creative and creative.is_enabled_for
 			and creative.is_enabled_for(player_name)) then
 		itemstack:take_item()
@@ -359,15 +347,14 @@ farming.grow_plant = function(pos, elapsed)
 
 	if not def.next_plant then
 		-- disable timer for fully grown plant
-		return
+		return true
 	end
 
 	-- grow seed
 	if minetest.get_item_group(node.name, "seed") and def.fertility then
 		local soil_node = minetest.get_node_or_nil({x = pos.x, y = pos.y - 1, z = pos.z})
 		if not soil_node then
-			tick_again(pos)
-			return
+			return false
 		end
 		-- omitted is a check for light, we assume seeds can germinate in the dark.
 		for _, v in pairs(def.fertility) do
@@ -378,27 +365,22 @@ farming.grow_plant = function(pos, elapsed)
 				end
 				minetest.swap_node(pos, placenode)
 				if minetest.registered_nodes[def.next_plant].next_plant then
-					tick(pos)
-					return
+					return true
 				end
 			end
 		end
-
-		return
 	end
 
 	-- check if on wet soil
 	local below = minetest.get_node({x = pos.x, y = pos.y - 1, z = pos.z})
 	if minetest.get_item_group(below.name, "soil") < 3 then
-		tick_again(pos)
-		return
+		return false
 	end
 
 	-- check light
 	local light = minetest.get_node_light(pos)
 	if not light or light < def.minlight or light > def.maxlight then
-		tick_again(pos)
-		return
+		return false
 	end
 
 	-- grow
@@ -410,9 +392,8 @@ farming.grow_plant = function(pos, elapsed)
 
 	-- new timer needed?
 	if minetest.registered_nodes[def.next_plant].next_plant then
-		tick(pos)
 	end
-	return
+	return true
 end
 
 -- Register plants
@@ -440,6 +421,7 @@ farming.register_plant = function(name, def)
 		def.fertility = {}
 	end
 
+	def.name = name
 	farming.registered_plants[pname] = def
 
 	-- Register seed
@@ -546,6 +528,9 @@ farming.register_plant = function(name, def)
 		})
 	end
 
+        farming.register_growth_abm(pname, lbm_nodes)
+        farming.register_growth_lbm(pname, lbm_nodes)
+
 	-- replacement LBM for pre-nodetimer plants
 	minetest.register_lbm({
 		name = ":" .. mname .. ":start_nodetimer_" .. pname,
@@ -561,4 +546,130 @@ farming.register_plant = function(name, def)
 		harvest = mname .. ":" .. pname
 	}
 	return r
+end
+
+--------------------------------------------------------------------------------
+--
+-- Crop growth ABM + LBM
+-- Persists crop growth over time, regardless of mapblock load status.
+--
+--------------------------------------------------------------------------------
+
+local function round(x)
+   return x >= 0
+      and math.floor(x + 0.5)
+      or math.ceil(x - 0.5)
+end
+
+local function crop_location_sanity_check(pos, node)
+   -- Sanity: ensure the last crop at the block was of the same type, and we
+   -- have the right metadata.
+   --
+   -- (This is pretty paranoid, I'm not sure if these can ever happen...)
+
+   local meta = minetest.get_meta(pos)
+   local last_crop_name = meta:get_string("last_crop_name")
+
+   if last_crop_name == "" then
+      minetest.log("warn",
+         "Crop at " .. minetest.pos_to_string(pos)
+            .. " had glitched \"last_crop_name\" metadata,"
+            .. " changed to " .. node.name .. "."
+      )
+      last_crop_name = node.name
+   end
+
+   local last_plant = farming.plant_from_node_name(last_crop_name)
+   local plant = farming.plant_from_node_name(node.name)
+
+   if (not last_plant or not plant)
+      or last_plant.name ~= plant.name
+   then
+      minetest.log("warn",
+         "Crop at " .. minetest.pos_to_string(pos) .. " changed from "
+            .. last_crop_name .. " to " .. plant.name .. " since last lbm run."
+      )
+   end
+   meta:set_string("last_crop_name", node.name)
+end
+
+local function try_grow_crop(pos, node)
+   crop_location_sanity_check(pos, node)
+
+   local meta = minetest.get_meta(pos)
+   local time = os.time(os.date("!*t"))
+
+   local plant = farming.plant_from_node_name(node.name)
+
+   local last_growth = meta:get_int("last_grow")
+
+   local growth = plant.custom_growth
+   local lower_bound, higher_bound = farming.compute_growth_interval(
+      pos, growth, false
+   )
+   local average_bound = round((lower_bound + higher_bound) / 2)
+
+   local elapsed_since_last_grow = time - last_growth
+
+   local steps = elapsed_since_last_grow / average_bound
+   local full_steps = math.floor(steps)
+   local next_step_pct = steps - full_steps
+
+   local result = false
+   if elapsed_since_last_grow > average_bound then
+      for i=1, full_steps, 1 do
+         result = farming.grow_plant(pos)
+      end
+   end
+
+   meta:set_int("last_grow", last_growth + round(average_bound * full_steps))
+
+   return result, full_steps, next_step_pct
+end
+
+local DEBUG = true
+
+function farming.register_growth_lbm(pname, lbm_nodes)
+   minetest.register_lbm({
+         label = "Crop growth lbm" .. pname,
+         name = "farming:crop_catchup_lbm_" .. pname,
+         nodenames = lbm_nodes,
+         run_at_every_load = true,
+         action = function(pos, node)
+            local result, full_steps, next_step_pct = try_grow_crop(pos, node)
+
+            if full_steps > 0 and DEBUG then
+               local msg = "grew " .. full_steps .. " steps"
+
+               minetest.log(
+                  "Crop at " .. minetest.pos_to_string(pos) .. " " .. msg
+                  .. " while unloaded (" .. tostring(round(next_step_pct * 100))
+                     .. "% to the next stage)."
+               )
+            end
+         end
+   })
+   minetest.log("Registered growth LBM for " .. pname)
+end
+
+function farming.register_growth_abm(pname, lbm_nodes)
+   minetest.register_abm({
+         label = "Crop growth abm " .. pname,
+         name = "farming:crop_catchup_abm_" .. pname,
+         nodenames = lbm_nodes,
+         interval = 30,
+         chance = 1,
+         action = function(pos, node)
+            local result, full_steps, next_step_pct = try_grow_crop(pos, node)
+
+            if full_steps > 0 and DEBUG then
+               local msg = "grew " .. full_steps .. " steps"
+               minetest.log(
+                  "Crop at " .. minetest.pos_to_string(pos) .. " " .. msg
+                  .. " (" .. round(next_step_pct * 100) .. "% left until the next step)."
+               )
+            end
+         end
+   })
+   minetest.log("Registered growth ABM for " .. pname)
 end
