@@ -138,11 +138,44 @@ minetest.register_globalstep(function(dtime)
 	end
 end)
 
-function player_api.give_item(player, itemstack)
+local function find_empty_index(list, stack)
+   for i, item in ipairs(list) do
+      if item:is_empty()
+         or (item:to_string() == stack:to_string()
+                and item:get_count() ~= item:get_stack_max())
+      then
+         return i
+      end
+   end
+end
+
+local function call_inv_action(player, inv, listname, stack, left)
+   local index = find_empty_index(inv:get_list(listname), stack)
+   if index then
+      local diff = ItemStack(stack)
+      diff:set_count(stack:get_count() - left:get_count())
+
+      for _,f in ipairs(core.registered_on_player_inventory_actions) do
+         f(player, "put", player:get_inventory(), {
+              listname = listname, index = index, stack = diff
+         })
+      end
+   end
+end
+
+function player_api.give_item(player, itemstack, should_call_action)
    local inv = player:get_inventory()
    local left = inv:add_item("main", itemstack)
+   if should_call_action then
+      call_inv_action(player, inv, "main", itemstack, left)
+   end
+
    if left and not left:is_empty() then
       local left2 = inv:add_item("main2", left)
+      if should_call_action then
+         call_inv_action(player, inv, "main2", left, left2)
+      end
+
       if left2 and not left2:is_empty() then
          return left2
       end
