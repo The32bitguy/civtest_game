@@ -317,7 +317,7 @@ if fire_enabled then
 		label = "Ignite flame",
 		nodenames = {"group:flammable"},
 		neighbors = {"group:igniter"},
-		interval = 7,
+		interval = 45,
 		chance = 12,
 		catch_up = false,
 		action = function(pos, node, active_object_count, active_object_count_wider)
@@ -344,7 +344,7 @@ if fire_enabled then
 				local def = minetest.registered_nodes[flammable_node.name]
 				if def.on_burn then
 					def.on_burn(p)
-				else
+				elseif not minetest.is_protected(p, "", minetest.DIG_ACTION) then
 					minetest.remove_node(p)
 					minetest.check_for_falling(p)
 				end
