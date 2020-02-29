@@ -211,7 +211,7 @@ local function add_effects(pos, radius, drops)
 		glow = 15,
 	})
 	minetest.add_particlespawner({
-		amount = 64,
+		amount = 32,
 		time = 0.5,
 		minpos = vector.subtract(pos, radius / 2),
 		maxpos = vector.add(pos, radius / 2),
@@ -242,7 +242,7 @@ local function add_effects(pos, radius, drops)
 	end
 
 	minetest.add_particlespawner({
-		amount = 64,
+		amount = 16,
 		time = 0.1,
 		minpos = vector.subtract(pos, radius / 2),
 		maxpos = vector.add(pos, radius / 2),
