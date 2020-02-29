@@ -390,9 +390,6 @@ farming.grow_plant = function(pos, elapsed)
 	end
 	minetest.swap_node(pos, placenode)
 
-	-- new timer needed?
-	if minetest.registered_nodes[def.next_plant].next_plant then
-	end
 	return true
 end
 
@@ -467,7 +464,6 @@ farming.register_plant = function(name, def)
 			return farming.place_seed(itemstack, placer, pointed_thing, mname .. ":seed_" .. pname)
 		end,
 		next_plant = mname .. ":" .. pname .. "_1",
-		on_timer = farming.grow_plant,
 		minlight = def.minlight,
 		maxlight = def.maxlight,
 		custom_growth = def.custom_growth,
@@ -521,7 +517,6 @@ farming.register_plant = function(name, def)
 			groups = nodegroups,
 			sounds = default.node_sound_leaves_defaults(),
 			next_plant = next_plant,
-			on_timer = farming.grow_plant,
 			minlight = def.minlight,
 			maxlight = def.maxlight,
 			custom_growth = def.custom_growth,
@@ -530,15 +525,6 @@ farming.register_plant = function(name, def)
 
         farming.register_growth_abm(pname, lbm_nodes)
         farming.register_growth_lbm(pname, lbm_nodes)
-
-	-- replacement LBM for pre-nodetimer plants
-	minetest.register_lbm({
-		name = ":" .. mname .. ":start_nodetimer_" .. pname,
-		nodenames = lbm_nodes,
-		action = function(pos, node)
-			tick_again(pos)
-		end,
-	})
 
 	-- Return
 	local r = {
