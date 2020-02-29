@@ -15,7 +15,7 @@ minetest.register_item(":", {
                         choppy = {times={[1]=20.0, [2]=10.00, [3]=2.00}, uses=0, maxlevel=4},
 			oddly_breakable_by_hand = {times={[1]=3.50,[2]=2.00,[3]=0.70}, uses=0}
 		},
-		damage_groups = {fleshy=1},
+		damage_groups = {fleshy=1 * default.HEALTH_MULTIPLIER},
 	}
 })
 
@@ -33,7 +33,7 @@ minetest.register_tool("default:pick_wood", {
 		groupcaps={
 			cracky = {times={[2]=7.0, [3]=1.5}, uses=10, maxlevel=4},
 		},
-		damage_groups = {fleshy=3 * default.HEALTH_MULTIPLIER},
+		damage_groups = {fleshy=1 * default.HEALTH_MULTIPLIER},
 	},
 	sound = {breaks = "default_tool_breaks"},
 })
@@ -48,7 +48,7 @@ minetest.register_tool("default:pick_stone", {
 		groupcaps={
 			cracky = {times={[2]=4.0, [3]=1.5}, uses=40, maxlevel=4},
 		},
-		damage_groups = {fleshy=3 * default.HEALTH_MULTIPLIER},
+		damage_groups = {fleshy=2 * default.HEALTH_MULTIPLIER},
 	},
 	sound = {breaks = "default_tool_breaks"},
 })
@@ -63,7 +63,7 @@ minetest.register_tool("default:pick_copper", {
 		groupcaps={
 			cracky = {times={[2]=3.0, [3]=1.0}, uses=400, maxlevel=4},
 		},
-		damage_groups = {fleshy=4 * default.HEALTH_MULTIPLIER},
+		damage_groups = {fleshy=3 * default.HEALTH_MULTIPLIER},
 	},
 	sound = {breaks = "default_tool_breaks"},
 })
@@ -78,7 +78,7 @@ minetest.register_tool("default:pick_bronze", {
 		groupcaps={
 			cracky = {times={[2]=2.5, [3]=0.90}, uses=1000, maxlevel=4},
 		},
-		damage_groups = {fleshy=4 * default.HEALTH_MULTIPLIER},
+		damage_groups = {fleshy=3 * default.HEALTH_MULTIPLIER},
 	},
 	sound = {breaks = "default_tool_breaks"},
 })
@@ -120,7 +120,7 @@ minetest.register_tool("default:pick_steel", {
 minetest.register_tool("default:shovel_wood", {
 	description = "Wooden Shovel",
 	inventory_image = "default_tool_woodshovel.png",
-	wield_image = "default_tool_woodshovel.png^[transformR90",
+	wield_image = "default_tool_woodshovel.png",
 	groups = { shovel = 1 },
 	tool_capabilities = {
 		full_punch_interval = default.PUNCH_INTERVAL,
@@ -137,7 +137,7 @@ minetest.register_tool("default:shovel_wood", {
 minetest.register_tool("default:shovel_stone", {
 	description = "Stone Shovel",
 	inventory_image = "default_tool_stoneshovel.png",
-	wield_image = "default_tool_stoneshovel.png^[transformR90",
+	wield_image = "default_tool_stoneshovel.png",
 	groups = { shovel = 1 },
 	tool_capabilities = {
 		full_punch_interval = default.PUNCH_INTERVAL,
@@ -153,7 +153,7 @@ minetest.register_tool("default:shovel_stone", {
 minetest.register_tool("default:shovel_copper", {
 	description = "Copper Shovel",
 	inventory_image = "default_tool_coppershovel.png",
-	wield_image = "default_tool_coppershovel.png^[transformR90",
+	wield_image = "default_tool_coppershovel.png",
 	groups = { shovel = 1 },
 	tool_capabilities = {
 		full_punch_interval = default.PUNCH_INTERVAL,
@@ -169,7 +169,7 @@ minetest.register_tool("default:shovel_copper", {
 minetest.register_tool("default:shovel_bronze", {
 	description = "Bronze Shovel",
 	inventory_image = "default_tool_bronzeshovel.png",
-	wield_image = "default_tool_bronzeshovel.png^[transformR90",
+	wield_image = "default_tool_bronzeshovel.png",
 	groups = { shovel = 1 },
 	tool_capabilities = {
 		full_punch_interval = default.PUNCH_INTERVAL,
@@ -185,7 +185,7 @@ minetest.register_tool("default:shovel_bronze", {
 minetest.register_tool("default:shovel_iron", {
 	description = "Iron Shovel",
 	inventory_image = "default_tool_ironshovel.png",
-	wield_image = "default_tool_ironshovel.png^[transformR90",
+	wield_image = "default_tool_ironshovel.png",
 	groups = { shovel = 1 },
 	tool_capabilities = {
 		full_punch_interval = default.PUNCH_INTERVAL,
@@ -193,7 +193,7 @@ minetest.register_tool("default:shovel_iron", {
 		groupcaps={
 			crumbly = {times={[1]=2.00, [2]=1.10, [3]=0.35}, uses=750, maxlevel=4},
 		},
-		damage_groups = {fleshy=3 * default.HEALTH_MULTIPLIER},
+		damage_groups = {fleshy=4 * default.HEALTH_MULTIPLIER},
 	},
 	sound = {breaks = "default_tool_breaks"},
 })
@@ -201,7 +201,7 @@ minetest.register_tool("default:shovel_iron", {
 minetest.register_tool("default:shovel_steel", {
 	description = "Steel Shovel",
 	inventory_image = "default_tool_steelshovel.png",
-	wield_image = "default_tool_steelshovel.png^[transformR90",
+	wield_image = "default_tool_steelshovel.png",
 	groups = { shovel = 1 },
 	tool_capabilities = {
 		full_punch_interval = default.PUNCH_INTERVAL,
@@ -209,7 +209,7 @@ minetest.register_tool("default:shovel_steel", {
 		groupcaps={
 			crumbly = {times={[1]=1.50, [2]=0.70, [3]=0.30}, uses=2500, maxlevel=4},
 		},
-		damage_groups = {fleshy=3 * default.HEALTH_MULTIPLIER},
+		damage_groups = {fleshy=4 * default.HEALTH_MULTIPLIER},
 	},
 	sound = {breaks = "default_tool_breaks"},
 })
@@ -274,7 +274,7 @@ minetest.register_tool("default:axe_bronze", {
 		groupcaps={
 			choppy={times={[1]=2.50, [2]=1.60, [3]=1.00}, uses=1000, maxlevel=4},
 		},
-		damage_groups = {fleshy=4 * default.HEALTH_MULTIPLIER},
+		damage_groups = {fleshy=5 * default.HEALTH_MULTIPLIER},
 	},
 	sound = {breaks = "default_tool_breaks"},
 })
@@ -289,7 +289,7 @@ minetest.register_tool("default:axe_iron", {
 		groupcaps={
 			choppy={times={[1]=2.00, [2]=1.50, [3]=0.90}, uses=750, maxlevel=4},
 		},
-		damage_groups = {fleshy=4 * default.HEALTH_MULTIPLIER},
+		damage_groups = {fleshy=6 * default.HEALTH_MULTIPLIER},
 	},
 	sound = {breaks = "default_tool_breaks"},
 })
@@ -304,7 +304,7 @@ minetest.register_tool("default:axe_steel", {
 		groupcaps={
 			choppy={times={[1]=1.50, [2]=1.40, [3]=0.80}, uses=2500, maxlevel=4},
 		},
-		damage_groups = {fleshy=4 * default.HEALTH_MULTIPLIER},
+		damage_groups = {fleshy=7 * default.HEALTH_MULTIPLIER},
 	},
 	sound = {breaks = "default_tool_breaks"},
 })
@@ -323,7 +323,7 @@ minetest.register_tool("default:sword_wood", {
 		groupcaps={
 			snappy={times={[2]=1.6, [3]=0.40}, uses=5, maxlevel=4},
 		},
-		damage_groups = {fleshy=2 * default.HEALTH_MULTIPLIER},
+		damage_groups = {fleshy=3 * default.HEALTH_MULTIPLIER},
 	},
 	groups = {flammable = 2},
 	sound = {breaks = "default_tool_breaks"},
@@ -339,7 +339,7 @@ minetest.register_tool("default:sword_stone", {
 		groupcaps={
 			snappy={times={[2]=1.4, [3]=0.40}, uses=10, maxlevel=4},
 		},
-		damage_groups = {fleshy=3 * default.HEALTH_MULTIPLIER},
+		damage_groups = {fleshy=4 * default.HEALTH_MULTIPLIER},
 	},
 	sound = {breaks = "default_tool_breaks"},
 })
