@@ -625,15 +625,15 @@ function default.register_ores()
 		ore_type       = "scatter",
 		ore            = "default:stone_with_coal",
 		wherein        = "default:stone",
-		clust_scarcity = 4,
-		clust_num_ores = 3,
-		clust_size     = 2,
+		clust_scarcity = 16,
+		clust_num_ores = 10,
+		clust_size     = 4,
 		y_max          = 100,
 		y_min          = -500,
                 noise_params   = {
                    offset=0,
                    scale=0.75,
-                   spread={x=100, y=100, z=100},
+                   spread={x=75, y=75, z=75},
                    seed=2382384,
                    octaves=3,
                    persist=0.70
@@ -647,20 +647,20 @@ function default.register_ores()
 		ore_type       = "scatter",
 		ore            = "default:stone_with_tin",
 		wherein        = "default:stone",
-		clust_scarcity = 4,
-		clust_num_ores = 3,
-		clust_size     = 2,
+		clust_scarcity = 10,
+		clust_num_ores = 2,
+		clust_size     = 3,
 		y_max          = 100,
-		y_min          = -500,
+		y_min          = -250,
                 noise_params   = {
                    offset=-0.05,
                    scale=0.85,
-                   spread={x=200, y=200, z=200},
+                   spread={x=150, y=150, z=150},
                    seed=3928374,
                    octaves=3,
                    persist=0.70
                 },
-                noise_threshold = 0.96
+                noise_threshold = 0.98
 	})
 
 	-- Copper
@@ -669,20 +669,20 @@ function default.register_ores()
 		ore_type       = "scatter",
 		ore            = "default:stone_with_copper",
 		wherein        = "default:stone",
-		clust_scarcity = 4,
-		clust_num_ores = 3,
-		clust_size     = 2,
+		clust_scarcity = 10,
+		clust_num_ores = 2,
+		clust_size     = 4,
 		y_max          = 100,
-		y_min          = -500,
+		y_min          = -250,
                 noise_params   = {
                    offset=-0.2,
-                   scale=1,
-                   spread={x=200, y=200, z=200},
+                   scale=1.05,
+                   spread={x=250, y=250, z=250},
                    seed=946293,
                    octaves=3,
                    persist=0.70
                 },
-                noise_threshold = 0.99
+                noise_threshold = 0.995
 	})
 
 	-- Iron
@@ -691,20 +691,20 @@ function default.register_ores()
 		ore_type       = "scatter",
 		ore            = "default:stone_with_iron",
 		wherein        = "default:stone",
-		clust_scarcity = 4,
-		clust_num_ores = 3,
-		clust_size     = 2,
+		clust_scarcity = 8,
+		clust_num_ores = 2,
+		clust_size     = 3,
 		y_max          = 100,
-		y_min          = -500,
+		y_min          = -250,
                 noise_params   = {
                    offset=0,
                    scale=0.85,
-                   spread={x=200, y=200, z=200},
+                   spread={x=150, y=150, z=150},
                    seed=3248324,
                    octaves=3,
                    persist=0.70
                 },
-                noise_threshold = 0.98
+                noise_threshold = 0.995
 	})
 
 	-- Gold
@@ -717,7 +717,7 @@ function default.register_ores()
 		clust_num_ores = 3,
 		clust_size     = 3,
 		y_max          = 100,
-		y_min          = -500,
+		y_min          = -250,
                 noise_params   = {
                    offset=-0.2,
                    scale=0.65,
@@ -736,8 +736,8 @@ function default.register_ores()
 		clust_scarcity = 100 * 100 * 100,
 		clust_num_ores = 3,
 		clust_size     = 2,
-		y_max          = 500,
-		y_min          = -500,
+		y_max          = 250,
+		y_min          = -250,
 	})
 
 	-- Mese crystal
