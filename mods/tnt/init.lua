@@ -444,12 +444,14 @@ minetest.register_node("tnt:gunpowder", {
 		connect_to_raillike = minetest.raillike_group("gunpowder")},
 	sounds = default.node_sound_leaves_defaults(),
 
-	on_punch = function(pos, node, puncher)
+	on_punch = function(pos, node, puncher, pointed_thing)
 		if puncher:get_wielded_item():get_name() == "default:torch" then
 			minetest.set_node(pos, {name = "tnt:gunpowder_burning"})
-			minetest.log("action", puncher:get_player_name() ..
+			minetest.log("verbose", puncher:get_player_name() ..
 				" ignites tnt:gunpowder at " ..
 				minetest.pos_to_string(pos))
+		else
+			minetest.node_punch(pos, node, puncher, pointed_thing)
 		end
 	end,
 	on_blast = function(pos, intensity)
@@ -608,16 +610,18 @@ function tnt.register_tnt(def)
 			after_place_node = function(pos, placer)
 				if placer:is_player() then
 					local meta = minetest.get_meta(pos)
-					meta:set_string("owner", placer:get_player_name())
+					meta:set_string("owner", "")
 				end
 			end,
-			on_punch = function(pos, node, puncher)
+			on_punch = function(pos, node, puncher, pointed_thing)
 				if puncher:get_wielded_item():get_name() == "default:torch" then
 					minetest.swap_node(pos, {name = name .. "_burning"})
 					minetest.registered_nodes[name .. "_burning"].on_construct(pos)
-					minetest.log("action", puncher:get_player_name() ..
+					minetest.log("verbose", puncher:get_player_name() ..
 						" ignites " .. node.name .. " at " ..
 						minetest.pos_to_string(pos))
+				else
+					minetest.node_punch(pos, node, puncher, pointed_thing)
 				end
 			end,
 			on_blast = function(pos, intensity)
