@@ -1115,6 +1115,18 @@ minetest.register_craft({
 
 minetest.register_craft({
 	type = "fuel",
+	recipe = "default:charcoal",
+	burntime = 40,
+})
+
+minetest.register_craft({
+	type = "fuel",
+	recipe = "default:coke",
+	burntime = 80,
+})
+
+minetest.register_craft({
+	type = "fuel",
 	recipe = "default:coalblock",
 	burntime = 370,
 })
