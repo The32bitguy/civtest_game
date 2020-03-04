@@ -97,7 +97,7 @@ minetest.register_tool("fireflies:bug_net", {
 			minetest.set_node(pointed_thing.under, {name = "air"})
 			local stack = ItemStack(node_name.." 1")
 			local leftover = player_api.give_item(player, stack)
-			if leftover:get_count() > 0 then
+			if leftover and not leftover:is_empty() then
 				minetest.add_item(pointed_thing.under, node_name.." 1")
 			end
 		end
