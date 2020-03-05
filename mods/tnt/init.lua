@@ -157,14 +157,10 @@ local function entity_physics(pos, radius, drops)
 
 		local damage = (4 / dist) * radius
 		if obj:is_player() then
-			-- currently the engine has no method to set
-			-- player velocity. See #2960
-			-- instead, we knock the player back 1.0 node, and slightly upwards
-			local dir = vector.normalize(vector.subtract(obj_pos, pos))
-			local moveoff = vector.multiply(dir, dist + 1.0)
-			local newpos = vector.add(pos, moveoff)
-			newpos = vector.add(newpos, {x = 0, y = 0.2, z = 0})
-			obj:set_pos(newpos)
+			local obj_vel = obj:get_player_velocity()
+			local new_vel = calc_velocity(pos, obj_pos, obj_vel, radius * 5)
+			new_vel.y = 10
+			obj:add_player_velocity(new_vel)
 
 			obj:set_hp(obj:get_hp() - damage)
 		else
