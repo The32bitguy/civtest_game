@@ -613,7 +613,7 @@ local function try_grow_crop(pos, node)
    return result, full_steps, next_step_pct
 end
 
-local DEBUG = true
+local DEBUG = false
 
 function farming.register_growth_lbm(pname, lbm_nodes)
    minetest.register_lbm({
