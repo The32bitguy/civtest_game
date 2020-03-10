@@ -43,7 +43,7 @@ function default.grow_sapling(pos)
 	local mg_name = minetest.get_mapgen_setting("mg_name")
 	local node = minetest.get_node(pos)
 	if node.name == "default:sapling" then
-		minetest.log("action", "A sapling grows into a tree at "..
+		minetest.log("verbose", "A sapling grows into a tree at "..
 			minetest.pos_to_string(pos))
 		if mg_name == "v6" then
 			default.grow_tree(pos, random(1, 4) == 1)
@@ -51,7 +51,7 @@ function default.grow_sapling(pos)
 			default.grow_new_apple_tree(pos)
 		end
 	elseif node.name == "default:junglesapling" then
-		minetest.log("action", "A jungle sapling grows into a tree at "..
+		minetest.log("verbose", "A jungle sapling grows into a tree at "..
 			minetest.pos_to_string(pos))
 		if mg_name == "v6" then
 			default.grow_jungle_tree(pos)
@@ -59,7 +59,7 @@ function default.grow_sapling(pos)
 			default.grow_new_jungle_tree(pos)
 		end
 	elseif node.name == "default:pine_sapling" then
-		minetest.log("action", "A pine sapling grows into a tree at "..
+		minetest.log("verbose", "A pine sapling grows into a tree at "..
 			minetest.pos_to_string(pos))
 		local snow = is_snow_nearby(pos)
 		if mg_name == "v6" then
@@ -70,31 +70,31 @@ function default.grow_sapling(pos)
 			default.grow_new_pine_tree(pos)
 		end
 	elseif node.name == "default:acacia_sapling" then
-		minetest.log("action", "An acacia sapling grows into a tree at "..
+		minetest.log("verbose", "An acacia sapling grows into a tree at "..
 			minetest.pos_to_string(pos))
 		default.grow_new_acacia_tree(pos)
 	elseif node.name == "default:aspen_sapling" then
-		minetest.log("action", "An aspen sapling grows into a tree at "..
+		minetest.log("verbose", "An aspen sapling grows into a tree at "..
 			minetest.pos_to_string(pos))
 		default.grow_new_aspen_tree(pos)
 	elseif node.name == "default:bush_sapling" then
-		minetest.log("action", "A bush sapling grows into a bush at "..
+		minetest.log("verbose", "A bush sapling grows into a bush at "..
 			minetest.pos_to_string(pos))
 		default.grow_bush(pos)
 	elseif node.name == "default:blueberry_bush_sapling" then
-		minetest.log("action", "A blueberry bush sapling grows into a bush at "..
+		minetest.log("verbose", "A blueberry bush sapling grows into a bush at "..
 			minetest.pos_to_string(pos))
 		default.grow_blueberry_bush(pos)
 	elseif node.name == "default:acacia_bush_sapling" then
-		minetest.log("action", "An acacia bush sapling grows into a bush at "..
+		minetest.log("verbose", "An acacia bush sapling grows into a bush at "..
 			minetest.pos_to_string(pos))
 		default.grow_acacia_bush(pos)
 	elseif node.name == "default:pine_bush_sapling" then
-		minetest.log("action", "A pine bush sapling grows into a bush at "..
+		minetest.log("verbose", "A pine bush sapling grows into a bush at "..
 			minetest.pos_to_string(pos))
 		default.grow_pine_bush(pos)
 	elseif node.name == "default:emergent_jungle_sapling" then
-		minetest.log("action", "An emergent jungle sapling grows into a tree at "..
+		minetest.log("verbose", "An emergent jungle sapling grows into a tree at "..
 			minetest.pos_to_string(pos))
 		default.grow_new_emergent_jungle_tree(pos)
 	end
