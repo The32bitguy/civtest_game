@@ -15,6 +15,8 @@ sfinv.register_page("sfinv:crafting", {
 				image[5,7.85;1,1;gui_hb_bg.png]
 				image[6,7.85;1,1;gui_hb_bg.png]
 				image[7,7.85;1,1;gui_hb_bg.png]
+				listring[current_player;craft]
+				listring[current_player;main2]
 				listring[current_player;main]
 				listring[current_player;main2]
 			]], true)
