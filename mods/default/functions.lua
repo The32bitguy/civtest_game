@@ -203,6 +203,9 @@ function default.grow_cactus(pos, node)
 	if minetest.get_node_light(pos) < 13 then
 		return
 	end
+	if not minetest.is_protected(pos, "") then
+        	return
+	end
 	minetest.set_node(pos, {name = "default:cactus"})
 	return true
 end
@@ -228,6 +231,9 @@ function default.grow_papyrus(pos, node)
 	end
 	if minetest.get_node_light(pos) < 13 then
 		return
+	end
+	if not minetest.is_protected(pos, "") then
+        	return
 	end
 	minetest.set_node(pos, {name = "default:papyrus"})
 	return true

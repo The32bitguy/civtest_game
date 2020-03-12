@@ -1328,16 +1328,6 @@ minetest.register_node("default:large_cactus_seedling", {
 	groups = {choppy = 2, dig_immediate = 3, attached_node = 1},
 	sounds = default.node_sound_wood_defaults(),
 
-	on_place = function(itemstack, placer, pointed_thing)
-		itemstack = default.sapling_on_place(itemstack, placer, pointed_thing,
-			"default:large_cactus_seedling",
-			{x = -2, y = -1, z = -2},
-			{x = 2, y = 5, z = 2},
-			4)
-
-		return itemstack
-	end,
-
 	on_construct = function(pos)
 		-- Normal cactus farming adds 1 cactus node by ABM,
 		-- interval 12s, chance 83.
@@ -1362,8 +1352,7 @@ minetest.register_node("default:large_cactus_seedling", {
 		end
 
 		if minetest.get_item_group(node_under.name, "sand") == 0 then
-			-- Seedling dies
-			minetest.remove_node(pos)
+			-- Seedling is just decorative, I suppose...
 			return
 		end
 
@@ -1374,9 +1363,9 @@ minetest.register_node("default:large_cactus_seedling", {
 			return
 		end
 
-		minetest.log("action", "A large cactus seedling grows into a large" ..
+		minetest.log("verbose", "A large cactus seedling grows into a" ..
 			"cactus at ".. minetest.pos_to_string(pos))
-		default.grow_large_cactus(pos)
+		minetest.set_node(pos, "default:cactus")
 	end,
 })
 
