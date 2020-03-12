@@ -122,6 +122,8 @@ function farming.plant_from_node_name(name)
    if string.find(name, "seed") then
       -- farming:seed_<name>
       plantname = name:split("_")[2]
+   elseif string.find(name, "sapling") then
+      plantname = name:split(":")[2]
    else
       -- farming:<name>_<stage>
       local modname_plantname = name:split("_")[1]
@@ -202,7 +204,7 @@ farming.hoe_on_place = function(itemstack, user, pointed_thing)
 
          minetest.chat_send_player(
             user:get_player_name(),
-            "A " .. plant.description .. " will take from " .. pretty_full_lower_bound
+            "This " .. plant.description .. " will take from " .. pretty_full_lower_bound
                .. " " .. flb_unit .. " to " .. pretty_full_higher_bound .. " "
                .. fhb_unit .. " to fully grow here."
          )
@@ -372,23 +374,32 @@ farming.grow_plant = function(pos, elapsed)
 	end
 
 	-- check if on wet soil
-	local below = minetest.get_node({x = pos.x, y = pos.y - 1, z = pos.z})
-	if minetest.get_item_group(below.name, "soil") < 3 then
-		return false
+	if def.requires_soil then
+		local below = minetest.get_node(
+			{x = pos.x, y = pos.y - 1, z = pos.z}
+		)
+		if minetest.get_item_group(below.name, "soil") < 3 then
+			return false
+		end
 	end
 
 	-- check light
 	local light = minetest.get_node_light(pos)
-	if not light or light < def.minlight or light > def.maxlight then
+	if not light or (light < def.minlight or light > def.maxlight) then
 		return false
 	end
 
 	-- grow
-	local placenode = {name = def.next_plant}
-	if def.place_param2 then
-		placenode.param2 = def.place_param2
+        local np_type = type(def.next_plant)
+	if np_type == "function" then
+		def.next_plant(name, pos)
+	else
+           local placenode = {name = def.next_plant}
+           if def.place_param2 then
+              placenode.param2 = def.place_param2
+           end
+           minetest.swap_node(pos, placenode)
 	end
-	minetest.swap_node(pos, placenode)
 
 	return true
 end
@@ -409,16 +420,17 @@ farming.register_plant = function(name, def)
 		return nil
 	end
 	if not def.minlight then
-		def.minlight = 1
+		def.minlight = 0
 	end
 	if not def.maxlight then
-		def.maxlight = 14
+		def.maxlight = 15
 	end
 	if not def.fertility then
 		def.fertility = {}
 	end
 
 	def.name = name
+        def.requires_soil = true
 	farming.registered_plants[pname] = def
 
 	-- Register seed
@@ -557,7 +569,7 @@ local function crop_location_sanity_check(pos, node)
    local last_crop_name = meta:get_string("last_crop_name")
 
    if last_crop_name == "" then
-      minetest.log("warn",
+      minetest.log("warning",
          "Crop at " .. minetest.pos_to_string(pos)
             .. " had glitched \"last_crop_name\" metadata,"
             .. " changed to " .. node.name .. "."
@@ -571,9 +583,10 @@ local function crop_location_sanity_check(pos, node)
    if (not last_plant or not plant)
       or last_plant.name ~= plant.name
    then
-      minetest.log("warn",
+      local plant_name = (plant and plant.name) or "???"
+      minetest.log("warning",
          "Crop at " .. minetest.pos_to_string(pos) .. " changed from "
-            .. last_crop_name .. " to " .. plant.name .. " since last lbm run."
+            .. last_crop_name .. " to " .. plant_name .. " since last lbm run."
       )
    end
    meta:set_string("last_crop_name", node.name)
@@ -658,4 +671,74 @@ function farming.register_growth_abm(pname, lbm_nodes)
          end
    })
    minetest.log("Registered growth ABM for " .. pname)
+end
+
+-- Sapling registry
+
+function farming.register_sapling(name, def)
+   def.name = name
+   def.description = def.description or "Sapling"
+   def.drawtype = def.drawtype or "plantlike"
+   def.paramtype = def.paramtype or "light"
+   def.sounds = def.sounds or default.node_sound_leaves_defaults()
+   def.sunlight_propagates = def.sunlight_propagates or true
+   def.walkable = def.walkable or false
+   def.selection_box = def.selection_box or
+      { type = "fixed",
+        fixed = {-4 / 16, -0.5, -4 / 16, 4 / 16, 7 / 16, 4 / 16} }
+
+   def.groups = def.groups or { snappy = 3, flammable = 2,
+                                attached_node = 1, sapling = 1 }
+
+   def.tree_minp = def.tree_min_pos
+      or error("Sapling " .. name ..
+                  " has no tree bounding box tree_min_pos defined.")
+   def.tree_maxp = def.tree_max_pos
+      or error("Sapling " .. name
+                  .. " has no tree bounding box tree_max_pos defined.")
+
+   def.wield_image = def.wield_image
+      or def.image
+      or error("Sapling " .. name " .. has no image property (wield).")
+   def.inventory_image = def.inventory_image
+      or def.image
+      or error("Sapling " .. name " .. has no image property (inventory).")
+   def.tiles = def.tiles
+      or (def.image and { def.image })
+      or error("Sapling " .. name " .. has no image property (tiles).")
+
+   def.on_place = function(itemstack, placer, pointed_thing)
+      itemstack = farming.sapling_on_place(
+         itemstack, placer, pointed_thing, name,
+         -- minp, maxp to be checked, relative to sapling pos
+         -- minp_relative.y = 1 because sapling pos has been checked
+         def.tree_min_pos,
+         def.tree_max_pos,
+         -- maximum interval of interior volume check
+         4
+      )
+      return itemstack
+   end
+
+   -- Now to interface with the farming API
+
+   local mname = name:split(":")[1]
+   local pname = name:split(":")[2]
+
+   def.steps = 1
+   def.minlight = def.minlight or 0
+   def.maxlight = def.maxlight or 15
+   def.fertility = def.fertility or {}
+   def.custom_growth = def.custom_growth
+      or error("Sapling " .. name .. " has no custom_growth property.")
+
+   def.next_plant = function(plant_name, pos)
+      farming.grow_sapling(pos)
+   end
+
+   farming.registered_plants[pname] = def
+   minetest.register_node(":" .. name, def)
+
+   farming.register_growth_abm(pname, { name })
+   farming.register_growth_lbm(pname, { name })
 end

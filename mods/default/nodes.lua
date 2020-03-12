@@ -690,41 +690,7 @@ minetest.register_node("default:wood", {
 	sounds = default.node_sound_wood_defaults(),
 })
 
-minetest.register_node("default:sapling", {
-	description = "Apple Tree Sapling",
-	drawtype = "plantlike",
-	tiles = {"default_sapling.png"},
-	inventory_image = "default_sapling.png",
-	wield_image = "default_sapling.png",
-	paramtype = "light",
-	sunlight_propagates = true,
-	walkable = false,
-	on_timer = default.grow_sapling,
-	selection_box = {
-		type = "fixed",
-		fixed = {-4 / 16, -0.5, -4 / 16, 4 / 16, 7 / 16, 4 / 16}
-	},
-	groups = {snappy = 2, dig_immediate = 3, flammable = 2,
-		attached_node = 1, sapling = 1},
-	sounds = default.node_sound_leaves_defaults(),
-
-	on_construct = function(pos)
-		minetest.get_node_timer(pos):start(math.random(300, 1500))
-	end,
-
-	on_place = function(itemstack, placer, pointed_thing)
-		itemstack = default.sapling_on_place(itemstack, placer, pointed_thing,
-			"default:sapling",
-			-- minp, maxp to be checked, relative to sapling pos
-			-- minp_relative.y = 1 because sapling pos has been checked
-			{x = -3, y = 1, z = -3},
-			{x = 3, y = 6, z = 3},
-			-- maximum interval of interior volume check
-			4)
-
-		return itemstack
-	end,
-})
+-- default:sapling definition moved to civtest_game/mods/farming/init.lua
 
 minetest.register_node("default:leaves", {
 	description = "Apple Tree Leaves",
@@ -851,77 +817,9 @@ minetest.register_node("default:jungleleaves", {
 	after_place_node = default.after_place_leaves,
 })
 
-minetest.register_node("default:junglesapling", {
-	description = "Jungle Tree Sapling",
-	drawtype = "plantlike",
-	tiles = {"default_junglesapling.png"},
-	inventory_image = "default_junglesapling.png",
-	wield_image = "default_junglesapling.png",
-	paramtype = "light",
-	sunlight_propagates = true,
-	walkable = false,
-	on_timer = default.grow_sapling,
-	selection_box = {
-		type = "fixed",
-		fixed = {-4 / 16, -0.5, -4 / 16, 4 / 16, 7 / 16, 4 / 16}
-	},
-	groups = {snappy = 2, dig_immediate = 3, flammable = 2,
-		attached_node = 1, sapling = 1},
-	sounds = default.node_sound_leaves_defaults(),
+-- default:junglesapling definition moved to civtest_game/mods/farming/init.lua
 
-	on_construct = function(pos)
-		minetest.get_node_timer(pos):start(math.random(300, 1500))
-	end,
-
-	on_place = function(itemstack, placer, pointed_thing)
-		itemstack = default.sapling_on_place(itemstack, placer, pointed_thing,
-			"default:junglesapling",
-			-- minp, maxp to be checked, relative to sapling pos
-			-- minp_relative.y = 1 because sapling pos has been checked
-			{x = -2, y = 1, z = -2},
-			{x = 2, y = 15, z = 2},
-			-- maximum interval of interior volume check
-			4)
-
-		return itemstack
-	end,
-})
-
-minetest.register_node("default:emergent_jungle_sapling", {
-	description = "Emergent Jungle Tree Sapling",
-	drawtype = "plantlike",
-	tiles = {"default_emergent_jungle_sapling.png"},
-	inventory_image = "default_emergent_jungle_sapling.png",
-	wield_image = "default_emergent_jungle_sapling.png",
-	paramtype = "light",
-	sunlight_propagates = true,
-	walkable = false,
-	on_timer = default.grow_sapling,
-	selection_box = {
-		type = "fixed",
-		fixed = {-4 / 16, -0.5, -4 / 16, 4 / 16, 7 / 16, 4 / 16}
-	},
-	groups = {snappy = 2, dig_immediate = 3, flammable = 2,
-		attached_node = 1, sapling = 1},
-	sounds = default.node_sound_leaves_defaults(),
-
-	on_construct = function(pos)
-		minetest.get_node_timer(pos):start(math.random(300, 1500))
-	end,
-
-	on_place = function(itemstack, placer, pointed_thing)
-		itemstack = default.sapling_on_place(itemstack, placer, pointed_thing,
-			"default:emergent_jungle_sapling",
-			-- minp, maxp to be checked, relative to sapling pos
-			{x = -3, y = -5, z = -3},
-			{x = 3, y = 31, z = 3},
-			-- maximum interval of interior volume check
-			4)
-
-		return itemstack
-	end,
-})
-
+-- default:emergent_jungle_sapling definition moved to civtest_game/mods/farming/init.lua
 
 minetest.register_node("default:pine_tree", {
 	description = "Pine Tree",
@@ -965,42 +863,7 @@ minetest.register_node("default:pine_needles",{
 	after_place_node = default.after_place_leaves,
 })
 
-minetest.register_node("default:pine_sapling", {
-	description = "Pine Tree Sapling",
-	drawtype = "plantlike",
-	tiles = {"default_pine_sapling.png"},
-	inventory_image = "default_pine_sapling.png",
-	wield_image = "default_pine_sapling.png",
-	paramtype = "light",
-	sunlight_propagates = true,
-	walkable = false,
-	on_timer = default.grow_sapling,
-	selection_box = {
-		type = "fixed",
-		fixed = {-4 / 16, -0.5, -4 / 16, 4 / 16, 7 / 16, 4 / 16}
-	},
-	groups = {snappy = 2, dig_immediate = 3, flammable = 3,
-		attached_node = 1, sapling = 1},
-	sounds = default.node_sound_leaves_defaults(),
-
-	on_construct = function(pos)
-		minetest.get_node_timer(pos):start(math.random(300, 1500))
-	end,
-
-	on_place = function(itemstack, placer, pointed_thing)
-		itemstack = default.sapling_on_place(itemstack, placer, pointed_thing,
-			"default:pine_sapling",
-			-- minp, maxp to be checked, relative to sapling pos
-			-- minp_relative.y = 1 because sapling pos has been checked
-			{x = -2, y = 1, z = -2},
-			{x = 2, y = 14, z = 2},
-			-- maximum interval of interior volume check
-			4)
-
-		return itemstack
-	end,
-})
-
+-- default:pine_sapling definition moved to civtest_game/mods/farming/init.lua
 
 minetest.register_node("default:acacia_tree", {
 	description = "Acacia Tree",
@@ -1045,41 +908,7 @@ minetest.register_node("default:acacia_leaves", {
 	after_place_node = default.after_place_leaves,
 })
 
-minetest.register_node("default:acacia_sapling", {
-	description = "Acacia Tree Sapling",
-	drawtype = "plantlike",
-	tiles = {"default_acacia_sapling.png"},
-	inventory_image = "default_acacia_sapling.png",
-	wield_image = "default_acacia_sapling.png",
-	paramtype = "light",
-	sunlight_propagates = true,
-	walkable = false,
-	on_timer = default.grow_sapling,
-	selection_box = {
-		type = "fixed",
-		fixed = {-4 / 16, -0.5, -4 / 16, 4 / 16, 7 / 16, 4 / 16}
-	},
-	groups = {snappy = 2, dig_immediate = 3, flammable = 2,
-		attached_node = 1, sapling = 1},
-	sounds = default.node_sound_leaves_defaults(),
-
-	on_construct = function(pos)
-		minetest.get_node_timer(pos):start(math.random(300, 1500))
-	end,
-
-	on_place = function(itemstack, placer, pointed_thing)
-		itemstack = default.sapling_on_place(itemstack, placer, pointed_thing,
-			"default:acacia_sapling",
-			-- minp, maxp to be checked, relative to sapling pos
-			-- minp_relative.y = 1 because sapling pos has been checked
-			{x = -4, y = 1, z = -4},
-			{x = 4, y = 7, z = 4},
-			-- maximum interval of interior volume check
-			4)
-
-		return itemstack
-	end,
-})
+-- default:acacia_sapling definition moved to civtest_game/mods/farming/init.lua
 
 minetest.register_node("default:aspen_tree", {
 	description = "Aspen Tree",
@@ -1123,41 +952,7 @@ minetest.register_node("default:aspen_leaves", {
 	after_place_node = default.after_place_leaves,
 })
 
-minetest.register_node("default:aspen_sapling", {
-	description = "Aspen Tree Sapling",
-	drawtype = "plantlike",
-	tiles = {"default_aspen_sapling.png"},
-	inventory_image = "default_aspen_sapling.png",
-	wield_image = "default_aspen_sapling.png",
-	paramtype = "light",
-	sunlight_propagates = true,
-	walkable = false,
-	on_timer = default.grow_sapling,
-	selection_box = {
-		type = "fixed",
-		fixed = {-3 / 16, -0.5, -3 / 16, 3 / 16, 0.5, 3 / 16}
-	},
-	groups = {snappy = 2, dig_immediate = 3, flammable = 3,
-		attached_node = 1, sapling = 1},
-	sounds = default.node_sound_leaves_defaults(),
-
-	on_construct = function(pos)
-		minetest.get_node_timer(pos):start(math.random(300, 1500))
-	end,
-
-	on_place = function(itemstack, placer, pointed_thing)
-		itemstack = default.sapling_on_place(itemstack, placer, pointed_thing,
-			"default:aspen_sapling",
-			-- minp, maxp to be checked, relative to sapling pos
-			-- minp_relative.y = 1 because sapling pos has been checked
-			{x = -2, y = 1, z = -2},
-			{x = 2, y = 12, z = 2},
-			-- maximum interval of interior volume check
-			4)
-
-		return itemstack
-	end,
-})
+-- default:aspen_sapling definition moved to civtest_game/mods/farming/init.lua
 
 --
 -- Ores
@@ -1675,40 +1470,7 @@ minetest.register_node("default:bush_leaves", {
 	after_place_node = default.after_place_leaves,
 })
 
-minetest.register_node("default:bush_sapling", {
-	description = "Bush Sapling",
-	drawtype = "plantlike",
-	tiles = {"default_bush_sapling.png"},
-	inventory_image = "default_bush_sapling.png",
-	wield_image = "default_bush_sapling.png",
-	paramtype = "light",
-	sunlight_propagates = true,
-	walkable = false,
-	on_timer = default.grow_sapling,
-	selection_box = {
-		type = "fixed",
-		fixed = {-4 / 16, -0.5, -4 / 16, 4 / 16, 2 / 16, 4 / 16}
-	},
-	groups = {snappy = 2, dig_immediate = 3, flammable = 2,
-		attached_node = 1, sapling = 1},
-	sounds = default.node_sound_leaves_defaults(),
-
-	on_construct = function(pos)
-		minetest.get_node_timer(pos):start(math.random(300, 1500))
-	end,
-
-	on_place = function(itemstack, placer, pointed_thing)
-		itemstack = default.sapling_on_place(itemstack, placer, pointed_thing,
-			"default:bush_sapling",
-			-- minp, maxp to be checked, relative to sapling pos
-			{x = -1, y = 0, z = -1},
-			{x = 1, y = 1, z = 1},
-			-- maximum interval of interior volume check
-			2)
-
-		return itemstack
-	end,
-})
+-- default:bush_sapling definition moved to civtest_game/mods/farming/init.lua
 
 minetest.register_node("default:blueberry_bush_leaves_with_berries", {
 	description = "Blueberry Bush Leaves with Berries",
@@ -1754,40 +1516,7 @@ minetest.register_node("default:blueberry_bush_leaves", {
 	after_place_node = default.after_place_leaves,
 })
 
-minetest.register_node("default:blueberry_bush_sapling", {
-	description = "Blueberry Bush Sapling",
-	drawtype = "plantlike",
-	tiles = {"default_blueberry_bush_sapling.png"},
-	inventory_image = "default_blueberry_bush_sapling.png",
-	wield_image = "default_blueberry_bush_sapling.png",
-	paramtype = "light",
-	sunlight_propagates = true,
-	walkable = false,
-	on_timer = default.grow_sapling,
-	selection_box = {
-		type = "fixed",
-		fixed = {-4 / 16, -0.5, -4 / 16, 4 / 16, 2 / 16, 4 / 16}
-	},
-	groups = {snappy = 2, dig_immediate = 3, flammable = 2,
-		attached_node = 1, sapling = 1},
-	sounds = default.node_sound_leaves_defaults(),
-
-	on_construct = function(pos)
-		minetest.get_node_timer(pos):start(math.random(300, 1500))
-	end,
-
-	on_place = function(itemstack, placer, pointed_thing)
-		itemstack = default.sapling_on_place(itemstack, placer, pointed_thing,
-			"default:blueberry_bush_sapling",
-			-- minp, maxp to be checked, relative to sapling pos
-			{x = -1, y = 0, z = -1},
-			{x = 1, y = 1, z = 1},
-			-- maximum interval of interior volume check
-			2)
-
-		return itemstack
-	end,
-})
+-- default:blueberry_bush_sapling definition moved to civtest_game/mods/farming/init.lua
 
 minetest.register_node("default:acacia_bush_stem", {
 	description = "Acacia Bush Stem",
@@ -1825,40 +1554,7 @@ minetest.register_node("default:acacia_bush_leaves", {
 	after_place_node = default.after_place_leaves,
 })
 
-minetest.register_node("default:acacia_bush_sapling", {
-	description = "Acacia Bush Sapling",
-	drawtype = "plantlike",
-	tiles = {"default_acacia_bush_sapling.png"},
-	inventory_image = "default_acacia_bush_sapling.png",
-	wield_image = "default_acacia_bush_sapling.png",
-	paramtype = "light",
-	sunlight_propagates = true,
-	walkable = false,
-	on_timer = default.grow_sapling,
-	selection_box = {
-		type = "fixed",
-		fixed = {-3 / 16, -0.5, -3 / 16, 3 / 16, 2 / 16, 3 / 16}
-	},
-	groups = {snappy = 2, dig_immediate = 3, flammable = 2,
-		attached_node = 1, sapling = 1},
-	sounds = default.node_sound_leaves_defaults(),
-
-	on_construct = function(pos)
-		minetest.get_node_timer(pos):start(math.random(300, 1500))
-	end,
-
-	on_place = function(itemstack, placer, pointed_thing)
-		itemstack = default.sapling_on_place(itemstack, placer, pointed_thing,
-			"default:acacia_bush_sapling",
-			-- minp, maxp to be checked, relative to sapling pos
-			{x = -1, y = 0, z = -1},
-			{x = 1, y = 1, z = 1},
-			-- maximum interval of interior volume check
-			2)
-
-		return itemstack
-	end,
-})
+-- default:acacia_bush_sapling definition moved to civtest_game/mods/farming/init.lua
 
 minetest.register_node("default:pine_bush_stem", {
 	description = "Pine Bush Stem",
@@ -1896,40 +1592,7 @@ minetest.register_node("default:pine_bush_needles", {
 	after_place_node = default.after_place_leaves,
 })
 
-minetest.register_node("default:pine_bush_sapling", {
-	description = "Pine Bush Sapling",
-	drawtype = "plantlike",
-	tiles = {"default_pine_bush_sapling.png"},
-	inventory_image = "default_pine_bush_sapling.png",
-	wield_image = "default_pine_bush_sapling.png",
-	paramtype = "light",
-	sunlight_propagates = true,
-	walkable = false,
-	on_timer = default.grow_sapling,
-	selection_box = {
-		type = "fixed",
-		fixed = {-4 / 16, -0.5, -4 / 16, 4 / 16, 2 / 16, 4 / 16}
-	},
-	groups = {snappy = 2, dig_immediate = 3, flammable = 2,
-		attached_node = 1, sapling = 1},
-	sounds = default.node_sound_leaves_defaults(),
-
-	on_construct = function(pos)
-		minetest.get_node_timer(pos):start(math.random(300, 1500))
-	end,
-
-	on_place = function(itemstack, placer, pointed_thing)
-		itemstack = default.sapling_on_place(itemstack, placer, pointed_thing,
-			"default:pine_bush_sapling",
-			-- minp, maxp to be checked, relative to sapling pos
-			{x = -1, y = 0, z = -1},
-			{x = 1, y = 1, z = 1},
-			-- maximum interval of interior volume check
-			2)
-
-		return itemstack
-	end,
-})
+-- default:pine_bush_sapling definition moved to civtest_game/mods/farming/init.lua
 
 minetest.register_node("default:sand_with_kelp", {
 	description = "Kelp",
