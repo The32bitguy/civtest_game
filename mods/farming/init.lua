@@ -181,7 +181,7 @@ farming.register_sapling("default:sapling", {
 	image = "default_sapling.png",
         tree_min_pos = {x = -3, y = 1, z = -3},
         tree_max_pos = {x = 3, y = 6, z = 3},
-	custom_growth = {optimum_heat = 50, heat_scaling = "exponential", heat_a = 16, heat_b = 2.5, heat_base_speed = 100000, variance = 10000},
+	custom_growth = {optimum_heat = 50, heat_scaling = "exponential", heat_a = 1, heat_b = 2, heat_base_speed = 100000, variance = 10000},
 })
 
 farming.register_sapling("default:junglesapling", {
@@ -189,7 +189,7 @@ farming.register_sapling("default:junglesapling", {
 	image = "default_junglesapling.png",
         tree_min_pos = {x = -2, y = 1, z = -2},
         tree_max_pos = {x = 2, y = 15, z = 2},
-	custom_growth = {optimum_heat = 50, heat_scaling = "exponential", heat_a = 16, heat_b = 2.5, heat_base_speed = 100000, variance = 10000},
+	custom_growth = {optimum_heat = 75, heat_scaling = "exponential", heat_a = 16, heat_b = 2.5, heat_base_speed = 100000, variance = 10000},
 })
 
 farming.register_sapling("default:emergent_jungle_sapling", {
@@ -197,7 +197,7 @@ farming.register_sapling("default:emergent_jungle_sapling", {
 	image = "default_emergent_jungle_sapling.png",
         tree_min_pos = {x = -3, y = -5, z = -3},
         tree_max_pos = {x = 3, y = 31, z = 3},
-	custom_growth = {optimum_heat = 40, heat_scaling = "exponential", heat_a = 2.5, heat_b = 1.7, heat_base_speed = 10000, variance = 2500},
+	custom_growth = {optimum_heat = 75, heat_scaling = "exponential", heat_a = 16, heat_b = 2.5, heat_base_speed = 100000, variance = 10000},
 })
 
 farming.register_sapling("default:pine_sapling", {
@@ -205,7 +205,7 @@ farming.register_sapling("default:pine_sapling", {
 	image = "default_pine_sapling.png",
         tree_min_pos = {x = -2, y = 1, z = -2},
         tree_max_pos = {x = 2, y = 14, z = 2},
-	custom_growth = {optimum_heat = 40, heat_scaling = "exponential", heat_a = 2.5, heat_b = 1.7, heat_base_speed = 10000, variance = 2500},
+	custom_growth = {optimum_heat = 35, heat_scaling = "exponential", heat_a = 16, heat_b = 1.7, heat_base_speed = 100000, variance = 10000},
 })
 
 farming.register_sapling("default:acacia_sapling", {
@@ -213,7 +213,7 @@ farming.register_sapling("default:acacia_sapling", {
 	image = "default_acacia_sapling.png",
         tree_min_pos = {x = -4, y = 1, z = -4},
         tree_max_pos = {x = 4, y = 7, z = 4},
-	custom_growth = {optimum_heat = 40, heat_scaling = "exponential", heat_a = 2.5, heat_b = 1.7, heat_base_speed = 10000, variance = 2500},
+	custom_growth = {optimum_heat = 75, heat_scaling = "exponential", heat_a = 16, heat_b = 2.5, heat_base_speed = 100000, variance = 10000},
 })
 
 farming.register_sapling("default:aspen_sapling", {
@@ -225,7 +225,7 @@ farming.register_sapling("default:aspen_sapling", {
 	},
         tree_min_pos = {x = -2, y = 1, z = -2},
         tree_max_pos = {x = 2, y = 12, z = 2},
-	custom_growth = {optimum_heat = 40, heat_scaling = "exponential", heat_a = 2.5, heat_b = 1.7, heat_base_speed = 10000, variance = 2500},
+	custom_growth = {optimum_heat = 50, heat_scaling = "exponential", heat_a = 16, heat_b = 2.5, heat_base_speed = 100000, variance = 10000},
 })
 
 farming.register_sapling("default:bush_sapling", {
@@ -237,7 +237,7 @@ farming.register_sapling("default:bush_sapling", {
         },
         tree_min_pos = {x = -1, y = 0, z = -1},
         tree_max_pos = {x = 1, y = 1, z = 1},
-	custom_growth = {optimum_heat = 40, heat_scaling = "exponential", heat_a = 2.5, heat_b = 1.7, heat_base_speed = 10000, variance = 2500},
+	custom_growth = {optimum_heat = 50, heat_scaling = "exponential", heat_a = 1, heat_b = 2, heat_base_speed = 100000, variance = 10000},
 })
 
 farming.register_sapling("default:blueberry_bush_sapling", {
@@ -249,7 +249,7 @@ farming.register_sapling("default:blueberry_bush_sapling", {
 	},
         tree_min_pos = {x = -1, y = 0, z = -1},
         tree_max_pos = {x = 1, y = 1, z = 1},
-	custom_growth = {optimum_heat = 40, heat_scaling = "exponential", heat_a = 2.5, heat_b = 1.7, heat_base_speed = 10000, variance = 2500},
+	custom_growth = {optimum_heat = 50, heat_scaling = "exponential", heat_a = 16, heat_b = 2.5, heat_base_speed = 100000, variance = 10000},
 })
 
 farming.register_sapling("default:acacia_bush_sapling", {
@@ -261,7 +261,7 @@ farming.register_sapling("default:acacia_bush_sapling", {
 	},
         tree_min_pos = {x = -1, y = 0, z = -1},
         tree_max_pos = {x = 1, y = 1, z = 1},
-	custom_growth = {optimum_heat = 40, heat_scaling = "exponential", heat_a = 2.5, heat_b = 1.7, heat_base_speed = 10000, variance = 2500},
+	custom_growth = {optimum_heat = 75, heat_scaling = "exponential", heat_a = 16, heat_b = 2.5, heat_base_speed = 100000, variance = 10000},
 })
 
 farming.register_sapling("default:pine_bush_sapling", {
@@ -273,5 +273,5 @@ farming.register_sapling("default:pine_bush_sapling", {
 	},
         tree_min_pos = {x = -1, y = 0, z = -1},
         tree_max_pos = {x = 1, y = 1, z = 1},
-	custom_growth = {optimum_heat = 40, heat_scaling = "exponential", heat_a = 2.5, heat_b = 1.7, heat_base_speed = 10000, variance = 2500},
+	custom_growth = {optimum_heat = 35, heat_scaling = "exponential", heat_a = 16, heat_b = 1.7, heat_base_speed = 100000, variance = 10000},
 })
