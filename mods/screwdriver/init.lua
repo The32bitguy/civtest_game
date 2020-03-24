@@ -136,7 +136,7 @@ screwdriver.handler = function(itemstack, user, pointed_thing, mode, uses)
 
 	if not (creative and creative.is_enabled_for and
 			creative.is_enabled_for(player_name)) then
-		itemstack:add_wear(65535 / ((uses or 200) - 1))
+		itemstack:add_wear(65535 / ((uses or 500) - 1))
 	end
 
 	return itemstack
@@ -160,7 +160,15 @@ minetest.register_tool("screwdriver:screwdriver", {
 minetest.register_craft({
 	output = "screwdriver:screwdriver",
 	recipe = {
-		{"default:steel_ingot"},
+		{"default:copper_ingot"},
+		{"group:stick"}
+	}
+})
+
+minetest.register_craft({
+	output = "screwdriver:screwdriver",
+	recipe = {
+		{"default:tin_ingot"},
 		{"group:stick"}
 	}
 })
