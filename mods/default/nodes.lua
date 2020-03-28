@@ -2154,8 +2154,11 @@ minetest.register_node("default:lava_flowing", {
 local bookshelf_formspec =
 	"size[8,7;]" ..
 	"list[context;books;0,0.3;8,2;]" ..
-	"list[current_player;main;0,2.85;8,1;]" ..
-	"list[current_player;main;0,4.08;8,3;8]" ..
+	-- "list[current_player;main;0,2.85;8,1;]" ..
+	-- "list[current_player;main;0,4.08;8,3;8]" ..
+         sfinv.get_inventory_area_formspec(2.85)..
+	"listring[context;books]" ..
+	"listring[current_player;main2]" ..
 	"listring[context;books]" ..
 	"listring[current_player;main]" ..
 	default.get_hotbar_bg(0,2.85)
