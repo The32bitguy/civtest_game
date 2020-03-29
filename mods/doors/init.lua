@@ -486,6 +486,7 @@ function doors.register(name, def)
 	def.buildable_to = false
 	def.selection_box = {type = "fixed", fixed = {-1/2,-1/2,-1/2,1/2,3/2,-6/16}}
 	def.collision_box = {type = "fixed", fixed = {-1/2,-1/2,-1/2,1/2,3/2,-6/16}}
+        def.node_dig_prediction = "solid_air"
 
 	def.mesh = "door_a.obj"
 	minetest.register_node(":" .. name .. "_a", def)
@@ -632,6 +633,8 @@ function doors.register_trapdoor(name, def)
 	def.paramtype = "light"
 	def.paramtype2 = "facedir"
 	def.is_ground_content = false
+
+        def.node_dig_prediction = "solid_air"
 
 	if def.protected then
 		def.can_dig = can_dig_door
