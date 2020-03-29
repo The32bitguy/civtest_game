@@ -40,14 +40,13 @@ minetest.register_craftitem("farming:bread", {
 })
 
 minetest.register_craft({
-	type = "shapeless",
 	output = "farming:flour",
-	recipe = {"farming:wheat", "farming:wheat", "farming:wheat", "farming:wheat"}
+	recipe = {{"farming:wheat", "farming:wheat"}}
 })
 
 minetest.register_craft({
 	type = "cooking",
-	cooktime = 15,
+	cooktime = 10,
 	output = "farming:bread",
 	recipe = "farming:flour"
 })
