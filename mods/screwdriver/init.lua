@@ -136,7 +136,7 @@ screwdriver.handler = function(itemstack, user, pointed_thing, mode, uses)
 
 	if not (creative and creative.is_enabled_for and
 			creative.is_enabled_for(player_name)) then
-		itemstack:add_wear(65535 / ((uses or 500) - 1))
+		itemstack:add_wear(65535 / ((uses or 10000) - 1))
 	end
 
 	return itemstack
