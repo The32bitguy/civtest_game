@@ -332,6 +332,16 @@ farming.place_seed = function(itemstack, placer, pointed_thing, plantname)
         local meta = minetest.get_meta(pt.above)
         local time = os.time(os.date("!*t"))
 
+        local plant = farming.plant_from_node_name(plantname)
+        local growth = plant.custom_growth
+        local lower_bound, higher_bound = farming.compute_growth_interval(
+           pt.above, growth, false
+        )
+        local average_bound = round((lower_bound + higher_bound) / 2)
+
+        local node_timer = minetest.get_node_timer(pt.above)
+        node_timer:start(average_bound)
+
         meta:set_string("last_crop_name", plantname)
         meta:set_string("last_grow", time)
 
@@ -479,6 +489,10 @@ farming.register_plant = function(name, def)
 		minlight = def.minlight,
 		maxlight = def.maxlight,
 		custom_growth = def.custom_growth,
+                on_timer = function(pos, elapsed)
+                   local node = minetest.get_node(pos)
+                   farming.try_grow_crop(pos, node)
+                end
 	})
 
 	-- Register harvest
@@ -532,10 +546,13 @@ farming.register_plant = function(name, def)
 			minlight = def.minlight,
 			maxlight = def.maxlight,
 			custom_growth = def.custom_growth,
+                        on_timer = function(pos, elapsed)
+                           local node = minetest.get_node(pos)
+                           farming.try_grow_crop(pos, node)
+                        end
 		})
 	end
 
-        farming.register_growth_abm(pname, lbm_nodes)
         farming.register_growth_lbm(pname, lbm_nodes)
 
 	-- Return
@@ -592,7 +609,9 @@ local function crop_location_sanity_check(pos, node)
    meta:set_string("last_crop_name", node.name)
 end
 
-local function try_grow_crop(pos, node)
+local DEBUG = false
+
+function farming.try_grow_crop(pos, node)
    crop_location_sanity_check(pos, node)
 
    local meta = minetest.get_meta(pos)
@@ -615,7 +634,16 @@ local function try_grow_crop(pos, node)
    local next_step_pct = steps - full_steps
 
    local result = false
-   if elapsed_since_last_grow > average_bound then
+
+   if debug then
+      minetest.log("ESLG: " .. tostring(elapsed_since_last_grow))
+      minetest.log("AVG: " .. tostring(average_bound))
+      minetest.log("STEPS: " .. tostring(steps))
+      minetest.log("FULL_STEPS: " .. tostring(full_steps))
+      minetest.log("NEXT_STEP_PCT: " .. tostring(next_step_pct))
+   end
+
+   if elapsed_since_last_grow >= average_bound then
       for i=1, full_steps, 1 do
          result = farming.grow_plant(pos)
       end
@@ -623,10 +651,11 @@ local function try_grow_crop(pos, node)
 
    meta:set_int("last_grow", last_growth + round(average_bound * full_steps))
 
+   local node_timer = minetest.get_node_timer(pos)
+   node_timer:set(average_bound, average_bound * next_step_pct)
+
    return result, full_steps, next_step_pct
 end
-
-local DEBUG = false
 
 function farming.register_growth_lbm(pname, lbm_nodes)
    minetest.register_lbm({
@@ -635,7 +664,9 @@ function farming.register_growth_lbm(pname, lbm_nodes)
          nodenames = lbm_nodes,
          run_at_every_load = true,
          action = function(pos, node)
-            local result, full_steps, next_step_pct = try_grow_crop(pos, node)
+            local result, full_steps, next_step_pct = farming.try_grow_crop(
+               pos, node
+            )
 
             if full_steps > 0 and DEBUG then
                local msg = "grew " .. full_steps .. " steps"
@@ -649,28 +680,6 @@ function farming.register_growth_lbm(pname, lbm_nodes)
          end
    })
    minetest.log("Registered growth LBM for " .. pname)
-end
-
-function farming.register_growth_abm(pname, lbm_nodes)
-   minetest.register_abm({
-         label = "Crop growth abm " .. pname,
-         name = "farming:crop_catchup_abm_" .. pname,
-         nodenames = lbm_nodes,
-         interval = 30,
-         chance = 1,
-         action = function(pos, node)
-            local result, full_steps, next_step_pct = try_grow_crop(pos, node)
-
-            if full_steps > 0 and DEBUG then
-               local msg = "grew " .. full_steps .. " steps"
-               minetest.log(
-                  "Crop at " .. minetest.pos_to_string(pos) .. " " .. msg
-                  .. " (" .. round(next_step_pct * 100) .. "% left until the next step)."
-               )
-            end
-         end
-   })
-   minetest.log("Registered growth ABM for " .. pname)
 end
 
 -- Sapling registry
@@ -739,6 +748,5 @@ function farming.register_sapling(name, def)
    farming.registered_plants[pname] = def
    minetest.register_node(":" .. name, def)
 
-   farming.register_growth_abm(pname, { name })
    farming.register_growth_lbm(pname, { name })
 end
