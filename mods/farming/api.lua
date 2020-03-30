@@ -635,7 +635,7 @@ function farming.try_grow_crop(pos, node)
 
    local result = false
 
-   if debug then
+   if DEBUG then
       minetest.log("ESLG: " .. tostring(elapsed_since_last_grow))
       minetest.log("AVG: " .. tostring(average_bound))
       minetest.log("STEPS: " .. tostring(steps))
