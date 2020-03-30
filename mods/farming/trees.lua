@@ -58,6 +58,10 @@ function farming.sapling_can_grow(pos, name)
 	return true
 end
 
+local function is_snow_nearby(pos)
+	return minetest.find_node_near(pos, 1, {"group:snowy"})
+end
+
 
 -- Grow sapling
 
