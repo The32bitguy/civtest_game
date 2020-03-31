@@ -977,7 +977,16 @@ minetest.register_node("default:aspen_leaves", {
 -- Ores
 --
 
+local has_citadella = minetest.get_modpath("citadella")
+
 minetest.register_on_punchnode(function(pos, node, puncher, pointed_thing)
+   local pname = puncher:get_player_name()
+   if has_citadella
+      and ct.player_modes[pname] == ct.PLAYER_MODE_REINFORCE
+   then
+      return
+   end
+
    local node_def = core.registered_nodes[node.name]
    local node_level = (node_def
                           and node_def.groups
@@ -996,7 +1005,7 @@ minetest.register_on_punchnode(function(pos, node, puncher, pointed_thing)
 
       local node_desc = node_def.description
       minetest.chat_send_player(
-         puncher:get_player_name(), "You will not get a drop from "
+         pname, "You will not get a drop from "
             .. node_desc .. " if you dig with " .. held_desc .. "."
       )
    end
