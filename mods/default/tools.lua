@@ -321,7 +321,7 @@ minetest.register_tool("default:sword_wood", {
 		full_punch_interval = default.PUNCH_INTERVAL,
 		max_drop_level=0,
 		groupcaps={
-			snappy={times={[2]=1.6, [3]=0.40}, uses=5, maxlevel=4},
+			snappy={times={[2]=1.6, [3]=0.40}, uses=10, maxlevel=4},
 		},
 		damage_groups = {fleshy=3 * default.HEALTH_MULTIPLIER},
 	},
@@ -337,7 +337,7 @@ minetest.register_tool("default:sword_stone", {
 		full_punch_interval = default.PUNCH_INTERVAL,
 		max_drop_level=0,
 		groupcaps={
-			snappy={times={[2]=1.4, [3]=0.40}, uses=10, maxlevel=4},
+			snappy={times={[2]=1.4, [3]=0.40}, uses=40, maxlevel=4},
 		},
 		damage_groups = {fleshy=4 * default.HEALTH_MULTIPLIER},
 	},
@@ -353,7 +353,7 @@ minetest.register_tool("default:sword_copper", {
 		full_punch_interval = default.PUNCH_INTERVAL,
 		max_drop_level=2,
 		groupcaps={
-			snappy={times={[1]=2.75, [2]=1.30, [3]=0.375}, uses=15, maxlevel=4},
+			snappy={times={[1]=2.75, [2]=1.30, [3]=0.375}, uses=400, maxlevel=4},
 		},
 		damage_groups = {fleshy=7 * default.HEALTH_MULTIPLIER},
 	},
@@ -368,7 +368,7 @@ minetest.register_tool("default:sword_bronze", {
 		full_punch_interval = default.PUNCH_INTERVAL,
 		max_drop_level=2,
 		groupcaps={
-			snappy={times={[1]=2.75, [2]=1.30, [3]=0.375}, uses=20, maxlevel=4},
+			snappy={times={[1]=2.75, [2]=1.30, [3]=0.375}, uses=1000, maxlevel=4},
 		},
 		damage_groups = {fleshy=7 * default.HEALTH_MULTIPLIER},
 	},
@@ -383,7 +383,7 @@ minetest.register_tool("default:sword_iron", {
 		full_punch_interval = default.PUNCH_INTERVAL,
 		max_drop_level=3,
 		groupcaps={
-			snappy={times={[1]=2.5, [2]=1.20, [3]=0.35}, uses=18, maxlevel=4},
+			snappy={times={[1]=2.5, [2]=1.20, [3]=0.35}, uses=750, maxlevel=4},
 		},
 		damage_groups = {fleshy=8 * default.HEALTH_MULTIPLIER},
 	},
@@ -398,7 +398,7 @@ minetest.register_tool("default:sword_steel", {
 		full_punch_interval = default.PUNCH_INTERVAL,
 		max_drop_level=4,
 		groupcaps={
-			snappy={times={[1]=2.5, [2]=1.20, [3]=0.35}, uses=25, maxlevel=4},
+			snappy={times={[1]=2.5, [2]=1.20, [3]=0.35}, uses=2500, maxlevel=4},
 		},
 		damage_groups = {fleshy=10 * default.HEALTH_MULTIPLIER},
 	},
