@@ -986,7 +986,7 @@ minetest.register_on_punchnode(function(pos, node, puncher, pointed_thing)
 
    if (has_citadella
           and ct.player_modes[pname] == ct.PLAYER_MODE_REINFORCE)
-      or held:find("sword")
+      or held:get_name():find("sword")
    then
       return
    end
