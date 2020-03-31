@@ -202,11 +202,26 @@ farming.hoe_on_place = function(itemstack, user, pointed_thing)
             pretty_full_higher_bound = "3+"
          end
 
+         local average_bound = math.floor((lower_bound + higher_bound) / 2)
+         local elapsed = minetest.get_node_timer(pos):get_elapsed()
+
+         local growth_step = core.registered_nodes[node.name].growth_step
+
+         local total_growth = growth_step * average_bound + elapsed
+         local total_divisor, total_unit = growth_timescale(total_growth)
+
+         local pretty_total_growth = string.format(
+            "%.2f", total_growth / total_divisor
+         )
+
          minetest.chat_send_player(
             user:get_player_name(),
-            "This " .. plant.description .. " will take from " .. pretty_full_lower_bound
+            "This " .. plant.description
+            .. " has been growing for "..pretty_total_growth.." "..total_unit
+               .. ", and is on growth stage " .. growth_step .. ".\n"
+               .. "It will take from " .. pretty_full_lower_bound
                .. " " .. flb_unit .. " to " .. pretty_full_higher_bound .. " "
-               .. fhb_unit .. " to fully grow here."
+               .. fhb_unit .. " to fully grow here. "
          )
       end
    end
@@ -485,6 +500,7 @@ farming.register_plant = function(name, def)
 
 			return farming.place_seed(itemstack, placer, pointed_thing, mname .. ":seed_" .. pname)
 		end,
+                growth_step = 0,
 		next_plant = mname .. ":" .. pname .. "_1",
 		minlight = def.minlight,
 		maxlight = def.maxlight,
@@ -549,7 +565,8 @@ farming.register_plant = function(name, def)
                         on_timer = function(pos, elapsed)
                            local node = minetest.get_node(pos)
                            farming.try_grow_crop(pos, node)
-                        end
+                        end,
+                        growth_step = i
 		})
 	end
 
