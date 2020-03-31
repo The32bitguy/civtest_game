@@ -981,8 +981,12 @@ local has_citadella = minetest.get_modpath("citadella")
 
 minetest.register_on_punchnode(function(pos, node, puncher, pointed_thing)
    local pname = puncher:get_player_name()
-   if has_citadella
-      and ct.player_modes[pname] == ct.PLAYER_MODE_REINFORCE
+   local held = puncher:get_wielded_item()
+   local held_def = core.registered_items[held:get_name()]
+
+   if (has_citadella
+          and ct.player_modes[pname] == ct.PLAYER_MODE_REINFORCE)
+      or held:find("sword")
    then
       return
    end
@@ -992,8 +996,6 @@ minetest.register_on_punchnode(function(pos, node, puncher, pointed_thing)
                           and node_def.groups
                           and node_def.groups.level) or 0
 
-   local held = puncher:get_wielded_item()
-   local held_def = core.registered_items[held:get_name()]
    local toolcaps = held_def.tool_capabilities
    local tool_level = (toolcaps and toolcaps.max_drop_level) or 0
 
