@@ -788,6 +788,7 @@ function doors.register_fencegate(name, def)
 		connect_sides = {"left", "right"},
 		groups = def.groups,
 		sounds = def.sounds,
+	        node_dig_prediction = "solid_air",
 		on_rightclick = function(pos, node, clicker, itemstack, pointed_thing)
 			if has_citadella and has_playermanager then
 			   local can_open = has_locked_door_privilege(pos, clicker)
