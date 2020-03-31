@@ -245,6 +245,7 @@ minetest.register_node("default:cobble", {
 	is_ground_content = false,
 	groups = {cracky = 2, stone = 2, level = 1},
 	sounds = default.node_sound_stone_defaults(),
+	node_dig_prediction = "solid_air",
 })
 
 minetest.register_node("default:stonebrick", {
@@ -255,6 +256,7 @@ minetest.register_node("default:stonebrick", {
 	is_ground_content = false,
 	groups = {cracky = 2, stone = 1, level = 1},
 	sounds = default.node_sound_stone_defaults(),
+	node_dig_prediction = "solid_air",
 })
 
 minetest.register_node("default:stone_block", {
@@ -263,6 +265,7 @@ minetest.register_node("default:stone_block", {
 	is_ground_content = false,
 	groups = {cracky = 2, stone = 1, level = 1},
 	sounds = default.node_sound_stone_defaults(),
+	node_dig_prediction = "solid_air",
 })
 
 minetest.register_node("default:mossycobble", {
@@ -271,6 +274,7 @@ minetest.register_node("default:mossycobble", {
 	is_ground_content = false,
 	groups = {cracky = 2, stone = 1, level = 1},
 	sounds = default.node_sound_stone_defaults(),
+	node_dig_prediction = "solid_air",
 })
 
 
@@ -289,6 +293,7 @@ minetest.register_node("default:desert_cobble", {
 	is_ground_content = false,
 	groups = {cracky = 2, stone = 2, level = 1},
 	sounds = default.node_sound_stone_defaults(),
+	node_dig_prediction = "solid_air",
 })
 
 minetest.register_node("default:desert_stonebrick", {
@@ -299,6 +304,7 @@ minetest.register_node("default:desert_stonebrick", {
 	is_ground_content = false,
 	groups = {cracky = 2, stone = 1, level = 1},
 	sounds = default.node_sound_stone_defaults(),
+	node_dig_prediction = "solid_air",
 })
 
 minetest.register_node("default:desert_stone_block", {
@@ -307,6 +313,7 @@ minetest.register_node("default:desert_stone_block", {
 	is_ground_content = false,
 	groups = {cracky = 2, stone = 1, level = 1},
 	sounds = default.node_sound_stone_defaults(),
+	node_dig_prediction = "solid_air",
 })
 
 minetest.register_node("default:sandstone", {
@@ -324,6 +331,7 @@ minetest.register_node("default:sandstonebrick", {
 	is_ground_content = false,
 	groups = {cracky = 2, level = 1},
 	sounds = default.node_sound_stone_defaults(),
+	node_dig_prediction = "solid_air",
 })
 
 minetest.register_node("default:sandstone_block", {
@@ -332,6 +340,7 @@ minetest.register_node("default:sandstone_block", {
 	is_ground_content = false,
 	groups = {cracky = 2, level = 1},
 	sounds = default.node_sound_stone_defaults(),
+	node_dig_prediction = "solid_air",
 })
 
 minetest.register_node("default:desert_sandstone", {
@@ -349,6 +358,7 @@ minetest.register_node("default:desert_sandstone_brick", {
 	is_ground_content = false,
 	groups = {cracky = 2, level = 1},
 	sounds = default.node_sound_stone_defaults(),
+	node_dig_prediction = "solid_air",
 })
 
 minetest.register_node("default:desert_sandstone_block", {
@@ -357,6 +367,7 @@ minetest.register_node("default:desert_sandstone_block", {
 	is_ground_content = false,
 	groups = {cracky = 2, level = 1},
 	sounds = default.node_sound_stone_defaults(),
+	node_dig_prediction = "solid_air",
 })
 
 minetest.register_node("default:silver_sandstone", {
@@ -374,6 +385,7 @@ minetest.register_node("default:silver_sandstone_brick", {
 	is_ground_content = false,
 	groups = {cracky = 2, level = 1},
 	sounds = default.node_sound_stone_defaults(),
+	node_dig_prediction = "solid_air",
 })
 
 minetest.register_node("default:silver_sandstone_block", {
@@ -382,6 +394,7 @@ minetest.register_node("default:silver_sandstone_block", {
 	is_ground_content = false,
 	groups = {cracky = 2, level = 1},
 	sounds = default.node_sound_stone_defaults(),
+	node_dig_prediction = "solid_air",
 })
 
 minetest.register_node("default:obsidian", {
@@ -389,6 +402,7 @@ minetest.register_node("default:obsidian", {
 	tiles = {"default_obsidian.png"},
 	sounds = default.node_sound_stone_defaults(),
 	groups = {cracky = 1, level = 2},
+	node_dig_prediction = "solid_air",
 })
 
 minetest.register_node("default:obsidianbrick", {
@@ -399,6 +413,7 @@ minetest.register_node("default:obsidianbrick", {
 	is_ground_content = false,
 	sounds = default.node_sound_stone_defaults(),
 	groups = {cracky = 1, level = 2},
+	node_dig_prediction = "solid_air",
 })
 
 minetest.register_node("default:obsidian_block", {
@@ -407,6 +422,7 @@ minetest.register_node("default:obsidian_block", {
 	is_ground_content = false,
 	sounds = default.node_sound_stone_defaults(),
 	groups = {cracky = 1, level = 2},
+	node_dig_prediction = "solid_air",
 })
 
 minetest.register_node("default:limestone", {
@@ -431,6 +447,7 @@ minetest.register_node("default:marble_block", {
 	groups = {cracky = 2, level = 1},
 	drop = 'default:cobble',
 	sounds = default.node_sound_stone_defaults(),
+	node_dig_prediction = "solid_air",
 })
 
 --
@@ -685,6 +702,7 @@ minetest.register_node("default:wood", {
 	is_ground_content = false,
 	groups = {choppy = 2, oddly_breakable_by_hand = 2, flammable = 2, wood = 1},
 	sounds = default.node_sound_wood_defaults(),
+	node_dig_prediction = "solid_air",
 })
 
 -- default:sapling definition moved to civtest_game/mods/farming/init.lua
@@ -791,6 +809,7 @@ minetest.register_node("default:junglewood", {
 	is_ground_content = false,
 	groups = {choppy = 2, oddly_breakable_by_hand = 2, flammable = 2, wood = 1},
 	sounds = default.node_sound_wood_defaults(),
+	node_dig_prediction = "solid_air",
 })
 
 minetest.register_node("default:jungleleaves", {
@@ -838,6 +857,7 @@ minetest.register_node("default:pine_wood", {
 	is_ground_content = false,
 	groups = {choppy = 2, oddly_breakable_by_hand = 2, flammable = 3, wood = 1},
 	sounds = default.node_sound_wood_defaults(),
+	node_dig_prediction = "solid_air",
 })
 
 minetest.register_node("default:pine_needles",{
@@ -882,6 +902,7 @@ minetest.register_node("default:acacia_wood", {
 	is_ground_content = false,
 	groups = {choppy = 2, oddly_breakable_by_hand = 2, flammable = 2, wood = 1},
 	sounds = default.node_sound_wood_defaults(),
+	node_dig_prediction = "solid_air",
 })
 
 minetest.register_node("default:acacia_leaves", {
@@ -927,6 +948,7 @@ minetest.register_node("default:aspen_wood", {
 	is_ground_content = false,
 	groups = {choppy = 2, oddly_breakable_by_hand = 2, flammable = 3, wood = 1},
 	sounds = default.node_sound_wood_defaults(),
+	node_dig_prediction = "solid_air",
 })
 
 minetest.register_node("default:aspen_leaves", {
@@ -969,6 +991,7 @@ minetest.register_node("default:coalblock", {
 	is_ground_content = false,
 	groups = {cracky = 2, level = 1},
 	sounds = default.node_sound_stone_defaults(),
+	node_dig_prediction = "solid_air",
 })
 
 
@@ -985,6 +1008,7 @@ minetest.register_node("default:ironblock", {
 	is_ground_content = false,
 	groups = {cracky = 1, level = 1},
 	sounds = default.node_sound_metal_defaults(),
+	node_dig_prediction = "solid_air",
 })
 
 minetest.register_node("default:steelblock", {
@@ -993,6 +1017,7 @@ minetest.register_node("default:steelblock", {
 	is_ground_content = false,
 	groups = {cracky = 1, level = 1},
 	sounds = default.node_sound_metal_defaults(),
+	node_dig_prediction = "solid_air",
 })
 
 
@@ -1009,6 +1034,7 @@ minetest.register_node("default:copperblock", {
 	is_ground_content = false,
 	groups = {cracky = 1},
 	sounds = default.node_sound_metal_defaults(),
+	node_dig_prediction = "solid_air",
 })
 
 
@@ -1025,6 +1051,7 @@ minetest.register_node("default:tinblock", {
 	is_ground_content = false,
 	groups = {cracky = 1, level = 1},
 	sounds = default.node_sound_metal_defaults(),
+	node_dig_prediction = "solid_air",
 })
 
 
@@ -1034,6 +1061,7 @@ minetest.register_node("default:bronzeblock", {
 	is_ground_content = false,
 	groups = {cracky = 1, level = 1},
 	sounds = default.node_sound_metal_defaults(),
+	node_dig_prediction = "solid_air",
 })
 
 
@@ -1068,6 +1096,7 @@ minetest.register_node("default:goldblock", {
 	is_ground_content = false,
 	groups = {cracky = 1, level = 1},
 	sounds = default.node_sound_metal_defaults(),
+	node_dig_prediction = "solid_air",
 })
 
 
@@ -1085,6 +1114,7 @@ minetest.register_node("default:diamondblock", {
 	is_ground_content = false,
 	groups = {cracky = 1, level = 1},
 	sounds = default.node_sound_stone_defaults(),
+	node_dig_prediction = "solid_air",
 })
 
 --
@@ -2208,6 +2238,7 @@ minetest.register_node("default:bookshelf", {
 	is_ground_content = false,
 	groups = {choppy = 2, oddly_breakable_by_hand = 2, flammable = 3},
 	sounds = default.node_sound_wood_defaults(),
+	node_dig_prediction = "solid_air",
 
 	on_construct = function(pos)
 		local meta = minetest.get_meta(pos)
@@ -2303,7 +2334,8 @@ default.register_fence("default:fence_wood", {
 				"default_fence_overlay.png^[makealpha:255,126,126",
 	material = "default:wood",
 	groups = {choppy = 2, oddly_breakable_by_hand = 2, flammable = 2},
-	sounds = default.node_sound_wood_defaults()
+	sounds = default.node_sound_wood_defaults(),
+	node_dig_prediction = "solid_air",
 })
 
 default.register_fence("default:fence_acacia_wood", {
@@ -2315,7 +2347,8 @@ default.register_fence("default:fence_acacia_wood", {
 				"default_fence_overlay.png^[makealpha:255,126,126",
 	material = "default:acacia_wood",
 	groups = {choppy = 2, oddly_breakable_by_hand = 2, flammable = 2},
-	sounds = default.node_sound_wood_defaults()
+	sounds = default.node_sound_wood_defaults(),
+	node_dig_prediction = "solid_air",
 })
 
 default.register_fence("default:fence_junglewood", {
@@ -2327,7 +2360,8 @@ default.register_fence("default:fence_junglewood", {
 				"default_fence_overlay.png^[makealpha:255,126,126",
 	material = "default:junglewood",
 	groups = {choppy = 2, oddly_breakable_by_hand = 2, flammable = 2},
-	sounds = default.node_sound_wood_defaults()
+	sounds = default.node_sound_wood_defaults(),
+	node_dig_prediction = "solid_air",
 })
 
 default.register_fence("default:fence_pine_wood", {
@@ -2339,7 +2373,8 @@ default.register_fence("default:fence_pine_wood", {
 				"default_fence_overlay.png^[makealpha:255,126,126",
 	material = "default:pine_wood",
 	groups = {choppy = 2, oddly_breakable_by_hand = 2, flammable = 3},
-	sounds = default.node_sound_wood_defaults()
+	sounds = default.node_sound_wood_defaults(),
+	node_dig_prediction = "solid_air",
 })
 
 default.register_fence("default:fence_aspen_wood", {
@@ -2351,7 +2386,8 @@ default.register_fence("default:fence_aspen_wood", {
 				"default_fence_overlay.png^[makealpha:255,126,126",
 	material = "default:aspen_wood",
 	groups = {choppy = 2, oddly_breakable_by_hand = 2, flammable = 3},
-	sounds = default.node_sound_wood_defaults()
+	sounds = default.node_sound_wood_defaults(),
+	node_dig_prediction = "solid_air",
 })
 
 default.register_fence_rail("default:fence_rail_wood", {
@@ -2363,7 +2399,8 @@ default.register_fence_rail("default:fence_rail_wood", {
 				"default_fence_rail_overlay.png^[makealpha:255,126,126",
 	material = "default:wood",
 	groups = {choppy = 2, oddly_breakable_by_hand = 2, flammable = 2},
-	sounds = default.node_sound_wood_defaults()
+	sounds = default.node_sound_wood_defaults(),
+	node_dig_prediction = "solid_air",
 })
 
 default.register_fence_rail("default:fence_rail_acacia_wood", {
@@ -2375,7 +2412,8 @@ default.register_fence_rail("default:fence_rail_acacia_wood", {
 				"default_fence_rail_overlay.png^[makealpha:255,126,126",
 	material = "default:acacia_wood",
 	groups = {choppy = 2, oddly_breakable_by_hand = 2, flammable = 2},
-	sounds = default.node_sound_wood_defaults()
+	sounds = default.node_sound_wood_defaults(),
+	node_dig_prediction = "solid_air",
 })
 
 default.register_fence_rail("default:fence_rail_junglewood", {
@@ -2387,7 +2425,8 @@ default.register_fence_rail("default:fence_rail_junglewood", {
 				"default_fence_rail_overlay.png^[makealpha:255,126,126",
 	material = "default:junglewood",
 	groups = {choppy = 2, oddly_breakable_by_hand = 2, flammable = 2},
-	sounds = default.node_sound_wood_defaults()
+	sounds = default.node_sound_wood_defaults(),
+	node_dig_prediction = "solid_air",
 })
 
 default.register_fence_rail("default:fence_rail_pine_wood", {
@@ -2399,7 +2438,8 @@ default.register_fence_rail("default:fence_rail_pine_wood", {
 				"default_fence_rail_overlay.png^[makealpha:255,126,126",
 	material = "default:pine_wood",
 	groups = {choppy = 2, oddly_breakable_by_hand = 2, flammable = 3},
-	sounds = default.node_sound_wood_defaults()
+	sounds = default.node_sound_wood_defaults(),
+	node_dig_prediction = "solid_air",
 })
 
 default.register_fence_rail("default:fence_rail_aspen_wood", {
@@ -2411,7 +2451,8 @@ default.register_fence_rail("default:fence_rail_aspen_wood", {
 				"default_fence_rail_overlay.png^[makealpha:255,126,126",
 	material = "default:aspen_wood",
 	groups = {choppy = 2, oddly_breakable_by_hand = 2, flammable = 2},
-	sounds = default.node_sound_wood_defaults()
+	sounds = default.node_sound_wood_defaults(),
+	node_dig_prediction = "solid_air",
 })
 
 minetest.register_node("default:glass", {
@@ -2424,6 +2465,7 @@ minetest.register_node("default:glass", {
 	is_ground_content = false,
 	groups = {cracky = 3, oddly_breakable_by_hand = 3},
 	sounds = default.node_sound_glass_defaults(),
+	node_dig_prediction = "solid_air",
 })
 
 minetest.register_node("default:obsidian_glass", {
@@ -2436,6 +2478,7 @@ minetest.register_node("default:obsidian_glass", {
 	sunlight_propagates = true,
 	sounds = default.node_sound_glass_defaults(),
 	groups = {cracky = 3},
+	node_dig_prediction = "solid_air",
 })
 
 
@@ -2447,6 +2490,7 @@ minetest.register_node("default:brick", {
 	is_ground_content = false,
 	groups = {cracky = 3},
 	sounds = default.node_sound_stone_defaults(),
+	node_dig_prediction = "solid_air",
 })
 
 
@@ -2460,6 +2504,7 @@ minetest.register_node("default:meselamp", {
 	groups = {cracky = 3, oddly_breakable_by_hand = 3},
 	sounds = default.node_sound_glass_defaults(),
 	light_source = default.LIGHT_MAX,
+	node_dig_prediction = "solid_air",
 })
 
 minetest.register_node("default:mese_post_light", {
@@ -2481,6 +2526,7 @@ minetest.register_node("default:mese_post_light", {
 	is_ground_content = false,
 	groups = {choppy = 2, oddly_breakable_by_hand = 2, flammable = 2},
 	sounds = default.node_sound_wood_defaults(),
+	node_dig_prediction = "solid_air",
 })
 
 --
