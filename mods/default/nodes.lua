@@ -977,6 +977,31 @@ minetest.register_node("default:aspen_leaves", {
 -- Ores
 --
 
+minetest.register_on_punchnode(function(pos, node, puncher, pointed_thing)
+   local node_def = core.registered_nodes[node.name]
+   local node_level = (node_def
+                          and node_def.groups
+                          and node_def.groups.level) or 0
+
+   local held = puncher:get_wielded_item()
+   local held_def = core.registered_items[held:get_name()]
+   local toolcaps = held_def.tool_capabilities
+   local tool_level = (toolcaps and toolcaps.max_drop_level) or 0
+
+   if tool_level < node_level then
+      local held_desc = held_def.description
+      if tool_level == 0 then
+         held_desc = "your hand"
+      end
+
+      local node_desc = node_def.description
+      minetest.chat_send_player(
+         puncher:get_player_name(), "You will not get a drop from "
+            .. node_desc .. " if you dig with " .. held_desc .. "."
+      )
+   end
+end)
+
 minetest.register_node("default:stone_with_coal", {
 	description = "Coal Ore",
 	tiles = {"default_stone.png^default_mineral_coal.png"},
