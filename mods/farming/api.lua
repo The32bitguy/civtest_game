@@ -686,9 +686,10 @@ function farming.try_grow_crop(pos, node)
 end
 
 function farming.register_growth_lbm(pname, lbm_nodes)
+   local mname = minetest.get_current_modname()
    minetest.register_lbm({
          label = "Crop growth lbm" .. pname,
-         name = "farming:crop_catchup_lbm_" .. pname,
+         name = mname..":crop_catchup_lbm_" .. pname,
          nodenames = lbm_nodes,
          run_at_every_load = true,
          action = function(pos, node)
