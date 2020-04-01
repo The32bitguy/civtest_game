@@ -1,0 +1,6 @@
+[submodule "mods/civmisc"]
+	path = mods/civmisc
+	url = https://github.com/CivtestGame/CivMisc
+[submodule "mods/combattag"]
+	path = mods/combattag
+	url = git@github.com:CivtestGame/CombatTagMT.git
