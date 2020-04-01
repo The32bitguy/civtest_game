@@ -3,7 +3,7 @@
 -- TODO Ignore group:flower
 farming.registered_plants = {}
 
-farming.hoe_on_use = function(itemstack, user, pointed_thing, uses)
+farming.hoe_on_place = function(itemstack, user, pointed_thing, uses)
 	local pt = pointed_thing
 	-- check if pointing at a node
 	if not pt then
@@ -160,7 +160,29 @@ local function growth_timescale(time)
    return divisor, unit, over_three_months
 end
 
-farming.hoe_on_place = function(itemstack, user, pointed_thing)
+farming.hoe_on_use = function(itemstack, user, pointed_thing)
+
+   if pointed_thing
+      and pointed_thing.type == "nothing"
+   then
+      local name = user:get_player_name()
+      if not name then
+         return
+      end
+      local pos = user:get_pos()
+      local biome_data = minetest.get_biome_data(pos)
+
+      local biome_name = minetest.get_biome_name(biome_data.biome)
+      local heat = tostring(biome_data.heat)
+      local humidity = tostring(biome_data.humidity)
+      minetest.chat_send_player(
+         name,
+         "This biome is a " .. biome_name .. ". "
+            .. "The heat here is " .. minetest.get_heat(pos)
+            .. " and the humidity is " .. minetest.get_humidity(pos)
+      )
+   end
+
    if pointed_thing
       and pointed_thing.type == "node"
    then
@@ -229,18 +251,7 @@ farming.hoe_on_place = function(itemstack, user, pointed_thing)
 end
 
 farming.hoe_on_secondary_use = function(itemstack,user,pointed_thing)
-   local name = user:get_player_name()
-   if not name then
-      return
-   end
-   local pos = user:get_pos()
-   local biome = minetest.get_biome_data(pos)
 
-   minetest.chat_send_player(
-      name,
-      "The heat of this area is " .. minetest.get_heat(pos)
-         .. " and the humidity is " .. minetest.get_humidity(pos)
-   )
 end
 
 -- Register new hoes
