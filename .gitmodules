@@ -1,6 +1,8 @@
 [submodule "mods/civmisc"]
 	path = mods/civmisc
-	url = https://github.com/CivtestGame/CivMisc
+	url = git@github.com:CivtestGame/CivMisc.git
+    branch = master
 [submodule "mods/combattag"]
 	path = mods/combattag
 	url = git@github.com:CivtestGame/CombatTagMT.git
+	branch = master
