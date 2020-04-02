@@ -2,10 +2,6 @@
 	path = mods/civmisc
 	url = https://github.com/CivtestGame/CivMisc.git
     branch = master
-[submodule "mods/combattag"]
-	path = mods/combattag
-	url = https://github.com/CivtestGame/CombatTagMT.git
-	branch = master
 [submodule "mods/civindustry"]
 	path = mods/civindustry
 	url = https://github.com/CivtestGame/CivIndustry.git
@@ -14,16 +10,12 @@
 	path = mods/civtobacco
 	url = https://github.com/CivtestGame/CivTobacco.git
 	branch = master
-[submodule "mods/civarmor"]
-	path = mods/civarmor
-	url = https://github.com/CivtestGame/Civ-3d_armor.git
-	branch = master
 [submodule "mods/bookpress"]
 	path = mods/bookpress
 	url = https://github.com/CivtestGame/bookpress
 	branch = master
 [submodule "mods/hbhunger"]
-	path = mods/hbhunger
+	path = mods/civtest_hbhunger
 	url = https://github.com/CivtestGame/civtest_hbhunger
 	branch = master
 [submodule "mods/mobs_animal"]
@@ -33,10 +25,6 @@
 [submodule "mods/mobs_redo"]
 	path = mods/mobs_redo
 	url = https://github.com/CivtestGame/mobs_redo
-	branch = master
-[submodule "mods/prisonpearl"]
-	path = mods/prisonpearl
-	url = https://github.com/CivtestGame/prisonpearllua
 	branch = master
 [submodule "mods/xdecor"]
 	path = mods/xdecor
@@ -58,3 +46,41 @@
 	path = mods/civchat
 	url = https://github.com/CivtestGame/civchat
 	branch = master
+[submodule "mods/minetest_hudbars"]
+	path = mods/minetest_hudbars
+	url = git://repo.or.cz/minetest_hudbars.git
+[submodule "mods/CombatTagMT"]
+	path = mods/CombatTagMT
+	url = https://github.com/CivtestGame/CombatTagMT.git
+[submodule "mods/Civ-3d_armor"]
+	path = mods/Civ-3d_armor
+	url = https://github.com/CivtestGame/Civ-3d_armor.git
+	branch = master
+[submodule "mods/prisonpearllua"]
+	path = mods/prisonpearllua
+	url = https://github.com/CivtestGame/prisonpearllua
+	branch = master
+[submodule "mods/bakedclay"]
+	path = mods/bakedclay
+	url = https://notabug.org/TenPlus1/bakedclay.git
+[submodule "mods/craftguide"]
+	path = mods/craftguide
+	url = https://github.com/minetest-mods/craftguide.git
+[submodule "mods/hbsprint"]
+	path = mods/hbsprint
+	url = https://github.com/minetest-mods/hbsprint.git
+[submodule "mods/display_modpack"]
+	path = mods/display_modpack
+	url = https://github.com/pyrollo/display_modpack
+[submodule "mods/mod-bedrock2"]
+	path = mods/mod-bedrock2
+	url = https://github.com/AntumMT/mod-bedrock2.git
+[submodule "mods/Minetest-WorldEdit"]
+	path = mods/Minetest-WorldEdit
+	url = https://github.com/Uberi/Minetest-WorldEdit.git
+[submodule "mods/vignette_redo"]
+	path = mods/vignette_redo
+	url = https://github.com/kestral246/vignette_redo.git
+[submodule "mods/wield_redo"]
+	path = mods/wield_redo
+	url = https://notabug.org/Piezo_/wield_redo.git
