@@ -21,7 +21,7 @@ farming.register_plant("farming:wheat", {
 	inventory_image = "farming_wheat_seed.png",
 	steps = 8,
 	fertility = {"grassland", "desert"},
-	groups = {food_wheat = 1, flammable = 4},
+	groups = {food_wheat = 1, flammable = 4, spoils=7},
 	place_param2 = 3,
 	custom_growth = {optimum_heat = 50, heat_scaling = "exponential", heat_a = 2.5, heat_b = 1.7, heat_base_speed = 5000, variance = 1250},
 })
@@ -36,7 +36,7 @@ minetest.register_craftitem("farming:bread", {
 	description = "Bread",
 	inventory_image = "farming_bread.png",
 	on_use = minetest.item_eat(5),
-	groups = {food_bread = 1, flammable = 2},
+	groups = {food_bread = 1, flammable = 2, spoils=5},
 })
 
 minetest.register_craft({
@@ -162,7 +162,7 @@ minetest.register_craftitem("farming:baked_potato", {
 	description = "Baked Potato",
 	inventory_image = "farming_baked_potato.png",
 	on_use = minetest.item_eat(5),
-	groups = {food_potato = 1, flammable = 2},
+	groups = {food_potato = 1, flammable = 2, spoils=3},
 })
 
 
