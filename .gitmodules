@@ -84,3 +84,9 @@
 [submodule "mods/wield_redo"]
 	path = mods/wield_redo
 	url = https://notabug.org/Piezo_/wield_redo.git
+[submodule "mods/factory-mod"]
+	path = mods/factory-mod
+	url = https://github.com/CivtestGame/factory-mod.git
+[submodule "mods/NodeNetwork"]
+	path = mods/NodeNetwork
+	url = https://github.com/CivtestGame/NodeNetwork.git
