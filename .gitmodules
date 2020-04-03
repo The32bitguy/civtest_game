@@ -107,21 +107,6 @@
 	path = mods/display_modpack
         ignore = all
 
-[submodule "mods/bakedclay"]
-	path = mods/bakedclay
-	url = https://notabug.org/TenPlus1/bakedclay.git
-        ignore = all
-
-[submodule "mods/craftguide"]
-	path = mods/craftguide
-	url = https://github.com/minetest-mods/craftguide.git
-        ignore = all
-
-[submodule "mods/hbsprint"]
-	path = mods/hbsprint
-	url = https://github.com/minetest-mods/hbsprint.git
-        ignore = all
-
 [submodule "mods/mod-bedrock2"]
 	path = mods/mod-bedrock2
 	url = https://github.com/AntumMT/mod-bedrock2.git
