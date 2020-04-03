@@ -146,3 +146,6 @@
 	path = mods/hbsprint
 	url = https://github.com/minetest-mods/hbsprint.git
         ignore = all
+[submodule "mods/CivSkins"]
+	path = mods/CivSkins
+	url = https://github.com/CivtestGame/CivSkins.git
