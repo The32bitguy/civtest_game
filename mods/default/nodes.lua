@@ -2606,3 +2606,158 @@ default.register_leafdecay({
 	leaves = {"default:pine_bush_needles"},
 	radius = 1,
 })
+
+--
+-- blocks by klutz
+--
+
+minetest.register_node("default:shingle_red", {
+	description = "Red Shingle",
+	paramtype2 = "facedir",
+	place_param2 = 0,
+	tiles = {"default_shingle_red.png"},
+	is_ground_content = false,
+	groups = {cracky = 2, level = 1},
+	sounds = default.node_sound_stone_defaults(),
+	node_dig_prediction = "solid_air",
+})
+
+minetest.register_node("default:shingle_slate", {
+	description = "Slate Shingle",
+	paramtype2 = "facedir",
+	place_param2 = 0,
+	tiles = {"default_shingle_slate.png"},
+	is_ground_content = false,
+	groups = {cracky = 2, level = 1},
+	sounds = default.node_sound_stone_defaults(),
+	node_dig_prediction = "solid_air",
+})
+
+minetest.register_node("default:shingle_copper", {
+	description = "Copper Shingle",
+	paramtype2 = "facedir",
+	place_param2 = 0,
+	tiles = {"default_shingle_copper.png"},
+	is_ground_content = false,
+	groups = {cracky = 2, level = 1},
+	sounds = default.node_sound_stone_defaults(),
+	node_dig_prediction = "solid_air",
+})
+
+minetest.register_node("default:shingle_mud", {
+	description = "Mud Shingle",
+	paramtype2 = "facedir",
+	place_param2 = 0,
+	tiles = {"default_shingle_mud.png"},
+	is_ground_content = false,
+	groups = {cracky = 2, level = 1},
+	sounds = default.node_sound_stone_defaults(),
+	node_dig_prediction = "solid_air",
+})
+
+minetest.register_node("default:copper_lantern_square", {
+	description = "Square Copper Lantern",
+	tiles = {"default_copper_lantern_top.png", "default_copper_lantern_top.png",
+		"default_copper_lantern_side_dark.png", "default_copper_lantern_side_dark.png",
+		"default_copper_lantern_side.png", "default_copper_lantern_side.png"},
+	wield_image = "default_copper_lantern_side.png",
+	drawtype = "nodebox",
+	node_box = {
+		type = "fixed",
+		fixed = {
+			{-2 / 16, -8 / 16, -2 / 16, 2 / 16, 2 / 16, 2 / 16},
+		},
+	},
+	paramtype = "light",
+	light_source = default.LIGHT_MAX,
+	sunlight_propagates = true,
+	walkable = false,
+	is_ground_content = false,
+	groups = {cracky=2, choppy = 2, oddly_breakable_by_hand = 2},
+	sounds = default.node_sound_wood_defaults(),
+	node_dig_prediction = "solid_air",
+})
+
+minetest.register_node("default:bronze_lantern_square", {
+	description = "Square Bronze Lantern",
+	tiles = {"default_bronze_lantern_top.png", "default_bronze_lantern_top.png",
+		"default_bronze_lantern_side_dark.png", "default_bronze_lantern_side_dark.png",
+		"default_bronze_lantern_side.png", "default_bronze_lantern_side.png"},
+	wield_image = "default_bronze_lantern_side.png",
+	drawtype = "nodebox",
+	node_box = {
+		type = "fixed",
+		fixed = {
+			{-2 / 16, -8 / 16, -2 / 16, 2 / 16, 2 / 16, 2 / 16},
+		},
+	},
+	paramtype = "light",
+	light_source = default.LIGHT_MAX,
+	sunlight_propagates = true,
+	walkable = false,
+	is_ground_content = false,
+	groups = {cracky=2, choppy = 2, oddly_breakable_by_hand = 2},
+	sounds = default.node_sound_wood_defaults(),
+	node_dig_prediction = "solid_air",
+})
+
+minetest.register_node("default:iron_lantern_square", {
+	description = "Square Iron Lantern",
+	tiles = {"default_iron_lantern_top.png", "default_iron_lantern_top.png",
+		"default_iron_lantern_side_dark.png", "default_iron_lantern_side_dark.png",
+		"default_iron_lantern_side.png", "default_iron_lantern_side.png"},
+	wield_image = "default_iron_lantern_side.png",
+	drawtype = "nodebox",
+	node_box = {
+		type = "fixed",
+		fixed = {
+			{-2 / 16, -8 / 16, -2 / 16, 2 / 16, 2 / 16, 2 / 16},
+		},
+	},
+	paramtype = "light",
+	light_source = default.LIGHT_MAX,
+	sunlight_propagates = true,
+	walkable = false,
+	is_ground_content = false,
+	groups = {cracky=2, choppy = 2, oddly_breakable_by_hand = 2},
+	sounds = default.node_sound_wood_defaults(),
+	node_dig_prediction = "solid_air",
+})
+
+minetest.register_node("default:steel_lantern_square", {
+	description = "Square Steel Lantern",
+	tiles = {"default_steel_lantern_top.png", "default_steel_lantern_top.png",
+		"default_steel_lantern_side_dark.png", "default_steel_lantern_side_dark.png",
+		"default_steel_lantern_side.png", "default_steel_lantern_side.png"},
+	wield_image = "default_steel_lantern_side.png",
+	drawtype = "nodebox",
+	node_box = {
+		type = "fixed",
+		fixed = {
+			{-2 / 16, -8 / 16, -2 / 16, 2 / 16, 2 / 16, 2 / 16},
+		},
+	},
+	paramtype = "light",
+	light_source = default.LIGHT_MAX,
+	sunlight_propagates = true,
+	walkable = false,
+	is_ground_content = false,
+	groups = {cracky=2, choppy = 2, oddly_breakable_by_hand = 2},
+	sounds = default.node_sound_wood_defaults(),
+	node_dig_prediction = "solid_air",
+})
+
+minetest.register_node("default:hanging_paper_lantern", {
+	description = "Hanging Paper Lantern",
+	tiles = {"default_hanging_paper_lantern.png"},
+	wield_image = "default_hanging_paper_lantern.png",
+	drawtype = "plantlike",
+	paramtype = "light",
+	light_source = default.LIGHT_MAX,
+	sunlight_propagates = true,
+	walkable = false,
+	is_ground_content = false,
+	groups = {cracky=2, choppy = 2, oddly_breakable_by_hand = 2},
+	sounds = default.node_sound_wood_defaults(),
+	node_dig_prediction = "solid_air",
+})

@@ -831,6 +831,50 @@ stairs.register_stair_and_slab(
 	true
 )
 
+stairs.register_stair_and_slab(
+	"shingle_red",
+	"default:shingle_red",
+	{crumbly = 3, cools_lava = 1, snowy = 1},
+	{"default_shingle_red.png"},
+	"Red Shingle Stair",
+	"Red Shingle Slab",
+	default.node_sound_stone_defaults(),
+	true
+)
+
+stairs.register_stair_and_slab(
+	"shingle_slate",
+	"default:shingle_slate",
+	{cracky = 2, level = 1},
+	{"default_shingle_slate.png"},
+	"Slate Shingle Stair",
+	"Slate Shingle Slab",
+	default.node_sound_stone_defaults(),
+	true
+)
+
+stairs.register_stair_and_slab(
+	"shingle_copper",
+	"default:shingle_copper",
+	{cracky = 2, level = 1},
+	{"default_shingle_copper.png"},
+	"Copper Shingle Stair",
+	"Copper Shingle Slab",
+	default.node_sound_stone_defaults(),
+	true
+)
+
+stairs.register_stair_and_slab(
+	"shingle_mud",
+	"default:shingle_mud",
+	{cracky = 2, level = 1},
+	{"default_shingle_mud.png"},
+	"Mud Shingle Stair",
+	"Mud Shingle Slab",
+	default.node_sound_stone_defaults(),
+	true
+)
+
 -- Glass stair nodes need to be registered individually to utilize specialized textures.
 
 stairs.register_stair(
