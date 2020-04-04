@@ -821,6 +821,74 @@ minetest.register_craft({
 	recipe = "group:tree",
 })
 
+minetest.register_craft({
+	output = 'default:pick_wrought_iron',
+	recipe = {
+		{'default:wrought_iron_ingot', 'default:wrought_iron_ingot', 'default:wrought_iron_ingot'},
+		{'', 'group:stick', ''},
+		{'', 'group:stick', ''},
+	}
+})
+
+minetest.register_craft({
+	output = 'default:pick_wrought_iron_good',
+	recipe = {
+		{'', 'default:comp_wrought_iron_pickhead', ''},
+		{'', 'default:comp_toolrod', ''},
+	}
+})
+
+minetest.register_craft({
+	output = 'default:pick_wrought_iron_superior',
+	recipe = {
+		{'', 'default:comp_wrought_iron_pickhead_sharp', ''},
+		{'', 'default:comp_toolrod_strong', ''},
+	}
+})
+
+minetest.register_craft({
+	output = 'default:pick_steel_good',
+	recipe = {
+		{'', 'default:comp_steel_pickhead', ''},
+		{'', 'default:comp_toolrod', ''},
+	}
+})
+
+minetest.register_craft({
+	output = 'default:pick_steel_superior',
+	recipe = {
+		{'', 'default:comp_steel_pickhead_sharp', ''},
+		{'', 'default:comp_toolrod_strong', ''},
+	}
+})
+
+minetest.register_craft({
+	output = 'default:pick_fine_steel',
+	recipe = {
+		{'default:fine_steel_ingot', 'default:fine_steel_ingot', 'default:fine_steel_ingot'},
+		{'', 'group:stick', ''},
+		{'', 'group:stick', ''},
+	}
+})
+
+minetest.register_craft({
+	output = 'default:pick_fine_steel_good',
+	recipe = {
+		{'', 'default:comp_fine_steel_pickhead', ''},
+		{'', 'default:comp_toolrod', ''},
+	}
+})
+
+minetest.register_craft({
+	output = 'default:pick_fine_steel_superior',
+	recipe = {
+		{'', 'default:comp_fine_steel_pickhead_sharp', ''},
+		{'', 'default:comp_toolrod_strong', ''},
+	}
+})
+
+
+
 --
 -- Fuels
 --

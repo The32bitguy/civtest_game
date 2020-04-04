@@ -405,6 +405,137 @@ minetest.register_tool("default:sword_steel", {
 	sound = {breaks = "default_tool_breaks"},
 })
 
+--
+-- CivIndustry
+--
+
+minetest.register_tool("default:pick_wrought_iron", {
+	description = "Wrought Iron Pickaxe",
+	inventory_image = "default_tool_wrought_ironpick.png",
+	groups = { pick = 1 },
+	tool_capabilities = {
+		full_punch_interval = default.PUNCH_INTERVAL,
+		max_drop_level=3,
+		groupcaps={
+			cracky = {times={[1]=7.00, [2]=2.2, [3]=0.90}, uses=1250, maxlevel=4},
+		},
+		damage_groups = {fleshy=4 * default.HEALTH_MULTIPLIER},
+	},
+	sound = {breaks = "default_tool_breaks"},
+})
+
+minetest.register_tool("default:pick_wrought_iron_good", {
+	description = "Good Wrought Iron Pickaxe",
+	inventory_image = "default_tool_wrought_ironpick_good.png",
+	groups = { pick = 1 },
+	tool_capabilities = {
+		full_punch_interval = default.PUNCH_INTERVAL,
+		max_drop_level=3,
+		groupcaps={
+			cracky = {times={[1]=6.75, [2]=2.1, [3]=0.88}, uses=1500, maxlevel=4},
+		},
+		damage_groups = {fleshy=4 * default.HEALTH_MULTIPLIER},
+	},
+	sound = {breaks = "default_tool_breaks"},
+})
+
+minetest.register_tool("default:pick_wrought_iron_superior", {
+	description = "Superior Wrought Iron Pickaxe",
+	inventory_image = "default_tool_wrought_ironpick_superior.png",
+	groups = { pick = 1 },
+	tool_capabilities = {
+		full_punch_interval = default.PUNCH_INTERVAL,
+		max_drop_level=3,
+		groupcaps={
+			cracky = {times={[1]=6.50, [2]=2.0, [3]=0.85}, uses=1750, maxlevel=4},
+		},
+		damage_groups = {fleshy=4 * default.HEALTH_MULTIPLIER},
+	},
+	sound = {breaks = "default_tool_breaks"},
+})
+
+minetest.register_tool("default:pick_steel_good", {
+	description = "Good Steel Pickaxe",
+	inventory_image = "default_tool_steelpick_good.png",
+	groups = { pick = 1 },
+	tool_capabilities = {
+		full_punch_interval = default.PUNCH_INTERVAL,
+		max_drop_level=4,
+		groupcaps={
+			cracky = {times={[1]=3.90, [2]=1.55, [3]=0.78}, uses=2650, maxlevel=4},
+		},
+		damage_groups = {fleshy=4 * default.HEALTH_MULTIPLIER},
+	},
+	sound = {breaks = "default_tool_breaks"},
+})
+
+minetest.register_tool("default:pick_steel_superior", {
+	description = "Superior Steel Pickaxe",
+	inventory_image = "default_tool_steelpick_superior.png",
+	groups = { pick = 1 },
+	tool_capabilities = {
+		full_punch_interval = default.PUNCH_INTERVAL,
+		max_drop_level=4,
+		groupcaps={
+			cracky = {times={[1]=3.80, [2]=1.50, [3]=0.76}, uses=2800, maxlevel=4},
+		},
+		damage_groups = {fleshy=4 * default.HEALTH_MULTIPLIER},
+	},
+	sound = {breaks = "default_tool_breaks"},
+})
+
+minetest.register_tool("default:pick_fine_steel", {
+	description = "Fine Steel Pickaxe",
+	inventory_image = "default_tool_fine_steelpick.png",
+	groups = { pick = 1 },
+	tool_capabilities = {
+		full_punch_interval = default.PUNCH_INTERVAL,
+		max_drop_level=4,
+		groupcaps={
+			cracky = {times={[1]=3.50, [2]=1.40, [3]=0.72}, uses=3200, maxlevel=4},
+		},
+		damage_groups = {fleshy=5 * default.HEALTH_MULTIPLIER},
+	},
+	sound = {breaks = "default_tool_breaks"},
+})
+
+minetest.register_tool("default:pick_fine_steel_good", {
+	description = "Good Fine Steel Pickaxe",
+	inventory_image = "default_tool_fine_steelpick_good.png",
+	groups = { pick = 1 },
+	tool_capabilities = {
+		full_punch_interval = default.PUNCH_INTERVAL,
+		max_drop_level=4,
+		groupcaps={
+			cracky = {times={[1]=3.45, [2]=1.37, [3]=0.70}, uses=3600, maxlevel=4},
+		},
+		damage_groups = {fleshy=5 * default.HEALTH_MULTIPLIER},
+	},
+	sound = {breaks = "default_tool_breaks"},
+})
+
+minetest.register_tool("default:pick_fine_steel_superior", {
+	description = "Superior Fine Steel Pickaxe",
+	inventory_image = "default_tool_fine_steelpick_superior.png",
+	groups = { pick = 1 },
+	tool_capabilities = {
+		full_punch_interval = default.PUNCH_INTERVAL,
+		max_drop_level=4,
+		groupcaps={
+			cracky = {times={[1]=3.40, [2]=1.35, [3]=0.68}, uses=4000, maxlevel=4},
+		},
+		damage_groups = {fleshy=5 * default.HEALTH_MULTIPLIER},
+	},
+	sound = {breaks = "default_tool_breaks"},
+})
+
+
+--
+
+--
+
+--
+
 minetest.register_tool("default:key", {
 	description = "Key",
 	inventory_image = "default_key.png",
