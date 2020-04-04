@@ -250,7 +250,7 @@ minetest.register_craftitem("default:iron_ingot", {
 })
 
 minetest.register_craftitem("default:steel_ingot", {
-	description = "Steel Ingot",
+	description = "Brittle Steel Ingot",
 	inventory_image = "default_steel_ingot.png",
 })
 
@@ -363,12 +363,12 @@ minetest.register_craftitem("default:comp_wrought_iron_pickhead_sharp", {
 })
 
 minetest.register_craftitem("default:comp_steel_pickhead", {
-	description = "Steel Pick Head",
+	description = "Brittle Steel Pick Head",
 	inventory_image = "default_comp_steel_pickhead.png",
 })
 
 minetest.register_craftitem("default:comp_steel_pickhead_sharp", {
-	description = "Sharp Steel Pick Head",
+	description = "Sharp Brittle Steel Pick Head",
 	inventory_image = "default_comp_steel_pickhead_sharp.png",
 })
 
@@ -393,7 +393,7 @@ minetest.register_craftitem("default:wrought_iron_ingot", {
 })
 
 minetest.register_craftitem("default:steel_lump", {
-	description = "Steel Lump",
+	description = "Brittle Steel Lump",
 	inventory_image = "default_steel_lump.png"
 })
 
