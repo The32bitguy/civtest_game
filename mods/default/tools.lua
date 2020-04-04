@@ -99,7 +99,7 @@ minetest.register_tool("default:pick_iron", {
 })
 
 minetest.register_tool("default:pick_steel", {
-	description = "Steel Pickaxe",
+	description = "Brittle Steel Pickaxe",
 	inventory_image = "default_tool_steelpick.png",
 	groups = { pick = 1 },
 	tool_capabilities = {
@@ -199,7 +199,7 @@ minetest.register_tool("default:shovel_iron", {
 })
 
 minetest.register_tool("default:shovel_steel", {
-	description = "Steel Shovel",
+	description = "Brittle Steel Shovel",
 	inventory_image = "default_tool_steelshovel.png",
 	wield_image = "default_tool_steelshovel.png",
 	groups = { shovel = 1 },
@@ -295,7 +295,7 @@ minetest.register_tool("default:axe_iron", {
 })
 
 minetest.register_tool("default:axe_steel", {
-	description = "Steel Axe",
+	description = "Brittle Steel Axe",
 	inventory_image = "default_tool_steelaxe.png",
 	groups = { axe = 1 },
 	tool_capabilities = {
@@ -391,7 +391,7 @@ minetest.register_tool("default:sword_iron", {
 })
 
 minetest.register_tool("default:sword_steel", {
-	description = "Steel Sword",
+	description = "Brittle Steel Sword",
 	inventory_image = "default_tool_steelsword.png",
 	groups = { sword = 1 },
 	tool_capabilities = {
@@ -455,7 +455,7 @@ minetest.register_tool("default:pick_wrought_iron_superior", {
 })
 
 minetest.register_tool("default:pick_steel_good", {
-	description = "Good Steel Pickaxe",
+	description = "Good Brittle Steel Pickaxe",
 	inventory_image = "default_tool_steelpick_good.png",
 	groups = { pick = 1 },
 	tool_capabilities = {
@@ -470,7 +470,7 @@ minetest.register_tool("default:pick_steel_good", {
 })
 
 minetest.register_tool("default:pick_steel_superior", {
-	description = "Superior Steel Pickaxe",
+	description = "Superior Brittle Steel Pickaxe",
 	inventory_image = "default_tool_steelpick_superior.png",
 	groups = { pick = 1 },
 	tool_capabilities = {
