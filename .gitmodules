@@ -2,147 +2,125 @@
 	path = mods/CivMisc
 	url = https://github.com/CivtestGame/CivMisc.git
 	branch = .
-        ignore = all
 
 [submodule "mods/CivIndustry"]
 	path = mods/CivIndustry
 	url = https://github.com/CivtestGame/CivIndustry.git
 	branch = .
-        ignore = all
 
 [submodule "mods/CivTobacco"]
 	path = mods/CivTobacco
 	url = https://github.com/CivtestGame/CivTobacco.git
 	branch = .
-        ignore = all
 
 [submodule "mods/bookpress"]
 	path = mods/bookpress
 	url = https://github.com/CivtestGame/bookpress.git
 	branch = .
-        ignore = all
 
 [submodule "mods/civtest_hbhunger"]
 	path = mods/civtest_hbhunger
 	url = https://github.com/CivtestGame/civtest_hbhunger.git
 	branch = .
-        ignore = all
 
 [submodule "mods/mobs_animal"]
 	path = mods/mobs_animal
 	url = https://github.com/CivtestGame/mobs_animal.git
 	branch = .
-        ignore = all
 
 [submodule "mods/mobs_redo"]
 	path = mods/mobs_redo
 	url = https://github.com/CivtestGame/mobs_redo.git
 	branch = .
-        ignore = all
 
 [submodule "mods/xdecor"]
 	path = mods/xdecor
 	url = https://github.com/CivtestGame/xdecor.git
 	branch = .
-        ignore = all
 
 [submodule "mods/fancy_vend"]
 	path = mods/fancy_vend
 	url = https://github.com/CivtestGame/fancy_vend.git
 	branch = .
-        ignore = all
 
 [submodule "mods/simplecrafting_lib"]
 	path = mods/simplecrafting_lib
 	url = https://github.com/CivtestGame/simplecrafting_lib.git
 	branch = .
-        ignore = all
 
 [submodule "mods/PMUtils"]
 	path = mods/PMUtils
 	url = https://github.com/CivtestGame/PMUtils.git
 	branch = .
-        ignore = all
 
 [submodule "mods/CivChat"]
 	path = mods/CivChat
 	url = https://github.com/CivtestGame/CivChat.git
 	branch = .
-        ignore = all
-
 
 [submodule "mods/factory-mod"]
 	path = mods/factory-mod
 	url = https://github.com/CivtestGame/factory-mod.git
 	branch = .
-        ignore = all
 
 [submodule "mods/NodeNetwork"]
 	path = mods/NodeNetwork
 	url = https://github.com/CivtestGame/NodeNetwork.git
 	branch = .
-        ignore = all
 
 [submodule "mods/CombatTagMT"]
 	path = mods/CombatTagMT
 	url = https://github.com/CivtestGame/CombatTagMT.git
 	branch = .
-        ignore = all
 
 [submodule "mods/Civ-3d_armor"]
 	path = mods/Civ-3d_armor
 	url = https://github.com/CivtestGame/Civ-3d_armor.git
 	branch = .
-        ignore = all
 
 [submodule "mods/PrisonPearlLua"]
 	path = mods/PrisonPearlLua
 	url = https://github.com/CivtestGame/PrisonPearlLua.git
 	branch = .
-        ignore = all
 
 [submodule "mods/display_modpack"]
 	url = https://github.com/CivtestGame/display_modpack.git
 	branch = .
 	path = mods/display_modpack
-        ignore = all
+
 
 [submodule "mods/mod-bedrock2"]
 	path = mods/mod-bedrock2
 	url = https://github.com/AntumMT/mod-bedrock2.git
-        ignore = all
 
 [submodule "mods/Minetest-WorldEdit"]
 	path = mods/Minetest-WorldEdit
 	url = https://github.com/Uberi/Minetest-WorldEdit.git
-        ignore = all
 
 [submodule "mods/vignette_redo"]
 	path = mods/vignette_redo
 	url = https://github.com/kestral246/vignette_redo.git
-        ignore = all
 
 [submodule "mods/wield_redo"]
 	path = mods/wield_redo
 	url = https://notabug.org/Piezo_/wield_redo.git
-        ignore = all
 
 [submodule "mods/minetest_hudbars"]
 	path = mods/minetest_hudbars
 	url = git://repo.or.cz/minetest_hudbars.git
-        ignore = all
 
 [submodule "mods/bakedclay"]
 	path = mods/bakedclay
 	url = https://notabug.org/TenPlus1/bakedclay.git
-        ignore = all
 
 [submodule "mods/craftguide"]
 	path = mods/craftguide
-	url = https://github.com/minetest-mods/craftguide.git
-        ignore = all
+	url = https://github.com/R3R3R3/craftguide.git
 
 [submodule "mods/hbsprint"]
 	path = mods/hbsprint
 	url = https://github.com/minetest-mods/hbsprint.git
-        ignore = all
+
+[submodule "mods/CivSkins"]
+	path = mods/CivSkins
+	url = https://github.com/CivtestGame/CivSkins.git

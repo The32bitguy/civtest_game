@@ -250,7 +250,7 @@ minetest.register_craftitem("default:iron_ingot", {
 })
 
 minetest.register_craftitem("default:steel_ingot", {
-	description = "Steel Ingot",
+	description = "Brittle Steel Ingot",
 	inventory_image = "default_steel_ingot.png",
 })
 
@@ -320,4 +320,168 @@ minetest.register_craftitem("default:charcoal", {
 	description = "Charcoal",
 	inventory_image = "default_charcoal.png",
         groups = {coke = 1, coal = 1, flammable = 1}
+})
+
+minetest.register_craftitem("default:comp_hammer", {
+	description = "Hammering Component",
+	inventory_image = "default_comp_hammer.png",
+})
+
+minetest.register_craftitem("default:comp_hammer_adv", {
+	description = "Advanced Hammering Component",
+	inventory_image = "default_comp_hammer_adv.png",
+})
+
+minetest.register_craftitem("default:comp_sharp", {
+	description = "Sharpening Component",
+	inventory_image = "default_comp_sharp.png",
+})
+
+minetest.register_craftitem("default:comp_sharp_adv", {
+	description = "Advanced Sharpening Component",
+	inventory_image = "default_comp_sharp_adv.png",
+})
+
+minetest.register_craftitem("default:comp_toolrod", {
+	description = "Tool Rod",
+	inventory_image = "default_comp_toolrod.png",
+})
+
+minetest.register_craftitem("default:comp_toolrod_strong", {
+	description = "Strong Tool Rod",
+	inventory_image = "default_comp_toolrod_strong.png",
+})
+
+minetest.register_craftitem("default:comp_wrought_iron_pickhead", {
+	description = "Wrought Iron Pick Head",
+	inventory_image = "default_comp_wrought_iron_pickhead.png",
+})
+
+minetest.register_craftitem("default:comp_wrought_iron_pickhead_sharp", {
+	description = "Sharp Wrought Iron Pick Head",
+	inventory_image = "default_comp_wrought_iron_pickhead_sharp.png",
+})
+
+minetest.register_craftitem("default:comp_steel_pickhead", {
+	description = "Brittle Steel Pick Head",
+	inventory_image = "default_comp_steel_pickhead.png",
+})
+
+minetest.register_craftitem("default:comp_steel_pickhead_sharp", {
+	description = "Sharp Brittle Steel Pick Head",
+	inventory_image = "default_comp_steel_pickhead_sharp.png",
+})
+
+minetest.register_craftitem("default:comp_fine_steel_pickhead", {
+	description = "Fine Steel Pick Head",
+	inventory_image = "default_comp_fine_steel_pickhead.png",
+})
+
+minetest.register_craftitem("default:comp_fine_steel_pickhead_sharp", {
+	description = "Sharp Fine Steel Pick Head",
+	inventory_image = "default_comp_fine_steel_pickhead_sharp.png",
+})
+
+minetest.register_craftitem("default:wrought_iron_lump", {
+	description = "Wrought Iron Lump",
+	inventory_image = "default_wrought_iron_lump.png"
+})
+
+minetest.register_craftitem("default:wrought_iron_ingot", {
+	description = "Wrought Iron Ingot",
+	inventory_image = "default_wrought_iron_ingot.png"
+})
+
+minetest.register_craftitem("default:steel_lump", {
+	description = "Brittle Steel Lump",
+	inventory_image = "default_steel_lump.png"
+})
+
+minetest.register_craftitem("default:fine_steel_lump", {
+	description = "Fine Steel Lump",
+	inventory_image = "default_fine_steel_lump.png"
+})
+
+minetest.register_craftitem("default:fine_steel_ingot", {
+	description = "Fine Steel Ingot",
+	inventory_image = "default_fine_steel_ingot.png"
+})
+
+minetest.register_craftitem("default:aluminium_ingot", {
+	description = "Aluminium Ingot",
+	inventory_image = "default_aluminium.png"
+})
+
+minetest.register_craftitem("default:elem_chromium", {
+	description = "Chromium",
+	inventory_image = "default_elem_chromium.png"
+})
+
+minetest.register_craftitem("default:lead", {
+	description = "Lead",
+	inventory_image = "default_elem_lead.png"
+})
+
+minetest.register_craftitem("default:elem_manganese", {
+	description = "Manganese",
+	inventory_image = "default_elem_manganese.png"
+})
+
+minetest.register_craftitem("default:elem_nickel", {
+	description = "Nickel",
+	inventory_image = "default_elem_nickel.png"
+})
+
+minetest.register_craftitem("default:elem_pewter", {
+	description = "Pewter",
+	inventory_image = "default_elem_pewter.png"
+})
+
+minetest.register_craftitem("default:elem_sulphur", {
+	description = "Sulphur",
+	inventory_image = "default_elem_sulphur.png"
+})
+
+minetest.register_craftitem("default:elem_zinc", {
+	description = "Zinc",
+	inventory_image = "default_elem_zinc.png"
+})
+
+minetest.register_craftitem("default:brass_ingot", {
+	description = "Brass Ingot",
+	inventory_image = "default_brass_ingot.png"
+})
+
+minetest.register_craftitem("default:alubronze_ingot", {
+	description = "Aluminium Bronze Ingot",
+	inventory_image = "default_alubronze_ingot.png"
+})
+
+minetest.register_craftitem("default:slag", {
+	description = "Slag",
+	inventory_image = "default_slag.png"
+})
+
+minetest.register_craftitem("default:bacon", {
+	description = "Bacon",
+	inventory_image = "default_bacon.png",
+	on_use = minetest.item_eat(4)
+})
+
+minetest.register_craftitem("default:pie_meat", {
+	description = "Meat Pie",
+	inventory_image = "default_pie_meat.png",
+	on_use = minetest.item_eat(4)
+})
+
+minetest.register_craftitem("default:pie_berry", {
+	description = "Berry Pie",
+	inventory_image = "default_pie_berry.png",
+	on_use = minetest.item_eat(3)
+})
+
+minetest.register_craftitem("default:pie_mushroom", {
+	description = "Mushroom Pie",
+	inventory_image = "default_pie_mushroom.png",
+	on_use = minetest.item_eat(4)
 })

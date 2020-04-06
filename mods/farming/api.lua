@@ -278,7 +278,7 @@ farming.register_hoe = function(name, def)
 			return farming.hoe_on_use(itemstack, user, pointed_thing, def.max_uses)
 		end,
                 on_place = function(itemstack, user, pointed_thing)
-                      return farming.hoe_on_place(itemstack, user, pointed_thing)
+                      return farming.hoe_on_place(itemstack, user, pointed_thing, def.max_uses)
                 end,
 		on_secondary_use = function(itemstack, user, pointed_thing)
 			return farming.hoe_on_secondary_use(itemstack,user,pointed_thing)
@@ -385,7 +385,7 @@ farming.grow_plant = function(pos, elapsed)
 
 	if not def.next_plant then
 		-- disable timer for fully grown plant
-		return true
+		return false
 	end
 
 	-- grow seed
@@ -464,6 +464,9 @@ farming.register_plant = function(name, def)
 	if not def.fertility then
 		def.fertility = {}
 	end
+	if not def.visual_scale then
+		visual_scale = 1.00
+	end
 
 	def.name = name
         def.requires_soil = true
@@ -487,6 +490,7 @@ farming.register_plant = function(name, def)
 		place_param2 = def.place_param2 or nil, -- this isn't actually used for placement
 		walkable = false,
 		sunlight_propagates = true,
+		visual_scale = def.visual_scale,
 		selection_box = {
 			type = "fixed",
 			fixed = {-0.5, -0.5, -0.5, 0.5, -5/16, 0.5},
@@ -523,11 +527,13 @@ farming.register_plant = function(name, def)
 	})
 
 	-- Register harvest
-	minetest.register_craftitem(":" .. mname .. ":" .. pname, {
-		description = pname:gsub("^%l", string.upper),
-		inventory_image = mname .. "_" .. pname .. ".png",
-		groups = def.groups or {flammable = 2},
+	if not def.drops_seeds then
+		minetest.register_craftitem(":" .. mname .. ":" .. pname, {
+			description = pname:gsub("^%l", string.upper),
+			inventory_image = mname .. "_" .. pname .. ".png",
+			groups = def.groups or {flammable = 2},
 	})
+	end
 
 	-- Register growing steps
 	for i = 1, def.steps do
@@ -536,6 +542,10 @@ farming.register_plant = function(name, def)
 			base_rarity =  8 - (i - 1) * 7 / (def.steps - 1)
 		end
 		local drop = {
+			items = {}
+		}
+		if not def.drops_seeds then
+		drop = {
 			items = {
 				{items = {mname .. ":" .. pname}, rarity = base_rarity},
 				{items = {mname .. ":" .. pname}, rarity = base_rarity * 2},
@@ -543,6 +553,16 @@ farming.register_plant = function(name, def)
 				{items = {mname .. ":seed_" .. pname}, rarity = base_rarity * 2},
 			}
 		}
+		else
+		drop = {
+			items = {
+				{items = {mname .. ":seed_" .. pname}, rarity = base_rarity},
+				{items = {mname .. ":seed_" .. pname}, rarity = base_rarity},
+				{items = {mname .. ":seed_" .. pname}, rarity = base_rarity * 2},
+				{items = {mname .. ":seed_" .. pname}, rarity = base_rarity * 3},
+			}
+		}
+		end
 		local nodegroups = {snappy = 3, flammable = 2, plant = 1, not_in_creative_inventory = 1, attached_node = 1}
 		nodegroups[pname] = i
 
@@ -661,8 +681,6 @@ function farming.try_grow_crop(pos, node)
    local full_steps = math.floor(steps)
    local next_step_pct = steps - full_steps
 
-   local result = false
-
    if DEBUG then
       minetest.log("ESLG: " .. tostring(elapsed_since_last_grow))
       minetest.log("AVG: " .. tostring(average_bound))
@@ -671,18 +689,21 @@ function farming.try_grow_crop(pos, node)
       minetest.log("NEXT_STEP_PCT: " .. tostring(next_step_pct))
    end
 
+   local succeeded = false
+
    if elapsed_since_last_grow >= average_bound then
       for i=1, full_steps, 1 do
-         result = farming.grow_plant(pos)
+         succeeded = farming.grow_plant(pos)
       end
    end
 
-   meta:set_int("last_grow", last_growth + round(average_bound * full_steps))
+   if succeeded then
+      meta:set_int("last_grow", last_growth + round(average_bound * full_steps))
+      local node_timer = minetest.get_node_timer(pos)
+      node_timer:set(average_bound, average_bound * next_step_pct)
+   end
 
-   local node_timer = minetest.get_node_timer(pos)
-   node_timer:set(average_bound, average_bound * next_step_pct)
-
-   return result, full_steps, next_step_pct
+   return succeeded, full_steps, next_step_pct
 end
 
 function farming.register_growth_lbm(pname, lbm_nodes)
@@ -773,6 +794,8 @@ function farming.register_sapling(name, def)
    def.next_plant = function(plant_name, pos)
       farming.grow_sapling(pos)
    end
+
+   def.growth_step = 0
 
    farming.registered_plants[pname] = def
    minetest.register_node(":" .. name, def)
